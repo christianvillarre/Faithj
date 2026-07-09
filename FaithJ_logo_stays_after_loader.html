@@ -208,7 +208,7 @@ body{overflow-x:hidden}
 .hero-bg{
   position:absolute;
   inset:0;
-  background:url("images/stock6.jpeg") center/cover no-repeat;
+  background:url("images/stock1.jpeg") center/cover no-repeat;
   transform:scale(1.08);
 }
 .hero::after{
@@ -997,211 +997,6 @@ body{
 }
 </style>
 
-
-<style>
-/* CLEANER STORY SECTION OVERRIDES — landing untouched */
-.work-head p,
-.story-copy p,
-.story-note p,
-.story-mini p,
-.story-data__item span{
-  font-size:1rem;
-  line-height:1.58;
-  color:rgba(0,0,0,.58);
-  letter-spacing:-.01em;
-}
-
-.story-kicker{
-  font-size:.78rem;
-  letter-spacing:.14em;
-  margin-bottom:14px;
-  color:#8c7142;
-}
-
-.story-kicker.is-muted{
-  display:none;
-}
-
-.story-divider{
-  width:54px;
-  margin:20px 0;
-}
-
-.story-specs{
-  gap:10px;
-  margin-top:24px;
-}
-
-.story-specs li{
-  font-size:.95rem;
-  color:rgba(0,0,0,.58);
-}
-
-.story-specs li strong{
-  font-size:.72rem;
-  letter-spacing:.14em;
-}
-
-.story-row{
-  padding:9vh 0;
-}
-
-.story-note{
-  padding:10vh 0;
-}
-
-.story-pair{
-  padding:9vh 0 11vh;
-}
-
-.story-data{
-  padding:10vh 0;
-}
-
-.story-copy h3,
-.story-note h3,
-.story-data h3{
-  max-width:9ch;
-}
-
-.story-card .story-copy h3{
-  max-width:12ch;
-}
-
-@media(max-width:900px){
-  .work-head p,
-  .story-copy p,
-  .story-note p,
-  .story-mini p,
-  .story-data__item span{
-    font-size:.98rem;
-  }
-}
-</style>
-
-
-<style>
-/* Simpler editorial typography */
-.story-kicker{
-  font-size:.92rem !important;
-  letter-spacing:.04em !important;
-  font-weight:500 !important;
-  text-transform:none !important;
-  color:#8c7142;
-  margin-bottom:18px !important;
-}
-.story-kicker.is-muted{display:none!important;}
-
-.story-copy p,
-.story-note p,
-.story-data__item span,
-.story-mini p,
-.work-head p{
-  font-size:1.02rem !important;
-  line-height:1.65 !important;
-  color:rgba(0,0,0,.60)!important;
-}
-
-.story-specs li strong{
-  display:inline-block!important;
-  font-size:.92rem!important;
-  font-weight:600!important;
-  letter-spacing:0!important;
-  text-transform:none!important;
-  margin-right:8px!important;
-  color:#111;
-}
-
-.story-specs li{
-  font-size:1rem!important;
-  line-height:1.55!important;
-}
-
-.story-copy h3,
-.story-note h3,
-.story-data h3,
-.story-card .story-copy h3{
-  max-width:none!important;
-}
-</style>
-
-
-<style>
-/* FINAL STORY TEXT + MOTION TUNING */
-.story-kicker,
-.story-specs li strong,
-.capstone-info span,
-.stats-head span,
-.testimonials-head,
-.footer-col span{
-  font-size:1rem !important;
-  letter-spacing:.02em !important;
-  text-transform:none !important;
-  font-family:'Work Sans', Helvetica, Arial, sans-serif !important;
-  font-weight:500 !important;
-}
-
-.story-kicker{
-  color:#8c7142 !important;
-  margin-bottom:18px !important;
-}
-
-.story-kicker.is-muted{
-  display:none !important;
-}
-
-.story-copy p,
-.story-note p,
-.story-mini p,
-.story-data__item span,
-.work-head p{
-  font-size:clamp(1.04rem,1.08vw,1.14rem) !important;
-  line-height:1.64 !important;
-  color:rgba(0,0,0,.62) !important;
-  letter-spacing:-.01em !important;
-}
-
-.story-specs{
-  gap:10px !important;
-}
-
-.story-specs li{
-  font-size:1.02rem !important;
-  line-height:1.5 !important;
-  color:rgba(0,0,0,.60) !important;
-}
-
-.story-specs li strong{
-  display:inline !important;
-  color:#111 !important;
-  margin-right:8px !important;
-}
-
-.story-copy h3,
-.story-note h3,
-.story-data h3,
-.story-card .story-copy h3{
-  max-width:none !important;
-  line-height:.94 !important;
-}
-
-.story-line{
-  display:block;
-  overflow:hidden;
-}
-
-.story-line > span{
-  display:block;
-  will-change:transform, opacity;
-}
-
-.story-copy,
-.story-note,
-.story-data{
-  will-change:transform, opacity;
-}
-</style>
-
 </head>
 
 <body>
@@ -1232,196 +1027,878 @@ body{
   </a>
 </header>
 
-<!-- Simple Center Menu -->
-<div class="menu-wrap" id="menuWrap">
-  <div class="menu-bg" id="menuBg"></div>
+<!-- Bottom Morph Navbar -->
+<div class="bottom-nav-wrap">
+  <div class="bottom-nav-menu" id="bottomNavMenu" aria-hidden="true">
+    <div class="bottom-nav-menu__box">
+      <div class="bottom-nav-menu__top">
 
-  <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-expanded="false">
-    <span class="menu-toggle__label">Menu</span>
-    <span class="menu-toggle__box" aria-hidden="true">
-      <span class="menu-toggle__bar"></span>
-      <span class="menu-toggle__bar"></span>
+        <div class="bottom-nav-menu__panel is-active" data-panel="main">
+          
+
+          <nav class="bottom-nav-menu__nav">
+            <div class="bottom-nav-menu__eyebrow">Menu</div>
+            <button class="bottom-nav-menu__item bottom-nav-menu__trigger" type="button" data-target="consulting">Home</button>
+            <button class="bottom-nav-menu__item bottom-nav-menu__trigger" type="button" data-target="advisory">Projects</button>
+            <button class="bottom-nav-menu__item bottom-nav-menu__trigger" type="button" data-target="affiliates">About</button>
+            <a href="/about.html" class="bottom-nav-menu__item">Expertise</a>
+            <a href="/news.html" class="bottom-nav-menu__item">Gallery</a>
+            <a href="/contact.html" class="bottom-nav-menu__item">Contact</a>
+          </nav>
+        </div>
+
+        <div class="bottom-nav-menu__panel" data-panel="consulting">
+          <div class="bottom-nav-menu__eyebrow">Consulting</div>
+          <button class="bottom-nav-menu__back" type="button" data-target="main">Back to Menu</button>
+
+          <a href="/consulting/ndt-level-iii.html" class="bottom-nav-menu__subitem">NDT Level III Consulting & Support</a>
+          <a href="/consulting/advanced-ndt-experts.html" class="bottom-nav-menu__subitem">Advanced NDT Subject Matter Experts</a>
+          <a href="/consulting/written-practice.html" class="bottom-nav-menu__subitem">NDT Written Practice Review</a>
+          <a href="/consulting/advanced-training.html" class="bottom-nav-menu__subitem">Advanced NDT Training</a>
+          <a href="/consulting/automation-robotics.html" class="bottom-nav-menu__subitem">Automation & Robotics</a>
+        </div>
+
+        <div class="bottom-nav-menu__panel" data-panel="advisory">
+          <div class="bottom-nav-menu__eyebrow">Advisory</div>
+          <button class="bottom-nav-menu__back" type="button" data-target="main">Back to Menu</button>
+
+          <a href="/advisory/ma-support.html" class="bottom-nav-menu__subitem">Mergers & Acquisition Support</a>
+          <a href="/advisory/talent-acquisition.html" class="bottom-nav-menu__subitem">Talent Acquisition</a>
+          <a href="/advisory/strategic-planning.html" class="bottom-nav-menu__subitem">Strategic Planning</a>
+          <a href="/advisory/business-development.html" class="bottom-nav-menu__subitem">Business Development</a>
+        </div>
+
+        <div class="bottom-nav-menu__panel" data-panel="affiliates">
+          <div class="bottom-nav-menu__eyebrow">Affiliates</div>
+          <button class="bottom-nav-menu__back" type="button" data-target="main">Back to Menu</button>
+
+          <a href="/affiliates/top-notch-edm.html" class="bottom-nav-menu__subitem">Top Notch EDM Services</a>
+          <a href="/affiliates/sound-ndt.html" class="bottom-nav-menu__subitem">Sound NDT Solutions</a>
+        </div>
+
+      </div>
+
+      <div class="bottom-nav-menu__bottom">
+        <a href="/contact.html" class="bottom-nav-menu__cta">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <button class="bottom-nav" id="bottomNav" type="button" aria-expanded="false">
+  <span class="bottom-nav__content">
+
+        <span class="bottom-nav__home">Menu</span>
+
+        <span class="bottom-nav__toggle">
+            <span class="bottom-nav__line"></span>
+            <span class="bottom-nav__line"></span>
+            <span class="bottom-nav__line"></span>
+        </span>
+
     </span>
-  </button>
 
-  <nav class="nav-dropdown" id="navDropdown" aria-label="Main menu">
-    <a href="#work">Projects</a>
-    <a href="/about.html">About</a>
-    <a href="/news.html">Gallery</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
+  <span class="bottom-nav__x" aria-hidden="true">
+    <span></span>
+    <span></span>
+  </span>
+</button>
 </div>
 
 <style>
-/* SIMPLE CENTER MENU */
-.menu-wrap{
-  position:fixed;
-  left:50%;
-  top:18px;
-  transform:translateX(-50%);
-  z-index:210;
-  width:min(250px, calc(100vw - 48px));
-  pointer-events:auto;
+:root{
+  --bottom-nav-w: clamp(220px, 28vw, 320px);
+  --bottom-nav-h: clamp(54px, 6vw, 66px);
+  --bottom-nav-open: clamp(54px, 6vw, 56px);
+
+  --bottom-nav-bg: #ffffffe6;
+  --bottom-nav-menu-bg: #f1f1f1bb;
+  --bottom-nav-border: rgba(255, 255, 255, 0.932);
+
+  --menu-panel-w: clamp(320px, 42vw, 460px);
+  --menu-inner-pad: clamp(18px, 3vw, 48px);
+
+  --menu-radius: 2px;
+  --card-radius: clamp(12px, 1.5vw, 16px);
 }
 
-.menu-toggle{
-  position:relative;
-  z-index:3;
-  width:100%;
-  height:54px;
-  border:1px solid rgba(255, 255, 255, 0);
-  border-radius:12px;
-  padding:0 18px 0 22px;
-  background:rgb(56, 56, 56);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  cursor:pointer;
-  font-family:var(--headline);
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  font-size:15px;
-  font-weight:600;
-  /*
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  box-shadow:0 12px 34px rgba(0,0,0,.18);*/
-  transition:background .25s var(--ease-smooth), border-color .25s var(--ease-smooth), transform .25s var(--ease-smooth), color .25s var(--ease-smooth);
+/* wrapper - TOP CENTER */
+.bottom-nav-wrap{
+  position: fixed;
+  left: 50%;
+  top: 18px;
+  bottom: auto;
+  transform: translateX(-50%);
+  z-index: 100;
 }
 
-.menu-toggle:hover{
-  transform:translateY(-1px);
-  
-  background:rgb(56, 56, 56);
+/* trigger button */
+.bottom-nav{
+  position: relative;
+  z-index: 2;
+  width: var(--bottom-nav-w);
+  height: var(--bottom-nav-h);
+  padding: 0;
+  border: 0;
+  border-radius: var(--menu-radius);
+  cursor: pointer;
+  overflow: hidden;
+
+  background: var(--bottom-nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+
+  transition:
+    width .42s cubic-bezier(.22,1,.36,1),
+    border-radius .42s cubic-bezier(.22,1,.36,1),
+    transform .25s ease,
+    background .25s ease;
 }
 
-.menu-toggle__label{
-  line-height:1;
+.bottom-nav:hover{
+  transform: translateY(-1px);
 }
 
-.menu-toggle__box{
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  position:relative;
+.bottom-nav__content{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 18px;
 }
 
-.menu-toggle__bar{
-  position:absolute;
-  width:17px;
-  height:2px;
-  border-radius:999px;
-  background:currentColor;
-  transition:transform .28s var(--ease-smooth), opacity .2s ease;
+.bottom-nav__brand{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.menu-toggle__bar:first-child{transform:translateY(-4px);}
-.menu-toggle__bar:last-child{transform:translateY(4px);}
-
-.menu-toggle.open .menu-toggle__bar:first-child{transform:rotate(45deg);}
-.menu-toggle.open .menu-toggle__bar:last-child{transform:rotate(-45deg);}
-
-.menu-bg{
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  height:54px;
-  z-index:1;
-  border-radius:28px;
-  background:rgb(56, 56, 56);
-  
-  opacity:0;
-  transform:scale(.96);
-  pointer-events:none;
-  transition:height .34s var(--ease-smooth), opacity .2s ease, transform .3s var(--ease-smooth), border-radius .34s var(--ease-smooth);
+.bottom-nav__brand img{
+  display: block;
+  width: clamp(22px, 2.2vw, 28px);
+  height: clamp(22px, 2.2vw, 28px);
+  object-fit: contain;
 }
 
-.menu-bg.open{
-  height:330px;
-  opacity:1;
-  transform:scale(1);
-  border-radius:28px;
+.bottom-nav__home{
+  color: #052330;
+  font-size: clamp(13px, 1.2vw, 15px);
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-align:left;
+    flex:1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin-left: 0.5rem;
 }
 
-.nav-dropdown{
-  position:relative;
-  z-index:2;
-  display:grid;
-  gap:2px;
-  padding:68px 14px 14px;
-  opacity:0;
-  transform:translateY(-10px);
-  pointer-events:none;
-  transition:opacity .22s ease, transform .3s var(--ease-smooth);
+.bottom-nav__toggle{
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-self: end;
+  width: 44px;
+  height: 44px;
+  gap: 4px;
 }
 
-.nav-dropdown.open{
-  opacity:1;
-  transform:translateY(0);
-  pointer-events:auto;
+.bottom-nav__line{
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: #052330;
+  transition: transform .25s ease, opacity .25s ease;
 }
 
-.nav-dropdown a{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  min-height:46px;
-  padding:0 12px;
-  border-radius:18px;
-  color:#ffffff;
-  text-decoration:none;
-  font-family:var(--headline);
-  font-size:clamp(1.35rem,2.1vw,1.9rem);
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:-.015em;
-  line-height:1;
-  transition:background .2s ease, color .2s ease, transform .2s var(--ease-smooth);
+.bottom-nav__x{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(.8);
+  pointer-events: none;
+
+  transition:
+    opacity .2s ease,
+    transform .28s cubic-bezier(.22,1,.36,1);
 }
 
-.nav-dropdown a::after{
-  content:"→";
-  font-size:.7em;
-  opacity:.45;
-  transform:translateX(-4px);
-  transition:opacity .2s ease, transform .2s var(--ease-smooth);
+.bottom-nav__x span{
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: #052330;
 }
 
-.nav-dropdown a:hover{
-  background:rgba(0, 0, 0, 0.034);
-  transform:translateX(2px);
+.bottom-nav__x span:first-child{ transform: rotate(45deg); }
+.bottom-nav__x span:last-child{ transform: rotate(-45deg); }
+
+/* trigger open state */
+.bottom-nav.is-open{
+  width: var(--bottom-nav-open);
+  border-radius: var(--menu-radius);
 }
 
-.nav-dropdown a:hover::after{
-  opacity:1;
-  transform:translateX(0);
+.bottom-nav.is-open .bottom-nav__content{
+  opacity: 0;
+  transform: scale(.92);
+  pointer-events: none;
+}
+
+.bottom-nav.is-open .bottom-nav__x{
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* menu shell - OPENS DOWN */
+.bottom-nav-menu{
+  position: absolute;
+  left: 50%;
+  top: calc(var(--bottom-nav-h) + 12px);
+  bottom: auto;
+  z-index: 1;
+
+  width: min(var(--menu-panel-w), calc(100vw - 32px));
+  max-height: min(85vh, calc(100vh - 120px));
+  height: auto;
+  padding: 0;
+  border: 1px solid var(--bottom-nav-border);
+  border-radius: var(--menu-radius);
+
+  background: var(--bottom-nav-menu-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.22);
+
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  transform: translateX(-50%) translateY(-10px) scale(.96);
+  transform-origin: top center;
+
+  transition:
+    transform .32s cubic-bezier(.22,1,.36,1),
+    opacity .22s ease;
+}
+
+.bottom-nav-menu.is-open{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.bottom-nav-menu::after{
+  display: none;
+}
+
+/* menu inner layout */
+.bottom-nav-menu__box{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: var(--menu-inner-pad);
+}
+
+.bottom-nav-menu__top{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: 100%;
+}
+
+/* panels */
+.bottom-nav-menu__panel{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(24px);
+
+  transition:
+    opacity .28s ease,
+    transform .34s cubic-bezier(.22,1,.36,1),
+    visibility 0s linear .34s;
+  will-change: transform, opacity;
+}
+
+.bottom-nav-menu__panel.is-active{
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+
+  transition:
+    opacity .28s ease .1s,
+    transform .34s cubic-bezier(.22,1,.36,1) .1s,
+    visibility 0s linear 0s;
+}
+
+.bottom-nav-menu__panel.is-entering-from-right{
+  opacity: 0;
+  visibility: visible;
+  pointer-events: none;
+  transform: translateX(28px);
+}
+
+.bottom-nav-menu__panel.is-entering-from-left{
+  opacity: 0;
+  visibility: visible;
+  pointer-events: none;
+  transform: translateX(-28px);
+}
+
+.bottom-nav-menu__panel.is-exiting-to-left{
+  opacity: 0;
+  visibility: visible;
+  pointer-events: none;
+  transform: translateX(-28px);
+}
+
+.bottom-nav-menu__panel.is-exiting-to-right{
+  opacity: 0;
+  visibility: visible;
+  pointer-events: none;
+  transform: translateX(28px);
+}
+
+.bottom-nav-menu__panel.is-exiting-to-left,
+.bottom-nav-menu__panel.is-exiting-to-right{
+  transition:
+    opacity .2s ease,
+    transform .26s cubic-bezier(.4,0,.2,1);
+}
+
+/* eyebrow */
+.bottom-nav-menu__eyebrow{
+  margin-bottom: 18px;
+  color: #052330;
+  font-size: 14px!important;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.bottom-nav-menu__panel-note{
+  margin: -4px 0 14px;
+  max-width: 34ch;
+  color: #052330;
+  font-size: clamp(12px, 1.1vw, 13px);
+  line-height: 1.45;
+}
+
+.bottom-nav-menu__nav{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 1.5rem;
+}
+
+.bottom-nav-menu__item{
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: clamp(34px, 5vw, 62px);
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+
+  color: #052330;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  transition:
+    color .18s ease,
+    transform .18s ease,
+    background .18s ease;
+}
+.bottom-nav-menu__nav{
+  gap: 4px;
+  margin-bottom: 8px;
+  padding: 1rem;
+}
+
+.bottom-nav-menu__item{
+  min-height: 38px;
+  padding: 4px 0;
+  font-size: clamp(22px, 2.4vw, 30px);
+}
+.bottom-nav-menu__item:hover{
+  color: #f00303;
+  transform: translateX(4px);
+}
+
+.bottom-nav-menu__trigger{
+  appearance: none;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.bottom-nav-menu__back{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  appearance: none;
+  border: 0;
+  background: rgba(255,255,255,.055);
+  padding: 10px 14px;
+  margin: 0 0 10px;
+  border-radius: var(--card-radius);
+  cursor: pointer;
+
+  color: #052330;
+  font-size: clamp(11px, .95vw, 12px);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    color .18s ease;
+}
+
+.bottom-nav-menu__back::before{
+  content: "←";
+  font-size: 14px;
+  line-height: 1;
+  color: #f00303;
+}
+
+.bottom-nav-menu__back:hover{
+  transform: translateY(-1px);
+  background: rgba(86,119,133,.16);
+  color: #052330;
+}
+
+.bottom-nav-menu__sublist{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.bottom-nav-menu__subitem{
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+
+  padding: clamp(8px,.8vw,9px) clamp(12px,1.5vw,14px);
+  border-radius: var(--card-radius);
+  background: rgba(255,255,255,.02);
+
+  color: #F00303;
+  text-decoration: none;
+  font-size: clamp(8px, 1vw, 14px);
+  font-weight: 600;
+  line-height: 1.35;
+
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    color .18s ease;
+}
+
+.bottom-nav-menu__subitem:hover{
+  transform: translateY(-1px);
+  background: #5677851b;
+  color: #fff;
+}
+
+.bottom-nav-menu__subitem::after{
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 8px;
+  height: 1px;
+  background: #f00303;
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: .95;
+  transition: transform 180ms cubic-bezier(.22,1,.36,1);
+}
+
+.bottom-nav-menu__subitem:hover::after,
+.bottom-nav-menu__subitem:focus-visible::after{
+  transform: scaleX(1);
+}
+
+.bottom-nav-menu__subitem-icon{
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.bottom-nav-menu__subitem-icon path{
+  stroke: #fff;
+  transition:
+    stroke .17s cubic-bezier(.22,1,.36,1),
+    transform .16s cubic-bezier(.22,1,.36,1);
+}
+
+.bottom-nav-menu__subitem:hover .bottom-nav-menu__subitem-icon path{
+  stroke: #f00303;
+}
+
+.bottom-nav-menu__meta{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: end;
+  margin-top: 10px;
+}
+
+.bottom-nav-menu__meta-left,
+.bottom-nav-menu__meta-right{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bottom-nav-menu__meta-left{ gap: 8px; }
+.bottom-nav-menu__meta-right{ gap: 6px; }
+
+.bottom-nav-menu__mini{
+  color: #052330;
+  font-size: clamp(11px, .95vw, 12px);
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color .18s ease;
+}
+
+.bottom-nav-menu__mini:hover{ color: #fff; }
+
+.bottom-nav-menu__contact-link{
+  color: #052330;
+  font-size: clamp(13px,1vw,14px);
+  line-height: 1.35;
+  text-decoration: none;
+  word-break: break-word;
+  transition: color .18s ease;
+}
+
+.bottom-nav-menu__contact-link:hover{ color: #fff; }
+
+.bottom-nav-menu__bottom{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.bottom-nav-menu__cta{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(46px,5vw,52px);
+
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+
+  color: #052330;
+  font-size: clamp(13px,1vw,14px);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  transition:
+    background .18s ease,
+    color .18s ease,
+    border-color .18s ease,
+    transform .18s ease;
+}
+
+.bottom-nav-menu__cta:hover{
+  background: #fff;
+  color: #00202e;
+  border-color: #fff;
+  transform: translateY(-1px);
 }
 
 body.nav-open{
+  overflow: hidden;
+}
+
+/* small screens */
+@media (max-width: 480px){
+  :root{
+    --menu-panel-w: calc(100vw - 20px);
+    --menu-inner-pad: 18px;
+  }
+
+  .bottom-nav{
+    width: clamp(210px, 58vw, 240px);
+  }
+
+  .bottom-nav-menu{
+    top: calc(var(--bottom-nav-h) + 10px);
+    bottom: auto;
+    max-height: calc(100vh - 100px);
+  }
+
+  .bottom-nav__content{
+    grid-template-columns: 40px 1fr 40px;
+    gap: 6px;
+    padding: 0 8px;
+  }
+
+  .bottom-nav__toggle{
+    width: 40px;
+    height: 40px;
+  }
+
+  .bottom-nav-menu__meta{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .bottom-nav-menu__subitem{
+    gap: 10px;
+  }
+}
+
+/* scale down below 1400px */
+@media (max-width: 1400px){
+  :root{
+    --bottom-nav-w: clamp(170px, 20vw, 260px);
+    --bottom-nav-h: clamp(44px, 4.2vw, 54px);
+    --bottom-nav-open: clamp(44px, 4.2vw, 48px);
+
+    --menu-panel-w: clamp(260px, 32vw, 360px);
+    --menu-inner-pad: clamp(12px, 1.6vw, 24px);
+    --card-radius: clamp(10px, 1vw, 14px);
+  }
+
+  .bottom-nav__content{
+    grid-template-columns: 36px 1fr 36px;
+    gap: 4px;
+    padding: 0 6px;
+  }
+
+  .bottom-nav__brand img{
+    width: 20px;
+    height: 20px;
+  }
+
+  .bottom-nav__toggle{
+    width: 34px;
+    height: 34px;
+    gap: 3px;
+  }
+
+  .bottom-nav__line,
+  .bottom-nav__x span{
+    width: 15px;
+  }
+
+  .bottom-nav__home{
+    font-size: clamp(11px, .9vw, 13px);
+  }
+
+  .bottom-nav-menu{
+    top: calc(var(--bottom-nav-h) + 10px);
+    bottom: auto;
+    width: min(var(--menu-panel-w), calc(100vw - 24px));
+    max-height: min(80vh, calc(100vh - 100px));
+  }
+
+  .bottom-nav-menu__eyebrow{
+    margin-bottom: 12px;
+    font-size: clamp(9px, .7vw, 10px);
+  }
+
+  .bottom-nav-menu__panel-note{
+    margin: -2px 0 10px;
+    font-size: clamp(10px, .8vw, 11px);
+    line-height: 1.35;
+  }
+
+  .bottom-nav-menu__nav{
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .bottom-nav-menu__item{
+    font-size: clamp(17px, 1.8vw, 24px);
+    min-height: clamp(24px, 2.2vw, 32px);
+    padding: 0;
+  }
+
+  .bottom-nav-menu__back{
+    padding: 7px 10px;
+    margin: 0 0 8px;
+    font-size: clamp(10px, .8vw, 11px);
+    gap: 8px;
+  }
+
+  .bottom-nav-menu__back::before{
+    font-size: 12px;
+  }
+
+  .bottom-nav-menu__sublist{
+    gap: 7px;
+  }
+
+  .bottom-nav-menu__subitem{
+    font-size: clamp(11px, .82vw, 12px);
+    padding: 7px 10px;
+    gap: 8px;
+    line-height: 1.25;
+  }
+
+  .bottom-nav-menu__subitem-icon{
+    width: 13px;
+    height: 13px;
+    margin-top: 1px;
+  }
+
+  .bottom-nav-menu__meta{
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .bottom-nav-menu__meta-left{ gap: 5px; }
+  .bottom-nav-menu__meta-right{ gap: 4px; }
+
+  .bottom-nav-menu__mini{
+    font-size: clamp(9px, .75vw, 10px);
+  }
+
+  .bottom-nav-menu__contact-link{
+    font-size: clamp(11px, .82vw, 12px);
+    line-height: 1.25;
+  }
+
+  .bottom-nav-menu__bottom{
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .bottom-nav-menu__cta{
+    min-height: clamp(38px, 3.4vw, 44px);
+    font-size: clamp(11px, .82vw, 12px);
+    letter-spacing: .1em;
+  }
+}
+</style>
+<style>
+    .bottom-nav-menu__top{
+  position:relative;
+  width:100%;
+  height:auto;
+  min-height:220px; /* important */
   overflow:hidden;
 }
 
-@media(max-width:600px){
-  .menu-wrap{
-    top:16px;
-    width:min(230px, calc(100vw - 36px));
-  }
-  .menu-toggle{
-    height:50px;
-  }
-  .menu-bg{
-    height:50px;
-  }
-  .menu-bg.open{
-    height:308px;
-  }
-  .nav-dropdown{
-    padding-top:62px;
-  }
+.bottom-nav-menu__panel{
+  position:absolute;
+  inset:0;
+  width:100%;
+}
+
+.bottom-nav-menu__panel.is-active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+.bottom-nav-menu__panel{
+  position:absolute;
+  inset:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateX(34px) scale(.985);
+  filter:blur(3px);
+
+  transition:
+    opacity .34s ease,
+    transform .46s cubic-bezier(.22,1,.36,1),
+    filter .34s ease,
+    visibility 0s linear .46s;
+}
+
+.bottom-nav-menu__panel.is-active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateX(0) scale(1);
+  filter:blur(0);
+
+  transition:
+    opacity .34s ease .08s,
+    transform .46s cubic-bezier(.22,1,.36,1) .08s,
+    filter .34s ease .08s,
+    visibility 0s linear 0s;
+}
+
+.bottom-nav-menu__panel.is-entering-from-right{
+  opacity:0;
+  visibility:visible;
+  transform:translateX(34px) scale(.985);
+  filter:blur(3px);
+}
+
+.bottom-nav-menu__panel.is-entering-from-left{
+  opacity:0;
+  visibility:visible;
+  transform:translateX(-34px) scale(.985);
+  filter:blur(3px);
+}
+
+.bottom-nav-menu__panel.is-exiting-to-left{
+  opacity:0;
+  visibility:visible;
+  pointer-events:none;
+  transform:translateX(-34px) scale(.985);
+  filter:blur(3px);
+}
+
+.bottom-nav-menu__panel.is-exiting-to-right{
+  opacity:0;
+  visibility:visible;
+  pointer-events:none;
+  transform:translateX(34px) scale(.985);
+  filter:blur(3px);
 }
 </style>
 
@@ -1454,15 +1931,10 @@ body.nav-open{
 
 <section class="work" id="work">
   <div class="work-head story-reveal">
-    <h2>Built on Experience. Guided by faith.
-    </h2>
+    <h2>Built in sequence</h2>
     <p>
-     Built on years of industry experience and guided by
-  faith, we deliver reliable structural manufacturing
-  solutions with integrity, precision, and craftsmanship.
-  Every project is completed with honest communication,
-  dependable service, and a commitment to quality that
-  stands the test of time.
+      A quiet visual sequence — planning, framing, finishes, and final presence.
+      Short notes and restrained details let the work carry the page.
     </p>
   </div>
 
@@ -1471,14 +1943,14 @@ body.nav-open{
       <video src="https://pub-8ad7c216262d47949e23e21b73c678fc.r2.dev/bathroom.mp4" autoplay muted loop playsinline></video>
     </div>
     <div class="story-copy">
-      <!--<span class="story-kicker">01 / First impression</span>-->
-      <h3>Strong first impression</h3>
-      <!--<div class="story-divider"></div>-->
-      <p>Exterior work starts with proportion, shadow, and durable surfaces.</p>
+      <span class="story-kicker">01 / First impression</span>
+      <h3>Clean lines before decoration.</h3>
+      <div class="story-divider"></div>
+      <p>The exterior language starts with proportion, shadow, and durable surfaces. Each opening, edge, and reveal is treated as part of the structure.</p>
       <ul class="story-specs">
-        <li><span><strong>Focus</strong>Site flow and exterior rhythm</span></li>
-        <li><span><strong>Finish</strong>Durable exterior details</span></li>
-        <li><span><strong>Result</strong>Intentional first impression</span></li>
+        <li><span><strong>Focus</strong>Facade rhythm, entry sequence, material transition</span></li>
+        <li><span><strong>Finish</strong>Quiet details that hold up in sun, rain, and daily use</span></li>
+        <li><span><strong>Result</strong>A build that feels intentional before you step inside</span></li>
       </ul>
     </div>
   </div>
@@ -1488,25 +1960,25 @@ body.nav-open{
       <h3>The plan is felt in the walk-through.</h3>
     </div>
     <div>
-      <p>Each image supports a simple sequence: arrival, structure, finish, and final use.</p>
+      <p>Instead of treating photos as random project shots, each section moves through a simple construction story: arrival, structure, finish, and final use.</p>
       <div class="story-note__side">
-        <div class="story-mini"><span>01</span><p>Site access and layout.</p></div>
-        <div class="story-mini"><span>02</span><p>Framing and systems.</p></div>
-        <div class="story-mini"><span>03</span><p>Finish and turnover.</p></div>
+        <div class="story-mini"><span>01</span><p>Layout and access are clarified before work begins.</p></div>
+        <div class="story-mini"><span>02</span><p>Framing and systems shape the long-term performance.</p></div>
+        <div class="story-mini"><span>03</span><p>Finishes are installed with clean transitions and restraint.</p></div>
       </div>
     </div>
   </div>
 
   <div class="story-row story-row--reverse story-reveal">
     <div class="story-copy">
-      <span class="story-kicker is-muted">03 / Interior structure</span>
+      <span class="story-kicker">03 / Interior structure</span>
       <h3>Rooms built around calm function.</h3>
-      
-      <p>Interior work is presented with restraint, so the craftsmanship reads quickly.</p>
+      <div class="story-divider"></div>
+      <p>Interior work is shown with room to breathe: a title, one short idea, and supporting details. The goal is to make the craftsmanship easy to understand at a glance.</p>
       <ul class="story-specs">
-        <li><span><strong>Lines</strong>Controlled finish lines</span></li>
-        <li><span><strong>Flow</strong>Simple room flow</span></li>
-        <li><span><strong>Use</strong>Made for daily use</span></li>
+        <li><span><strong>Lines</strong>Cabinetry, tile, drywall, and trim stay visually controlled</span></li>
+        <li><span><strong>Flow</strong>Spaces connect without feeling overworked</span></li>
+        <li><span><strong>Use</strong>Built for daily movement, not just photos</span></li>
       </ul>
     </div>
     <div class="story-media story-media--short">
@@ -1516,20 +1988,20 @@ body.nav-open{
 
   <div class="story-pair">
     <div class="story-card story-reveal">
-      <div class="story-media"><img src="images/stock4.jpeg" alt="Finish work detail"></div>
+      <div class="story-media"><img src="images/stock4.jpeg" alt="Material finish detail"></div>
       <div class="story-copy">
-        <h3>Finish work</h3>
-        
-        <p>Surfaces and trim are kept clean, quiet, and durable.</p>
+        <h3>Material finish</h3>
+        <div class="story-divider"></div>
+        <p>Surfaces, texture, and trim are kept simple so the work feels permanent.</p>
       </div>
     </div>
 
     <div class="story-card story-reveal">
-      <div class="story-media"><img src="images/stock5.jpeg" alt="Exterior rhythm detail"></div>
+      <div class="story-media"><img src="images/stock5.jpeg" alt="Structural rhythm detail"></div>
       <div class="story-copy">
-        <h3>Exterior rhythm</h3>
-        
-        <p>Clean edges create rhythm across the build.</p>
+        <h3>Structural rhythm</h3>
+        <div class="story-divider"></div>
+        <p>Repeating lines and clean edges create a steady visual pace across the build.</p>
       </div>
     </div>
   </div>
@@ -1539,10 +2011,10 @@ body.nav-open{
       <h3>Simple data, not clutter.</h3>
     </div>
     <div class="story-data__grid">
-      <div class="story-data__item"><strong>20+</strong><span>Years building in Houston.</span></div>
-      <div class="story-data__item"><strong>180+</strong><span>Completed projects.</span></div>
-      <div class="story-data__item"><strong>1.2M</strong><span>Square feet delivered.</span></div>
-      <div class="story-data__item"><strong>96%</strong><span>Referral-driven work.</span></div>
+      <div class="story-data__item"><strong>20+</strong><span>Years building across Houston and surrounding Texas markets.</span></div>
+      <div class="story-data__item"><strong>180+</strong><span>Projects completed with a focus on clean execution.</span></div>
+      <div class="story-data__item"><strong>1.2M</strong><span>Square feet completed across residential and commercial work.</span></div>
+      <div class="story-data__item"><strong>96%</strong><span>Referral-driven relationships from owners, architects, and builders.</span></div>
     </div>
   </div>
 
@@ -1551,13 +2023,13 @@ body.nav-open{
       <img src="images/stock2.jpeg" alt="Framing and structure">
     </div>
     <div class="story-copy">
-      <span class="story-kicker is-muted">07 / Framed for permanence</span>
+      <span class="story-kicker">07 / Framed for permanence</span>
       <h3>Strength sits behind the finish.</h3>
       <div class="story-divider"></div>
-      <p>The finish only works when the hidden structure is right.</p>
+      <p>The final look only works when the hidden layers are right. Structure, alignment, and sequencing keep the finished build stable over time.</p>
       <ul class="story-specs">
-        <li><span><strong>Structure</strong>Framing, substrate, and backing</span></li>
-        <li><span><strong>Coordination</strong>Finish protection</span></li>
+        <li><span><strong>Structure</strong>Framing, substrate, and connections handled with care</span></li>
+        <li><span><strong>Coordination</strong>Trades sequenced to protect the final finish</span></li>
       </ul>
     </div>
   </div>
@@ -1566,7 +2038,7 @@ body.nav-open{
     <div class="media"><img src="images/stock1.jpeg" alt="Completed construction project"></div>
     <div class="capstone-info">
       <span>08 / Signature</span>
-      <h3>Built clean from start to finish</h3>
+      <h3>The full build, start to finish</h3>
     </div>
   </div>
 </section>
@@ -1648,44 +2120,185 @@ body.nav-open{
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const menuToggle = document.getElementById("menuToggle");
-  const navDropdown = document.getElementById("navDropdown");
-  const menuBg = document.getElementById("menuBg");
-  const menuWrap = document.getElementById("menuWrap");
+  const bottomNav = document.getElementById("bottomNav");
+  const bottomNavMenu = document.getElementById("bottomNavMenu");
+  if (!bottomNav || !bottomNavMenu) return;
 
-  if (!menuToggle || !navDropdown || !menuBg || !menuWrap) return;
+  const menuTop = bottomNavMenu.querySelector(".bottom-nav-menu__top");
+  const panels = [...bottomNavMenu.querySelectorAll(".bottom-nav-menu__panel")];
+  const triggers = [...bottomNavMenu.querySelectorAll("[data-target]")];
+
+  let isOpen = false;
+  let isAnimating = false;
+
+  function getPanel(name){
+    return bottomNavMenu.querySelector(`.bottom-nav-menu__panel[data-panel="${name}"]`);
+  }
+
+  function panelItems(panel){
+    return panel.querySelectorAll(
+      ".bottom-nav-menu__eyebrow, .bottom-nav-menu__panel-note, .bottom-nav-menu__item, .bottom-nav-menu__back, .bottom-nav-menu__subitem, .bottom-nav-menu__meta, .bottom-nav-menu__cta"
+    );
+  }
+
+  function setMenuHeight(panel){
+    if (!panel || !menuTop) return;
+    menuTop.style.height = panel.scrollHeight + "px";
+  }
+
+  function resetItems(panel){
+    panelItems(panel).forEach(item => {
+      item.style.opacity = "";
+      item.style.transform = "";
+    });
+  }
+
+  function animateItemsIn(panel){
+    const items = [...panelItems(panel)];
+
+    items.forEach((item, index) => {
+      item.style.opacity = "0";
+      item.style.transform = "translateY(12px)";
+      item.style.transition = "none";
+
+      requestAnimationFrame(() => {
+        item.style.transition = `
+          opacity .42s cubic-bezier(.22,1,.36,1) ${index * 45}ms,
+          transform .48s cubic-bezier(.22,1,.36,1) ${index * 45}ms
+        `;
+        item.style.opacity = "1";
+        item.style.transform = "translateY(0)";
+      });
+    });
+  }
+
+  function resetToMain(){
+    const main = getPanel("main");
+
+    panels.forEach(panel => {
+      panel.classList.remove(
+        "is-active",
+        "is-entering-from-right",
+        "is-entering-from-left",
+        "is-exiting-to-left",
+        "is-exiting-to-right"
+      );
+      resetItems(panel);
+    });
+
+    main.classList.add("is-active");
+    setMenuHeight(main);
+  }
+
+  function switchPanel(targetName, direction = "forward"){
+    if (isAnimating) return;
+
+    const current = bottomNavMenu.querySelector(".bottom-nav-menu__panel.is-active");
+    const next = getPanel(targetName);
+
+    if (!current || !next || current === next) return;
+
+    isAnimating = true;
+
+    const enterClass = direction === "forward" ? "is-entering-from-right" : "is-entering-from-left";
+    const exitClass = direction === "forward" ? "is-exiting-to-left" : "is-exiting-to-right";
+
+    next.classList.remove(
+      "is-entering-from-right",
+      "is-entering-from-left",
+      "is-exiting-to-left",
+      "is-exiting-to-right"
+    );
+
+    current.classList.remove(
+      "is-entering-from-right",
+      "is-entering-from-left",
+      "is-exiting-to-left",
+      "is-exiting-to-right"
+    );
+
+    next.classList.add(enterClass);
+    next.style.visibility = "visible";
+
+    resetItems(next);
+
+    requestAnimationFrame(() => {
+      setMenuHeight(next);
+
+      current.classList.add(exitClass);
+      next.classList.add("is-active");
+      next.classList.remove(enterClass);
+
+      animateItemsIn(next);
+    });
+
+    setTimeout(() => {
+      current.classList.remove("is-active", exitClass);
+      resetItems(current);
+      isAnimating = false;
+    }, 520);
+  }
 
   function openMenu(){
-    menuToggle.classList.add("open");
-    navDropdown.classList.add("open");
-    menuBg.classList.add("open");
+    const active = bottomNavMenu.querySelector(".bottom-nav-menu__panel.is-active") || getPanel("main");
+
+    isOpen = true;
+
+    bottomNav.classList.add("is-open");
+    bottomNavMenu.classList.add("is-open");
     document.body.classList.add("nav-open");
-    menuToggle.setAttribute("aria-expanded","true");
+
+    bottomNav.setAttribute("aria-expanded", "true");
+    bottomNavMenu.setAttribute("aria-hidden", "false");
+
+    setMenuHeight(active);
+    animateItemsIn(active);
   }
 
   function closeMenu(){
-    menuToggle.classList.remove("open");
-    navDropdown.classList.remove("open");
-    menuBg.classList.remove("open");
+    isOpen = false;
+
+    bottomNav.classList.remove("is-open");
+    bottomNavMenu.classList.remove("is-open");
     document.body.classList.remove("nav-open");
-    menuToggle.setAttribute("aria-expanded","false");
+
+    bottomNav.setAttribute("aria-expanded", "false");
+    bottomNavMenu.setAttribute("aria-hidden", "true");
+
+    setTimeout(resetToMain, 260);
   }
 
-  menuToggle.addEventListener("click", () => {
-    menuToggle.classList.contains("open") ? closeMenu() : openMenu();
+  bottomNav.addEventListener("click", () => {
+    isOpen ? closeMenu() : openMenu();
   });
 
-  navDropdown.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", closeMenu);
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", e => {
+      e.preventDefault();
+
+      const target = trigger.dataset.target;
+      const direction = target === "main" ? "back" : "forward";
+
+      switchPanel(target, direction);
+    });
   });
 
-  document.addEventListener("click", (e) => {
-    if (!menuWrap.contains(e.target)) closeMenu();
+  document.addEventListener("click", e => {
+    if (!isOpen) return;
+    if (!e.target.closest(".bottom-nav-wrap")) closeMenu();
   });
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMenu();
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && isOpen) closeMenu();
   });
+
+  window.addEventListener("resize", () => {
+    if (!isOpen) return;
+    const active = bottomNavMenu.querySelector(".bottom-nav-menu__panel.is-active");
+    setMenuHeight(active);
+  });
+
+  resetToMain();
 });
 </script>
 
@@ -1734,8 +2347,7 @@ gsap.set(".loader-split-logo", {
 });
 
 gsap.set(".loader-icon2-wrap", {
-    width:0,
-    y:0
+    width:0
 });
 
 gsap.set(".loader-icon2", {
@@ -1816,11 +2428,6 @@ tl.to(".loader-half-1",{
     ease:"expo.inOut",
     delay:.25
 })
-.to(".loader-icon2-wrap",{
-    y:"-110vh",
-    duration:1.1,
-    ease:"expo.inOut"
-}, "<")
 .to(".logo-transition-layer",{
     opacity:0,
     duration:.18,
@@ -1929,64 +2536,17 @@ gsap.utils.toArray(".story-media img, .story-media video, .capstone .media img")
   });
 });
 
-/* copy reveal replaced by editorial line reveals */
-
-
-
-/* ---------- Editorial text line reveals ---------- */
-document.querySelectorAll(".story-copy h3, .story-note h3, .story-data h3, .work-head h2").forEach((heading) => {
-  if (heading.dataset.split === "true") return;
-
-  const raw = heading.textContent.trim();
-  const words = raw.split(" ");
-  const lines = [];
-  let buffer = [];
-
-  words.forEach((word, index) => {
-    buffer.push(word);
-    if (buffer.length === 3 || index === words.length - 1) {
-      lines.push(buffer.join(" "));
-      buffer = [];
+gsap.utils.toArray(".story-copy, .story-note > *, .story-data > *").forEach((copy) => {
+  gsap.from(copy, {
+    y: 38,
+    opacity: 0,
+    duration: .95,
+    ease: "expo.out",
+    scrollTrigger: {
+      trigger: copy,
+      start: "top 88%"
     }
   });
-
-  heading.innerHTML = lines.map(line => `<span class="story-line"><span>${line}</span></span>`).join("");
-  heading.dataset.split = "true";
-});
-
-gsap.utils.toArray(".story-copy, .story-note, .story-data, .work-head").forEach((block) => {
-  const lines = block.querySelectorAll(".story-line > span");
-  const paragraphs = block.querySelectorAll("p, .story-specs li, .story-mini, .story-data__item, .story-divider");
-
-  if (lines.length) {
-    gsap.from(lines, {
-      yPercent: 110,
-      opacity: 0,
-      duration: 1,
-      stagger: .08,
-      ease: "expo.out",
-      scrollTrigger: {
-        trigger: block,
-        start: "top 82%",
-        once: true
-      }
-    });
-  }
-
-  if (paragraphs.length) {
-    gsap.from(paragraphs, {
-      y: 24,
-      opacity: 0,
-      duration: .75,
-      stagger: .055,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: block,
-        start: "top 82%",
-        once: true
-      }
-    });
-  }
 });
 
 
