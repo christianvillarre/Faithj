@@ -208,7 +208,7 @@ body{overflow-x:hidden}
 .hero-bg{
   position:absolute;
   inset:0;
-  background:url("images/stock6.jpeg") center/cover no-repeat;
+  background:url("images/stock7.jpeg") center/cover no-repeat;
   transform:scale(1.08);
 }
 .hero::after{
@@ -321,8 +321,9 @@ body{overflow-x:hidden}
 .work-head{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:30px;
+  gap:60px;
   margin-bottom:12vh;
+  align-items:end;
 }
 .work-head h2{
   font-size:clamp(3rem,8vw,8rem);
@@ -332,7 +333,7 @@ body{overflow-x:hidden}
   margin:0;
 }
 .work-head p{
-  max-width:42ch;
+  max-width:52ch;
   font-size:1.05rem;
   line-height:1.65;
 }
@@ -693,8 +694,8 @@ body{
 
 .work{
   min-height:auto;
-  padding-top:18vh;
-  padding-bottom:16vh;
+  padding-top:10vh;
+  padding-bottom:10vh;
 }
 
 .work-head{
@@ -1695,7 +1696,7 @@ gsap.registerPlugin(ScrollTrigger);
 /* ---------- Lenis smooth scroll ---------- */
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-if(!prefersReducedMotion && window.Lenis){
+if (!prefersReducedMotion && window.Lenis) {
   const lenis = new Lenis({
     duration: 1.15,
     easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
@@ -1707,74 +1708,85 @@ if(!prefersReducedMotion && window.Lenis){
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });
+
   gsap.ticker.lagSmoothing(0);
 }
 
 /* ---------- Load-in sequence ---------- */
 
-/* hero image starts inset ~10% per side (20% smaller than full screen),
-   framed with rounded corners, then expands to full bleed */
-gsap.set(".hero-bg", { clipPath: "inset(10% round 26px)" });
+gsap.set(".hero-bg", {
+  clipPath: "inset(10% round 26px)"
+});
 
 gsap.set(".loader-half-1", {
-    yPercent:-140,
-    opacity:0
+  yPercent: -140,
+  opacity: 0
 });
 
 gsap.set(".loader-half-2", {
-    yPercent:140,
-    opacity:0
+  yPercent: 140,
+  opacity: 0
 });
 
 gsap.set(".loader-split-logo", {
-    scale:1
+  scale: 1
 });
 
 gsap.set(".loader-icon2-wrap", {
-    width:0,
-    y:0
+  width: 0,
+  y: 0
 });
 
 gsap.set(".loader-icon2", {
-    opacity:0,
-    x:-28
+  opacity: 0,
+  x: -28
 });
 
-const tl = gsap.timeline({ delay: .42 });
+const tl = gsap.timeline({
+  delay: .42
+});
 
-tl.to(".loader-half-1",{
-    yPercent:0,
-    opacity:1,
-    duration:1.05,
-    ease:"expo.out"
+tl.to(".loader-half-1", {
+  yPercent: 0,
+  opacity: 1,
+  duration: 1.05,
+  ease: "expo.out"
 })
-.to(".loader-half-2",{
-    yPercent:0,
-    opacity:1,
-    duration:1.05,
-    ease:"expo.out"
-},"<")
-.to(".loader-split-logo",{
-    scale:1.06,
-    duration:.35,
-    ease:"power2.out"
-},"-=.18")
-.to(".loader-split-logo",{
-    scale:1,
-    duration:.35,
-    ease:"expo.out"
+
+.to(".loader-half-2", {
+  yPercent: 0,
+  opacity: 1,
+  duration: 1.05,
+  ease: "expo.out"
+}, "<")
+
+/*
+.to(".loader-split-logo", {
+  scale: 1.06,
+  duration: .35,
+  ease: "power2.out"
+}, "-=.18")
+
+.to(".loader-split-logo", {
+  scale: 1,
+  duration: .35,
+  ease: "expo.out"
 })
-.to(".loader-icon2-wrap",{
-    width:"clamp(150px, 32vw, 260px)",
-    duration:.72,
-    ease:"expo.inOut"
-},"-=.12")
-.to(".loader-icon2",{
-    opacity:1,
-    x:0,
-    duration:.72,
-    ease:"expo.out"
-},"<")
+*/
+
+.to(".loader-icon2-wrap", {
+  width: "clamp(150px, 32vw, 260px)",
+  duration: .72,
+  ease: "expo.inOut"
+}, "-=.12")
+
+.to(".loader-icon2", {
+  opacity: 1,
+  x: 0,
+  duration: .72,
+  ease: "expo.out"
+}, "<")
+
 .add(() => {
   const loaderSplit = document.querySelector(".loader-split-logo");
   const navLogo = document.querySelector(".nav-split-logo");
@@ -1786,6 +1798,7 @@ tl.to(".loader-half-1",{
 
   const fromCenterX = from.left + from.width / 2;
   const fromCenterY = from.top + from.height / 2;
+
   const toCenterX = to.left + to.width / 2;
   const toCenterY = to.top + to.height / 2;
 
@@ -1793,79 +1806,139 @@ tl.to(".loader-half-1",{
   loaderSplit.dataset.moveY = toCenterY - fromCenterY;
 
   const scaleToNav = to.height / from.height;
+
   loaderSplit.dataset.moveScale = scaleToNav || .5;
 })
-.to(".loader-split-logo",{
-    x:() => Number(document.querySelector(".loader-split-logo")?.dataset.moveX || 0),
-    y:() => Number(document.querySelector(".loader-split-logo")?.dataset.moveY || 0),
-    scale:() => Number(document.querySelector(".loader-split-logo")?.dataset.moveScale || .5),
-    duration:.95,
-    ease:"expo.inOut"
-}, "<")
-.to(".nav-split-logo",{
-    opacity:1,
-    duration:.2,
-    ease:"power1.out"
-}, "<")
-.to(".loader",{
-    yPercent:-100,
-    duration:1.1,
-    ease:"expo.inOut",
-    delay:0
-})
-.to(".loader-icon2-wrap",{
-    y:"-110vh",
-    duration:1.1,
-    ease:"expo.inOut"
-}, "<")
-.to(".logo-transition-layer",{
-    opacity:0,
-    duration:.18,
-    ease:"power1.out"
-}, "-=.05")
+
+/* Everything below begins at the same exact time */
+/* Everything below begins from the same exit point */
+.addLabel("loaderExit")
+
+/* Horizontal movement */
+.to(".loader-split-logo", {
+  x: () => Number(
+    document.querySelector(".loader-split-logo")?.dataset.moveX || 0
+  ),
+  duration: 1.1,
+  ease: "power3.inOut"
+}, "loaderExit")
+
+/* Vertical movement begins slightly later, creating a curved path */
+.to(".loader-split-logo", {
+  y: () => Number(
+    document.querySelector(".loader-split-logo")?.dataset.moveY || 0
+  ),
+  duration: .92,
+  ease: "expo.inOut"
+}, "loaderExit+=.18")
+
+/* Logo scales down while traveling */
+.to(".loader-split-logo", {
+  scale: () => Number(
+    document.querySelector(".loader-split-logo")?.dataset.moveScale || .5
+  ),
+  duration: 1,
+  ease: "power3.inOut"
+}, "loaderExit")
+
+/* Whole loader moves upward */
+.to(".loader", {
+  yPercent: -100,
+  duration: 1.1,
+  ease: "expo.inOut"
+}, "loaderExit")
+
+/* Remaining loader text moves upward */
+.to(".loader-icon2-wrap", {
+  y: "-110vh",
+  duration: 1.1,
+  ease: "expo.inOut"
+}, "loaderExit")
+
+/* Fade moving logo out right before it reaches navbar */
+.to(".loader-split-logo", {
+  opacity: 0,
+  duration: .12,
+  ease: "power1.out"
+}, "loaderExit+=.91")
+
+/* Reveal permanent navbar logo at the same moment */
+.to(".nav-split-logo", {
+  opacity: 1,
+  duration: .12,
+  ease: "power1.out"
+}, "loaderExit+=.91")
+
+.to(".logo-transition-layer", {
+  opacity: 0,
+  duration: .18,
+  ease: "power1.out"
+}, "loaderExit+=1")
+
 .to(".hero-bg", {
   clipPath: "inset(0% round 0px)",
   duration: 1.7,
   ease: "expo.inOut"
-}, "-=1.05")
+}, "loaderExit+=.05")
+
 .to(".logo", {
   opacity: 1,
   duration: .7,
   ease: "power2.out"
-}, "-=1.6")
+}, "loaderExit+1.8")
+
 .from(".lets-talk", {
   y: -20,
   opacity: 0,
   duration: .7,
   ease: "power2.out"
-}, "-=1.6")
+}, "loaderExit+=.1")
+
 .from(".feature-label, .feature-col, .view-project", {
   y: 30,
   opacity: 0,
   stagger: .08,
   duration: 1,
   ease: "expo.out"
-}, "-=1.1")
+}, "loaderExit+=.55")
+
 .from(".edge", {
   y: 55,
   opacity: 0,
   stagger: .14,
   duration: 1.1,
   ease: "expo.out"
-}, "-=.9");
+}, "loaderExit+=.75");
 
-/* ---------- Magnetic "Let's Talk" button ---------- */
+/* ---------- Magnetic Let's Talk button ---------- */
+
 const magnet = document.querySelector('.lets-talk');
-if(magnet && !prefersReducedMotion){
+
+if (magnet && !prefersReducedMotion) {
   const strength = 0.35;
-  const moveX = gsap.quickTo(magnet, "x", { duration: .5, ease: "power3" });
-  const moveY = gsap.quickTo(magnet, "y", { duration: .5, ease: "power3" });
+
+  const moveX = gsap.quickTo(magnet, "x", {
+    duration: .5,
+    ease: "power3"
+  });
+
+  const moveY = gsap.quickTo(magnet, "y", {
+    duration: .5,
+    ease: "power3"
+  });
 
   magnet.addEventListener('mousemove', (e) => {
-    const b = magnet.getBoundingClientRect();
-    moveX((e.clientX - b.left - b.width / 2) * strength);
-    moveY((e.clientY - b.top - b.height / 2) * strength);
+    const bounds = magnet.getBoundingClientRect();
+
+    moveX(
+      (e.clientX - bounds.left - bounds.width / 2) * strength
+    );
+
+    moveY(
+      (e.clientY - bounds.top - bounds.height / 2) * strength
+    );
   });
+
   magnet.addEventListener('mouseleave', () => {
     moveX(0);
     moveY(0);
@@ -1873,6 +1946,7 @@ if(magnet && !prefersReducedMotion){
 }
 
 /* ---------- Hero parallax ---------- */
+
 gsap.to(".hero-bg", {
   yPercent: 18,
   scale: 1.14,
@@ -1886,6 +1960,7 @@ gsap.to(".hero-bg", {
 });
 
 /* ---------- Work panel rising over hero ---------- */
+
 gsap.from(".work", {
   y: "28vh",
   borderRadius: "44px 44px 0 0",
@@ -1899,6 +1974,7 @@ gsap.from(".work", {
 });
 
 /* ---------- Scroll reveals ---------- */
+
 gsap.utils.toArray(".story-reveal").forEach((el) => {
   gsap.from(el, {
     y: 70,
@@ -1912,13 +1988,16 @@ gsap.utils.toArray(".story-reveal").forEach((el) => {
   });
 });
 
-gsap.utils.toArray(".story-media img, .story-media video, .capstone .media img").forEach((media) => {
+gsap.utils.toArray(
+  ".story-media img, .story-media video, .capstone .media img"
+).forEach((media) => {
   gsap.to(media, {
     scale: 1,
     yPercent: -6,
     ease: "none",
     scrollTrigger: {
-      trigger: media.closest(".story-row, .story-card, .capstone") || media,
+      trigger:
+        media.closest(".story-row, .story-card, .capstone") || media,
       start: "top bottom",
       end: "bottom top",
       scrub: 1.1
@@ -1926,12 +2005,11 @@ gsap.utils.toArray(".story-media img, .story-media video, .capstone .media img")
   });
 });
 
-/* copy reveal replaced by editorial line reveals */
-
-
-
 /* ---------- Editorial text line reveals ---------- */
-document.querySelectorAll(".story-copy h3, .story-note h3, .story-data h3, .work-head h2").forEach((heading) => {
+
+document.querySelectorAll(
+  ".story-copy h3, .story-note h3, .story-data h3, .work-head h2"
+).forEach((heading) => {
   if (heading.dataset.split === "true") return;
 
   const raw = heading.textContent.trim();
@@ -1941,19 +2019,31 @@ document.querySelectorAll(".story-copy h3, .story-note h3, .story-data h3, .work
 
   words.forEach((word, index) => {
     buffer.push(word);
+
     if (buffer.length === 3 || index === words.length - 1) {
       lines.push(buffer.join(" "));
       buffer = [];
     }
   });
 
-  heading.innerHTML = lines.map(line => `<span class="story-line"><span>${line}</span></span>`).join("");
+  heading.innerHTML = lines
+    .map(
+      line =>
+        `<span class="story-line"><span>${line}</span></span>`
+    )
+    .join("");
+
   heading.dataset.split = "true";
 });
 
-gsap.utils.toArray(".story-copy, .story-note, .story-data, .work-head").forEach((block) => {
+gsap.utils.toArray(
+  ".story-copy, .story-note, .story-data, .work-head"
+).forEach((block) => {
   const lines = block.querySelectorAll(".story-line > span");
-  const paragraphs = block.querySelectorAll("p, .story-specs li, .story-mini, .story-data__item, .story-divider");
+
+  const paragraphs = block.querySelectorAll(
+    "p, .story-specs li, .story-mini, .story-data__item, .story-divider"
+  );
 
   if (lines.length) {
     gsap.from(lines, {
@@ -1986,14 +2076,16 @@ gsap.utils.toArray(".story-copy, .story-note, .story-data, .work-head").forEach(
   }
 });
 
-
 gsap.from(".stats-head > *", {
   y: 40,
   opacity: 0,
   stagger: .1,
   duration: 1,
   ease: "expo.out",
-  scrollTrigger: { trigger: ".stats-head", start: "top 85%" }
+  scrollTrigger: {
+    trigger: ".stats-head",
+    start: "top 85%"
+  }
 });
 
 gsap.from(".stat", {
@@ -2002,7 +2094,10 @@ gsap.from(".stat", {
   stagger: .1,
   duration: 1,
   ease: "expo.out",
-  scrollTrigger: { trigger: ".stats-grid", start: "top 85%" }
+  scrollTrigger: {
+    trigger: ".stats-grid",
+    start: "top 85%"
+  }
 });
 
 gsap.from(".testimonial", {
@@ -2011,7 +2106,10 @@ gsap.from(".testimonial", {
   stagger: .12,
   duration: 1,
   ease: "expo.out",
-  scrollTrigger: { trigger: ".testimonial-grid", start: "top 85%" }
+  scrollTrigger: {
+    trigger: ".testimonial-grid",
+    start: "top 85%"
+  }
 });
 
 gsap.from(".footer-top > *, .footer-bottom", {
@@ -2020,26 +2118,37 @@ gsap.from(".footer-top > *, .footer-bottom", {
   stagger: .08,
   duration: .9,
   ease: "power2.out",
-  scrollTrigger: { trigger: ".site-footer", start: "top 90%" }
+  scrollTrigger: {
+    trigger: ".site-footer",
+    start: "top 90%"
+  }
 });
 
 /* ---------- Count-up stats ---------- */
+
 document.querySelectorAll('.stat').forEach((el) => {
   const numEl = el.querySelector('.stat-num');
+
+  if (!numEl) return;
 
   if (el.dataset.static) {
     ScrollTrigger.create({
       trigger: el,
       start: "top 85%",
       once: true,
-      onEnter: () => { numEl.textContent = el.dataset.staticText; }
+      onEnter: () => {
+        numEl.textContent = el.dataset.staticText;
+      }
     });
+
     return;
   }
 
-  const target = +el.dataset.value;
+  const target = Number(el.dataset.value);
   const suffix = el.dataset.suffix || '';
-  const obj = { val: 0 };
+  const obj = {
+    val: 0
+  };
 
   ScrollTrigger.create({
     trigger: el,
@@ -2050,7 +2159,9 @@ document.querySelectorAll('.stat').forEach((el) => {
         val: target,
         duration: 1.7,
         ease: "power2.out",
-        onUpdate: () => { numEl.textContent = Math.round(obj.val) + suffix; }
+        onUpdate: () => {
+          numEl.textContent = Math.round(obj.val) + suffix;
+        }
       });
     }
   });
