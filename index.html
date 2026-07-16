@@ -650,155 +650,229 @@ body{overflow-x:hidden}
   </button>
 
   <nav class="nav-dropdown" id="navDropdown" aria-label="Main menu">
-    <a href="#work">Projects</a>
-    <a href="/about.html">About</a>
-    <a href="/news.html">Gallery</a>
-    <a href="/contact.html">Contact</a>
+    <a href="#work"><span>Projects</span></a>
+    <a href="/about.html"><span>About</span></a>
+    <a href="/news.html"><span>Gallery</span></a>
+    <a href="/contact.html"><span>Contact</span></a>
   </nav>
 </div>
 
 <style>
-/* SIMPLE CENTER MENU */
+/* =========================================================
+   CENTER MENU
+========================================================= */
+/* =========================================================
+   SIMPLE CENTER MENU
+========================================================= */
+
 .menu-wrap{
   position:fixed;
   left:50%;
   top:18px;
   transform:translateX(-50%);
   z-index:210;
-  width:min(250px, calc(100vw - 48px));
+
+  width:min(290px, calc(100vw - 48px));
+
   pointer-events:auto;
 }
 
 .menu-toggle{
   position:relative;
   z-index:3;
+
   width:100%;
   height:54px;
-  border:1px solid rgba(255, 255, 255, 0);
+
+  border:0;
   border-radius:12px;
-  padding:0 18px 0 22px;
-  background:rgb(56, 56, 56);
+  padding:0 16px 0 22px;
+
+  background:rgb(56,56,56);
   color:#fff;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   cursor:pointer;
+
   font-family:var(--headline);
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  font-size:15px;
+  font-size:14px;
   font-weight:400;
-  /*
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  box-shadow:0 12px 34px rgba(0,0,0,.18);*/
-  transition:background .25s var(--ease-smooth), border-color .25s var(--ease-smooth), transform .25s var(--ease-smooth), color .25s var(--ease-smooth);
+  line-height:1;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+
+  transition:
+    transform .25s var(--ease-smooth),
+    background .25s ease;
 }
 
 .menu-toggle:hover{
   transform:translateY(-1px);
-  
-  background:rgb(56, 56, 56);
+  background:rgb(62,62,62);
 }
 
 .menu-toggle__label{
   line-height:1;
-
 }
 
 .menu-toggle__box{
+  position:relative;
+
   width:30px;
   height:30px;
-  border-radius:50%;
+
   display:grid;
   place-items:center;
-  position:relative;
+
+  flex-shrink:0;
 }
 
 .menu-toggle__bar{
   position:absolute;
-  width:24px;
+
+  width:22px;
   height:1px;
+
   border-radius:999px;
   background:currentColor;
-  transition:transform .28s var(--ease-smooth), opacity .2s ease;
+
+  transform-origin:center;
+
+  transition:
+    transform .3s var(--ease-smooth),
+    width .3s var(--ease-smooth);
 }
 
-.menu-toggle__bar:first-child{transform:translateY(-4px);}
-.menu-toggle__bar:last-child{transform:translateY(4px);}
+.menu-toggle__bar:first-child{
+  transform:translateY(-4px);
+}
 
-.menu-toggle.open .menu-toggle__bar:first-child{transform:rotate(45deg);}
-.menu-toggle.open .menu-toggle__bar:last-child{transform:rotate(-45deg);}
+.menu-toggle__bar:last-child{
+  transform:translateY(4px);
+}
+
+.menu-toggle.open .menu-toggle__bar:first-child{
+  transform:rotate(45deg);
+}
+
+.menu-toggle.open .menu-toggle__bar:last-child{
+  transform:rotate(-45deg);
+}
+
+/* expanding background */
 
 .menu-bg{
   position:absolute;
+  z-index:1;
+
+  top:0;
   left:0;
   right:0;
-  top:0;
+
   height:54px;
-  z-index:1;
-  border-radius:28px;
-  background:rgb(56, 56, 56);
-  
+
+  border-radius:12px;
+  background:rgb(56,56,56);
+
   opacity:0;
-  transform:scale(.96);
+  transform:scale(.98);
+  transform-origin:top center;
+
   pointer-events:none;
-  transition:height .34s var(--ease-smooth), opacity .2s ease, transform .3s var(--ease-smooth), border-radius .34s var(--ease-smooth);
+
+  transition:
+    height .4s cubic-bezier(.76,0,.24,1),
+    opacity .18s ease,
+    transform .35s var(--ease-smooth),
+    border-radius .4s var(--ease-smooth);
 }
 
 .menu-bg.open{
   height:330px;
+
   opacity:1;
   transform:scale(1);
-  border-radius:28px;
+
+  border-radius:22px;
 }
+
+/* dropdown */
 
 .nav-dropdown{
   position:relative;
   z-index:2;
+
   display:grid;
   gap:2px;
+
   padding:68px 14px 14px;
+
   opacity:0;
-  transform:translateY(-10px);
+  visibility:hidden;
+  transform:translateY(-8px);
+
   pointer-events:none;
-  transition:opacity .22s ease, transform .3s var(--ease-smooth);
+
+  transition:
+    opacity .2s ease,
+    transform .3s var(--ease-smooth),
+    visibility 0s linear .3s;
 }
 
 .nav-dropdown.open{
   opacity:1;
+  visibility:visible;
   transform:translateY(0);
+
   pointer-events:auto;
+
+  transition-delay:0s;
 }
 
 .nav-dropdown a{
+  min-height:48px;
+  padding:0 12px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  min-height:46px;
-  padding:0 12px;
-  border-radius:18px;
-  color:#ffffff;
+
+  border-radius:12px;
+
+  color:#fff;
   text-decoration:none;
+
   font-family:var(--headline);
-  font-size:clamp(1.35rem,2.1vw,1.9rem);
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:-.015em;
+  font-size:clamp(1.2rem, 1.8vw, 1.6rem);
+  font-weight:500;
   line-height:1;
-  transition:background .2s ease, color .2s ease, transform .2s var(--ease-smooth);
+  letter-spacing:-.015em;
+  text-transform:uppercase;
+
+  transition:
+    background .2s ease,
+    transform .25s var(--ease-smooth);
 }
 
 .nav-dropdown a::after{
   content:"→";
-  font-size:.7em;
-  opacity:.45;
+
+  font-size:.65em;
+  font-weight:400;
+
+  opacity:.4;
   transform:translateX(-4px);
-  transition:opacity .2s ease, transform .2s var(--ease-smooth);
+
+  transition:
+    opacity .2s ease,
+    transform .25s var(--ease-smooth);
 }
 
 .nav-dropdown a:hover{
-  background:rgba(0, 0, 0, 0.034);
+  background:rgba(255,255,255,.055);
   transform:translateX(2px);
 }
 
@@ -814,86 +888,30 @@ body.nav-open{
 @media(max-width:600px){
   .menu-wrap{
     top:16px;
-    width:min(230px, calc(100vw - 36px));
+    width:min(260px, calc(100vw - 36px));
   }
+
   .menu-toggle{
     height:50px;
+    padding-left:20px;
   }
+
   .menu-bg{
     height:50px;
   }
+
   .menu-bg.open{
     height:308px;
   }
+
   .nav-dropdown{
-    padding-top:62px;
+    padding:62px 12px 12px;
   }
-}
 
-.feature-bar{
-  position:absolute;
-  z-index:2;
-  top:50vh;
-
-  left:50%;
-  transform:translateX(-50%);
-
-  width:calc(100% - clamp(40px, 6vw, 120px));
-
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  align-items:center;
-}
-.feature-item{
-    display:flex;
-    align-items:center;
-    min-width:0;
-}
-
-/* 1st column */
-.feature-item:nth-child(1){
-    justify-content:flex-start;
-    padding-left:0;
-}
-
-/* 2nd column */
-.feature-item:nth-child(2){
-    justify-content:center;
-}
-
-/* 3rd column */
-.feature-item:nth-child(3){
-    justify-content:center;
-}
-
-/* 4th column */
-.feature-item:nth-child(4){
-    justify-content:flex-end;
-    padding-right:0;
-}
-
-/* center the text within the middle columns */
-.feature-item:nth-child(2).feature-col,
-.feature-item:nth-child(3).feature-col{
-    align-items:center;
-    text-align:center;
-}
-
-/* don't let the link stretch */
-.view-project{
-    width:auto;
-}
-.view-project{
-    justify-content:flex-end;   /* keep the column the same */
-    border-bottom:none;
-}
-
-.view-project__text{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    border-bottom:1px solid rgba(255,255,255,.6);
-    padding-bottom:3px;
+  .nav-dropdown a{
+    min-height:45px;
+    font-size:1.15rem;
+  }
 }
 </style>
 
@@ -1834,6 +1852,399 @@ document.querySelectorAll('.stat').forEach((el) => {
   });
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuWrap = document.querySelector(".menu-wrap");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuBg = document.querySelector(".menu-bg");
+  const dropdown = document.querySelector(".nav-dropdown");
+  const menuLinks = gsap.utils.toArray(".nav-dropdown a");
+  const bars = gsap.utils.toArray(".menu-toggle__bar");
+  const menuLabel = document.querySelector(".menu-toggle__label");
+  const featureItems = gsap.utils.toArray(".feature-item");
 
+  if (!menuWrap || !menuToggle || !menuBg || !dropdown) return;
+
+  let isOpen = false;
+  let isAnimating = false;
+
+  const openHeight = () => {
+    return window.innerWidth <= 600 ? 308 : 330;
+  };
+
+  /* Initial states */
+  gsap.set(menuBg, {
+    height: window.innerWidth <= 600 ? 50 : 54,
+    borderRadius: 14
+  });
+
+  gsap.set(menuLinks, {
+    autoAlpha: 0,
+    y: -14,
+    rotateX: -15,
+    transformOrigin: "50% 0%"
+  });
+
+  gsap.set(dropdown, {
+    visibility: "hidden"
+  });
+
+  /* Menu opening animation */
+  const openMenu = () => {
+    if (isOpen || isAnimating) return;
+
+    isOpen = true;
+    isAnimating = true;
+
+    menuToggle.classList.add("open");
+    dropdown.classList.add("open");
+    document.body.classList.add("nav-open");
+
+    gsap.set(dropdown, {
+      visibility: "visible"
+    });
+
+    const tl = gsap.timeline({
+      defaults: {
+        ease: "power3.out"
+      },
+      onComplete: () => {
+        isAnimating = false;
+      }
+    });
+
+    tl.to(menuWrap, {
+      scale: 1.015,
+      duration: .18
+    })
+
+    .to(menuWrap, {
+      scale: 1,
+      duration: .28,
+      ease: "back.out(2)"
+    })
+
+    .to(menuBg, {
+      height: openHeight,
+      borderRadius: 28,
+      duration: .55,
+      ease: "expo.inOut"
+    }, 0)
+
+    .to(menuToggle, {
+      borderRadius: 24,
+      boxShadow:
+        "0 5px 18px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.06)",
+      duration: .4
+    }, 0)
+
+    .to(bars[0], {
+      y: 0,
+      rotation: 45,
+      width: 17,
+      duration: .4,
+      ease: "power3.inOut"
+    }, .08)
+
+    .to(bars[1], {
+      y: 0,
+      rotation: -45,
+      width: 17,
+      duration: .4,
+      ease: "power3.inOut"
+    }, .08)
+
+    .to(menuLabel, {
+      y: -3,
+      autoAlpha: .7,
+      duration: .2
+    }, .06)
+
+    .add(() => {
+      menuLabel.textContent = "Close";
+    })
+
+    .fromTo(menuLabel, {
+      y: 7,
+      autoAlpha: 0
+    }, {
+      y: 0,
+      autoAlpha: 1,
+      duration: .3
+    })
+
+    .to(menuLinks, {
+      autoAlpha: 1,
+      y: 0,
+      rotateX: 0,
+      duration: .48,
+      stagger: .055,
+      ease: "back.out(1.25)"
+    }, "-=.28");
+  };
+
+  /* Menu closing animation */
+ const closeMenu = () => {
+  if (!isOpen || isAnimating) return;
+
+  isOpen = false;
+  isAnimating = true;
+
+  document.body.classList.remove("nav-open");
+
+  const closedHeight = window.innerWidth <= 600 ? 50 : 54;
+
+  const tl = gsap.timeline({
+    onComplete: () => {
+      menuToggle.classList.remove("open");
+      dropdown.classList.remove("open");
+
+      gsap.set(dropdown, {
+        visibility: "hidden"
+      });
+
+      isAnimating = false;
+    }
+  });
+
+  /*
+    Make sure "Close" is completely visible
+    before beginning the closing timeline.
+  */
+  tl.set(menuLabel, {
+    autoAlpha: 1,
+    y: 0
+  })
+
+  /*
+    1. Animate "Close" out by itself.
+  */
+  .to({}, { duration: 0.12 }) // small pause
+
+.to(menuLabel, {
+  y: -10,
+  autoAlpha: 0,
+  duration: .18,
+  ease: "power2.inOut"
+})
+
+  /*
+    2. Links begin leaving only after
+    "Close" has fully disappeared.
+  */
+  .to(menuLinks, {
+    autoAlpha: 0,
+    y: -14,
+    rotateX: -15,
+    duration: .34,
+    stagger: {
+      each: .04,
+      from: "end"
+    },
+    ease: "power3.in"
+  }, "-=.04")
+
+  /*
+    3. Collapse the background.
+  */
+  .to(menuBg, {
+    height: closedHeight,
+    borderRadius: 14,
+    duration: .08,
+    ease: "expo.inOut"
+  }, "-=.08")
+
+  .to(menuToggle, {
+    borderRadius: 14,
+    boxShadow:
+      "0 10px 30px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.07)",
+    duration: .08,
+    ease: "expo.inOut"
+  }, "<")
+
+  /*
+    4. Turn the X back into the hamburger.
+  */
+  .to(bars[0], {
+    rotation: 0,
+    y: -4,
+    width: 22,
+    duration: .12,
+    ease: "power3.inOut"
+  }, "<+.06")
+
+  .to(bars[1], {
+    rotation: 0,
+    y: 4,
+    width: 22,
+    duration: .42,
+    ease: "power3.inOut"
+  }, "<")
+
+  /*
+    5. Change the hidden label to "Menu".
+  */
+  .add(() => {
+    menuLabel.textContent = "Menu";
+  })
+
+  /*
+    6. Bring "Menu" in only after
+    the menu has finished collapsing.
+  */
+ .fromTo(menuLabel, {
+  y: 6,
+  autoAlpha: 0
+}, {
+  y: 0,
+  autoAlpha: 1,
+  duration: .18,
+  ease: "power2.out"
+});
+};
+
+  menuToggle.addEventListener("click", () => {
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  /* Close when clicking a navigation link */
+  menuLinks.forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  /* Close when clicking outside */
+  document.addEventListener("click", event => {
+    if (
+      isOpen &&
+      !menuWrap.contains(event.target) &&
+      !isAnimating
+    ) {
+      closeMenu();
+    }
+  });
+
+  /* Close with Escape */
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && isOpen) {
+      closeMenu();
+    }
+  });
+
+  /* Button hover motion */
+  menuToggle.addEventListener("mouseenter", () => {
+    if (isOpen) return;
+
+    gsap.to(menuToggle, {
+      y: -2,
+      duration: .3,
+      ease: "power2.out"
+    });
+
+    gsap.fromTo(
+      menuToggle,
+      {
+        "--shine-position": "-100%"
+      },
+      {
+        "--shine-position": "100%",
+        duration: .7
+      }
+    );
+
+    gsap.fromTo(
+      menuToggle.querySelector("::before"),
+      {},
+      {}
+    );
+  });
+
+  menuToggle.addEventListener("mouseleave", () => {
+    gsap.to(menuToggle, {
+      y: 0,
+      duration: .35,
+      ease: "power3.out"
+    });
+  });
+
+  /* Individual link hover movement */
+  menuLinks.forEach(link => {
+    const arrowDistance = 5;
+
+    link.addEventListener("mouseenter", () => {
+      gsap.to(link, {
+        x: arrowDistance,
+        duration: .3,
+        ease: "power3.out"
+      });
+    });
+
+    link.addEventListener("mouseleave", () => {
+      gsap.to(link, {
+        x: 0,
+        duration: .4,
+        ease: "power3.out"
+      });
+    });
+  });
+
+  /* Feature bar entrance */
+  if (featureItems.length) {
+    gsap.fromTo(
+      featureItems,
+      {
+        autoAlpha: 0,
+        y: 18,
+        filter: "blur(6px)"
+      },
+      {
+        autoAlpha: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 1,
+        stagger: .1,
+        delay: .35,
+        ease: "power3.out",
+        clearProps: "filter"
+      }
+    );
+  }
+
+  /* View Project hover animation */
+  const viewProject = document.querySelector(".view-project");
+
+  if (viewProject) {
+    const viewText = viewProject.querySelector(".view-project__text");
+
+    viewProject.addEventListener("mouseenter", () => {
+      gsap.to(viewText, {
+        x: 5,
+        duration: .35,
+        ease: "power3.out"
+      });
+    });
+
+    viewProject.addEventListener("mouseleave", () => {
+      gsap.to(viewText, {
+        x: 0,
+        duration: .4,
+        ease: "power3.out"
+      });
+    });
+  }
+
+  /* Keep correct menu height after resizing */
+  window.addEventListener("resize", () => {
+    if (isOpen) {
+      gsap.set(menuBg, {
+        height: openHeight()
+      });
+    } else {
+      gsap.set(menuBg, {
+        height: window.innerWidth <= 600 ? 50 : 54
+      });
+    }
+  });
+});
+</script>
 </body>
 </html>
