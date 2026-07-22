@@ -76,23 +76,30 @@ body{overflow-x:hidden}
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:0;
+
   height:var(--loader-logo-h);
   width:auto;
   flex:0 0 auto;
-  overflow:visible;
+
+  overflow:hidden;
   background:transparent;
-  will-change:transform;
+
+  clip-path:polygon(0 0, 0 0, 0 0);
+
+  will-change:transform, clip-path;
 }
 
-.loader-half{
+.loader-icon3{
   display:block;
   height:100%;
   width:auto;
   object-fit:contain;
-  opacity:0;
-  will-change:transform, opacity;
+  opacity:1;
+
+  will-change:transform;
 }
+
+
 
 .loader-icon2-wrap{
   width:0;
@@ -190,7 +197,7 @@ body{overflow-x:hidden}
   line-height:0;
 }
 
-.nav-logo-half{
+.nav-logo-icon{
   display:block;
   height:100%;
   width:auto;
@@ -212,7 +219,7 @@ body{overflow-x:hidden}
 .hero-bg{
   position:absolute;
   inset:0;
-  background:url("images/stock7.jpeg") center/cover no-repeat;
+  background:url("images/stock7.webp") center/cover no-repeat;
   transform:scale(1.08);
 }
 .hero::after{
@@ -226,20 +233,21 @@ body{overflow-x:hidden}
 .edge{
   position:absolute;
   z-index:2;
-  max-width:34ch;
+  max-width:60ch;
   will-change:transform;
 }
 .edge h2{
-  font-size:clamp(3rem,9vw,9rem);
+  font-size:1rem;
   line-height:.85;
   font-weight:250;
   letter-spacing:-.08em;
   margin:0;
 }
 .edge p{
-  font-size:clamp(.9rem,1.2vw,1.15rem);
-  line-height:1.55;
-  opacity:.78;
+  font-size:1.5rem;
+  line-height:1.15;
+  opacity:1;
+  color: white;
 }
 .edge-bottom-left{left:28px;bottom:28px}
 .edge-bottom-right{right:28px;bottom:28px;text-align:right}
@@ -258,60 +266,47 @@ body{overflow-x:hidden}
   flex-wrap:wrap;
   will-change:transform;
 }
-.feature-label{
-  font-size:.85rem;
-  font-weight:600;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  opacity:1;
-  white-space:nowrap;
-}
-.feature-right{
-  display:flex;
-  align-items:center;
-  gap:56px;
-  flex-wrap:wrap;
-}
-.feature-col{
-  display:flex;
-  flex-direction:column;
-  gap:5px;
-}
-.feature-col .col-label{
-  font-size:.68rem;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  opacity:.55;
-}
-.feature-col p{
+.feature-label,
+.feature-col p,
+.view-project{
   margin:0;
+  font-family:var(--headline);
   font-size:1rem;
-  font-weight:300;
+  font-weight:500;
+  line-height:1;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#fff;
   white-space:nowrap;
 }
 .view-project{
   display:inline-flex;
   align-items:center;
   gap:8px;
-  color:#fff;
   text-decoration:none;
-  font-size:.9rem;
-  letter-spacing:.03em;
-  border-bottom:1px solid rgba(255,255,255,.6);
+ 
   padding-bottom:3px;
-  white-space:nowrap;
-  transition:gap .35s var(--ease-smooth), border-color .35s var(--ease-smooth);
+  transition:
+    gap .35s var(--ease-smooth),
+    border-color .35s var(--ease-smooth);
 }
+
 .view-project:hover{
   gap:14px;
   border-color:#fff;
 }
+
 .view-project .arrow{
   display:inline-block;
   transition:transform .35s var(--ease-smooth);
+  max-width:16px;
+  transform:translateY(2px);
 }
-.view-project:hover .arrow{transform:translateX(4px)}
 
+.view-project:hover .arrow{
+  transform:translateX(4px);
+  
+}
 
 /* STATS */
 .stats{
@@ -319,7 +314,12 @@ body{overflow-x:hidden}
   z-index:5;
   background:var(--dark);
   color:var(--cream);
-  padding:16vh 28px;
+
+  padding:
+    clamp(110px,16vh,180px)
+    clamp(28px,7vw,104px)
+    clamp(110px,16vh,180px);
+  padding-bottom: 0;
 }
 .stats-head{
   max-width:156ch;
@@ -368,7 +368,10 @@ body{overflow-x:hidden}
   z-index:5;
   background:var(--dark);
   color:var(--cream);
-  padding:6vh 28px 18vh;
+  padding:
+    clamp(110px,16vh,180px)
+    clamp(28px,7vw,104px)
+    clamp(110px,16vh,180px);
 }
 .testimonials-head{
   font-size:.8rem;
@@ -412,13 +415,185 @@ body{overflow-x:hidden}
   margin-bottom:2px;
 }
 
+
+/* CONTACT */
+.contact-section{
+  position:relative;
+  z-index:5;
+
+  background:var(--cream);
+  color:#111;
+
+  padding:
+    clamp(100px,14vh,160px)
+    clamp(28px,7vw,104px);
+}
+
+.contact-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);
+  gap:clamp(60px,9vw,150px);
+  align-items:start;
+}
+
+.contact-kicker{
+  display:block;
+
+  margin-bottom:20px;
+
+  color:#8c7142;
+
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+.contact-copy h2{
+  margin:0;
+
+  max-width:10ch;
+
+  font-size:clamp(3rem,7vw,7rem);
+  font-weight:620;
+  line-height:.92;
+  letter-spacing:-.055em;
+  text-transform:uppercase;
+}
+
+.contact-copy p{
+  max-width:42ch;
+
+  margin:28px 0 0;
+
+  color:rgba(0,0,0,.65);
+
+  font-size:1rem;
+  line-height:1.65;
+}
+
+.contact-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:26px 20px;
+}
+
+.contact-field{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.contact-field--full{
+  grid-column:1/-1;
+}
+
+.contact-field label{
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.contact-field input,
+.contact-field textarea,
+.contact-field select{
+  width:100%;
+
+  border:0;
+  border-bottom:1px solid rgba(0,0,0,.3);
+  border-radius:0;
+
+  padding:12px 0 14px;
+
+  background:transparent;
+  color:#111;
+
+  font:inherit;
+  outline:none;
+
+  transition:border-color .25s ease;
+}
+
+.contact-field textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus,
+.contact-field select:focus{
+  border-color:#111;
+}
+
+.contact-submit{
+  grid-column:1/-1;
+  justify-self:start;
+
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+
+  border:1px solid #111;
+  border-radius:999px;
+
+  padding:14px 22px;
+
+  background:#111;
+  color:#fff;
+
+  font-family:var(--headline);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+  transition:
+    transform .3s var(--ease-smooth),
+    background .3s ease,
+    color .3s ease;
+}
+
+.contact-submit:hover{
+  transform:translateY(-2px);
+  background:transparent;
+  color:#111;
+}
+
+.contact-submit svg{
+  width:15px;
+  height:15px;
+}
+
+@media(max-width:800px){
+  .contact-inner{
+    grid-template-columns:1fr;
+    gap:60px;
+  }
+
+  .contact-form{
+    grid-template-columns:1fr;
+  }
+
+  .contact-field--full,
+  .contact-submit{
+    grid-column:auto;
+  }
+}
+
+
 /* FOOTER */
 .site-footer{
   position:relative;
   z-index:5;
   background:#050503;
   color:var(--cream);
-  padding:10vh 28px 4vh;
+  padding:
+    clamp(110px,16vh,180px)
+    clamp(28px,7vw,104px)
+    clamp(110px,16vh,180px);
   border-top:1px solid var(--line-light);
 }
 .footer-top{
@@ -467,6 +642,9 @@ body{overflow-x:hidden}
   opacity:.5;
   gap:16px;
   flex-wrap:wrap;
+}
+.footer-logo {
+  width: 300px;
 }
 .back-to-top{
   color:var(--cream);
@@ -614,27 +792,41 @@ body{overflow-x:hidden}
 <div class="loader"></div>
 
 <div class="logo-transition-layer">
-    <div class="loader-logo-wrap loader-logo-row">
-        <div class="loader-split-logo">
-            <img src="/images/icon_half1.png" class="loader-half loader-half-1" alt="Logo half 1">
-            <img src="/images/icon_half2.png" class="loader-half loader-half-2" alt="Logo half 2">
-        </div>
+  <div class="loader-logo-wrap loader-logo-row">
 
-        <div class="loader-icon2-wrap">
-            <img src="/images/icon2.png" class="loader-icon2" alt="Logo text">
-        </div>
+    <div class="loader-split-logo">
+      <img
+        src="/images/icon3.png"
+        class="loader-icon3"
+        alt="Faith J logo"
+      >
     </div>
+
+    <div class="loader-icon2-wrap">
+      <img
+        src="/images/icon2.png"
+        class="loader-icon2"
+        alt="Faith J Construction"
+      >
+    </div>
+
+  </div>
 </div>
 
 <header class="site-ui">
+
   <a class="logo nav-split-logo" href="/" aria-label="Home">
-    <img src="/images/icon_half1.png" class="nav-logo-half" alt="">
-    <img src="/images/icon_half2.png" class="nav-logo-half" alt="">
+    <img
+      src="/images/icon3.png"
+      class="nav-logo-icon"
+      alt=""
+    >
   </a>
 
-  <a class="lets-talk" href="/contact.html">
+  <!--<a class="lets-talk" href="/contact.html">
     Let’s Talk
-  </a>
+  </a>-->
+
 </header>
 
 <!-- Simple Center Menu -->
@@ -651,9 +843,9 @@ body{overflow-x:hidden}
 
   <nav class="nav-dropdown" id="navDropdown" aria-label="Main menu">
     <a href="#work"><span>Projects</span></a>
-    <a href="/about.html"><span>About</span></a>
-    <a href="/news.html"><span>Gallery</span></a>
-    <a href="/contact.html"><span>Contact</span></a>
+    <a href="#work"><span>About</span></a>
+    <a href="#work"><span>Gallery</span></a>
+    <a href="#work"><span>Contact</span></a>
   </nav>
 </div>
 
@@ -858,22 +1050,20 @@ body{overflow-x:hidden}
 }
 
 .nav-dropdown a::after{
-  content:"→";
+  content:"";
 
-  font-size:.65em;
-  font-weight:400;
+  width:14px;
+  height:14px;
+  flex-shrink:0;
 
-  opacity:.4;
+  opacity:.45;
   transform:translateX(-4px);
+
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 18L18 6M18 6H10M18 6V14' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 
   transition:
     opacity .2s ease,
     transform .25s var(--ease-smooth);
-}
-
-.nav-dropdown a:hover{
-  background:rgba(255,255,255,.055);
-  transform:translateX(2px);
 }
 
 .nav-dropdown a:hover::after{
@@ -936,18 +1126,20 @@ body.nav-open{
 
   <a href="#work" class="view-project">
     <span class="view-project__text">
-        View Project <span class="arrow">→</span>
+        View Project <span class="arrow"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+ </svg></span>
     </span>
 </a>
 
 </div>
 
   <div class="edge edge-bottom-left">
-    <p>Architectural construction shaped by precision, clean execution, and lasting material presence.</p>
+    <p>Multifamily apartment complexes, commercial and residential construction and remodeling services.</p>
   </div>
 
   <div class="edge edge-bottom-right">
-    <p>Residential / Commercial<br>Houston, Texas</p>
+    <p>Family-owned and operated<br>Houston, Texas</p>
   </div>
 </section>
 
@@ -984,9 +1176,9 @@ body.nav-open{
     clamp(90px,12vh,140px);
 }
 
-.fj-work__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,1fr);gap:30px;align-items:start;margin:0 0 clamp(45px,4h,75px);}
+.fj-work__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,1fr);gap:460px;align-items:start;margin:0 0 clamp(45px,4h,75px);}
 .fj-work__head>*{min-width:0}
-.fj-work__head h2{margin:0;max-width:9ch;overflow:visible;font-size:clamp(3rem,8vw,8rem);font-weight:640;line-height:.92;letter-spacing:-.045em;text-transform:uppercase;overflow-wrap:normal;word-break:normal}
+.fj-work__head h2{margin:0;max-width:9ch;overflow:visible;font-size:clamp(3rem,6vw,6rem);font-weight:640;line-height:.92;letter-spacing:-.045em;text-transform:uppercase;overflow-wrap:normal;word-break:normal}
 .fj-work__head p{margin:6px 0 0;max-width:42ch;color:var(--fj-body);font-size:clamp(1rem,1.08vw,1.08rem);line-height:1.65}
 
 .fj-story{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:40px;align-items:start;padding:clamp(85px,14vh,145px) 0 clamp(65px,10vh,110px)}
@@ -1075,7 +1267,7 @@ body.nav-open{
 <section class="fj-work" id="work">
   <div class="fj-work__head">
     <h2>FAITH J.<br>
-    WORK</h2>
+    CONSTRUCTION</h2>
     <p>We were created to build through excellence & satisfaction;
 
 Dedicated to work in Good Faith, having God as our priority in everything we do</p>
@@ -1137,7 +1329,7 @@ Dedicated to work in Good Faith, having God as our priority in everything we do<
     </div>
 
     <div class="fj-project__media">
-      <img src="images/stock3.jpeg" alt="Interior construction detail">
+      <img src="images/stock3.webp" alt="Interior construction detail">
     </div>
   </article>
 
@@ -1145,7 +1337,7 @@ Dedicated to work in Good Faith, having God as our priority in everything we do<
 
     <article class="fj-split__card">
       <div class="fj-split__media">
-        <img src="images/stock4.jpeg" alt="Exterior construction">
+        <img src="images/stock5.webp" alt="Exterior construction">
       </div>
       <span class="fj-split__label">03 / Exterior</span>
       <h3>Exterior improvements</h3>
@@ -1153,7 +1345,7 @@ Dedicated to work in Good Faith, having God as our priority in everything we do<
 
     <article class="fj-split__card">
       <div class="fj-split__media">
-        <img src="images/stock5.jpeg" alt="Interior remodeling">
+        <img src="images/stock4.webp" alt="Interior remodeling">
       </div>
       <span class="fj-split__label">04 / Interior</span>
       <h3>Interior remodeling</h3>
@@ -1184,7 +1376,7 @@ Dedicated to work in Good Faith, having God as our priority in everything we do<
   <article class="fj-project fj-project--left">
 
     <div class="fj-project__media">
-      <img src="images/stock2.jpeg" alt="Construction framing">
+      <img src="images/stock2.webp" alt="Construction framing">
     </div>
 
     <div class="fj-project__info">
@@ -1198,7 +1390,7 @@ Dedicated to work in Good Faith, having God as our priority in everything we do<
   <article class="fj-capstone">
 
     <div class="fj-capstone__media">
-      <img src="images/stock1.jpeg" alt="Completed construction project">
+      <img src="images/stock1.webp" alt="Completed construction project">
     </div>
 
     <div class="fj-capstone__copy">
@@ -1234,7 +1426,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   });
 
   work.querySelectorAll(".fj-project__media,.fj-split__media,.fj-capstone__media").forEach(media=>{
-    gsap.from(media,{clipPath:"inset(0 0 100% 0)",duration:1.25,ease:"expo.inOut",scrollTrigger:{trigger:media,start:"top 82%",once:true}});
+    gsap.from(media,{clipPath:"inset(0 0 100% 0)",duration:1.25,ease:"expo.inOut",scrollTrigger:{trigger:media,start:"top 95%",once:true}});
   });
 
   work.querySelectorAll(".fj-project__media img,.fj-project__media video,.fj-split__media img,.fj-split__media video,.fj-capstone__media img,.fj-capstone__media video").forEach(media=>{
@@ -1293,10 +1485,140 @@ document.addEventListener("DOMContentLoaded",()=>{
   </div>
 </section>
 
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+
+    <div class="contact-copy">
+      <span class="contact-kicker">Start a project</span>
+
+      <h2>Let’s build something lasting.</h2>
+
+      <p>
+        Tell us about your construction, renovation, or remodeling
+        project. Our team will follow up to discuss the scope,
+        location, and next steps.
+      </p>
+    </div>
+
+    <form
+      class="contact-form"
+      name="project-inquiry"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+    >
+
+      <input
+        type="hidden"
+        name="form-name"
+        value="project-inquiry"
+      >
+
+      <p hidden>
+        <label>
+          Do not fill this out:
+          <input name="bot-field">
+        </label>
+      </p>
+
+      <div class="contact-field">
+        <label for="contact-name">Name</label>
+
+        <input
+          id="contact-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+        >
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-email">Email</label>
+
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-phone">Phone</label>
+
+        <input
+          id="contact-phone"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+        >
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-type">Project type</label>
+
+        <select
+          id="contact-type"
+          name="project-type"
+          required
+        >
+          <option value="" selected disabled>
+            Select one
+          </option>
+
+          <option>Commercial Construction</option>
+          <option>Multifamily Renovation</option>
+          <option>Residential Construction</option>
+          <option>Interior Remodeling</option>
+          <option>Exterior Improvements</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="contact-field contact-field--full">
+        <label for="contact-message">
+          Project details
+        </label>
+
+        <textarea
+          id="contact-message"
+          name="message"
+          placeholder="Tell us about the location, scope, and timeline."
+          required
+        ></textarea>
+      </div>
+
+      <button class="contact-submit" type="submit">
+        Send inquiry
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M6 18L18 6M18 6H10M18 6V14"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
+
 <footer class="site-footer">
   <div class="footer-top">
     <div class="footer-brand">
-      <h3>Faith J</h3>
+      <img src="images/icon4.png" alt="Faith J Construction" class="footer-logo">
       <p>Architectural construction shaped by precision, clean execution, and lasting material presence. Based in Houston, building across Texas.</p>
     </div>
     <div class="footer-col">
@@ -1367,21 +1689,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <script>
+
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
 gsap.registerPlugin(ScrollTrigger);
 
 /* ---------- Lenis smooth scroll ---------- */
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- Lenis smooth scroll ---------- */
+
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+let lenis = null;
+
+/* Prevent browser restoration */
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+/* Lock page at the top while loading */
+document.documentElement.style.scrollBehavior = "auto";
+document.documentElement.style.overflow = "hidden";
+document.body.style.overflow = "hidden";
+
+window.scrollTo(0, 0);
 
 if (!prefersReducedMotion && window.Lenis) {
-  const lenis = new Lenis({
+  lenis = new Lenis({
     duration: 1.15,
-    easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
+    easing: (t) =>
+      t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+    smoothWheel: true
   });
 
-  lenis.on('scroll', ScrollTrigger.update);
+  lenis.stop();
+
+  lenis.on("scroll", ScrollTrigger.update);
 
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
@@ -1390,24 +1735,56 @@ if (!prefersReducedMotion && window.Lenis) {
   gsap.ticker.lagSmoothing(0);
 }
 
+function forceTop() {
+  window.scrollTo(0, 0);
+
+  if (lenis) {
+    lenis.scrollTo(0, {
+      immediate: true,
+      force: true
+    });
+  }
+}
+
+forceTop();
+
+window.addEventListener("load", () => {
+  forceTop();
+
+  requestAnimationFrame(() => {
+    forceTop();
+
+    requestAnimationFrame(() => {
+      forceTop();
+
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+
+      if (lenis) {
+        lenis.start();
+      }
+
+      ScrollTrigger.refresh();
+    });
+  });
+});
+
+window.addEventListener("pageshow", () => {
+  forceTop();
+});
 /* ---------- Load-in sequence ---------- */
 
 gsap.set(".hero-bg", {
   clipPath: "inset(10% round 26px)"
 });
 
-gsap.set(".loader-half-1", {
-  yPercent: -140,
-  opacity: 0
-});
-
-gsap.set(".loader-half-2", {
-  yPercent: 140,
-  opacity: 0
-});
-
 gsap.set(".loader-split-logo", {
-  scale: 1
+  scale: 1,
+  clipPath: "polygon(0 0, 0 0, 0 0, 0 0)"
+});
+
+gsap.set(".loader-icon3", {
+  scale: 1.04
 });
 
 gsap.set(".loader-icon2-wrap", {
@@ -1424,16 +1801,14 @@ const tl = gsap.timeline({
   delay: .42
 });
 
-tl.to(".loader-half-1", {
-  yPercent: 0,
-  opacity: 1,
+tl.to(".loader-split-logo", {
+  clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
   duration: 1.05,
-  ease: "expo.out"
+  ease: "expo.inOut"
 })
 
-.to(".loader-half-2", {
-  yPercent: 0,
-  opacity: 1,
+.to(".loader-icon3", {
+  scale: 1,
   duration: 1.05,
   ease: "expo.out"
 }, "<")
@@ -1497,7 +1872,7 @@ tl.to(".loader-half-1", {
   x: () => Number(
     document.querySelector(".loader-split-logo")?.dataset.moveX || 0
   ),
-  duration: 1.1,
+  duration: 0.9,
   ease: "power3.inOut"
 }, "loaderExit")
 
@@ -1626,7 +2001,7 @@ if (magnet && !prefersReducedMotion) {
 /* ---------- Hero parallax ---------- */
 
 gsap.to(".hero-bg", {
-  yPercent: 18,
+  yPercent: -18,
   scale: 1.14,
   ease: "none",
   scrollTrigger: {
@@ -1852,6 +2227,8 @@ document.querySelectorAll('.stat').forEach((el) => {
   });
 });
 </script>
+
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const menuWrap = document.querySelector(".menu-wrap");
@@ -1872,7 +2249,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return window.innerWidth <= 600 ? 308 : 330;
   };
 
-  /* Initial states */
   gsap.set(menuBg, {
     height: window.innerWidth <= 600 ? 50 : 54,
     borderRadius: 14
@@ -1880,8 +2256,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   gsap.set(menuLinks, {
     autoAlpha: 0,
-    y: -14,
-    rotateX: -15,
+    y: -10,
+    rotateX: -10,
     transformOrigin: "50% 0%"
   });
 
@@ -1889,7 +2265,6 @@ document.addEventListener("DOMContentLoaded", () => {
     visibility: "hidden"
   });
 
-  /* Menu opening animation */
   const openMenu = () => {
     if (isOpen || isAnimating) return;
 
@@ -1914,20 +2289,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     tl.to(menuWrap, {
-      scale: 1.015,
-      duration: .18
+      scale: 1.01,
+      duration: .1
     })
 
     .to(menuWrap, {
       scale: 1,
-      duration: .28,
-      ease: "back.out(2)"
+      duration: .16,
+      ease: "back.out(1.6)"
     })
 
     .to(menuBg, {
       height: openHeight,
       borderRadius: 28,
-      duration: .55,
+      duration: .34,
       ease: "expo.inOut"
     }, 0)
 
@@ -1935,184 +2310,155 @@ document.addEventListener("DOMContentLoaded", () => {
       borderRadius: 24,
       boxShadow:
         "0 5px 18px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.06)",
-      duration: .4
+      duration: .24
     }, 0)
 
     .to(bars[0], {
       y: 0,
       rotation: 45,
       width: 17,
-      duration: .4,
+      duration: .24,
       ease: "power3.inOut"
-    }, .08)
+    }, .03)
 
     .to(bars[1], {
       y: 0,
       rotation: -45,
       width: 17,
-      duration: .4,
+      duration: .24,
       ease: "power3.inOut"
-    }, .08)
+    }, .03)
 
     .to(menuLabel, {
-      y: -3,
-      autoAlpha: .7,
-      duration: .2
-    }, .06)
+      y: -5,
+      autoAlpha: 0,
+      duration: .12
+    }, .02)
 
     .add(() => {
       menuLabel.textContent = "Close";
     })
 
     .fromTo(menuLabel, {
-      y: 7,
+      y: 5,
       autoAlpha: 0
     }, {
       y: 0,
       autoAlpha: 1,
-      duration: .3
+      duration: .18
     })
 
     .to(menuLinks, {
       autoAlpha: 1,
       y: 0,
       rotateX: 0,
-      duration: .48,
-      stagger: .055,
-      ease: "back.out(1.25)"
-    }, "-=.28");
+      duration: .28,
+      stagger: .035,
+      ease: "back.out(1.15)"
+    }, "-=.08");
   };
 
-  /* Menu closing animation */
- const closeMenu = () => {
-  if (!isOpen || isAnimating) return;
+  const closeMenu = () => {
+    if (!isOpen || isAnimating) return;
 
-  isOpen = false;
-  isAnimating = true;
+    isOpen = false;
+    isAnimating = true;
 
-  document.body.classList.remove("nav-open");
+    document.body.classList.remove("nav-open");
 
-  const closedHeight = window.innerWidth <= 600 ? 50 : 54;
+    const closedHeight = window.innerWidth <= 600 ? 50 : 54;
 
-  const tl = gsap.timeline({
-    onComplete: () => {
-      menuToggle.classList.remove("open");
-      dropdown.classList.remove("open");
+    const tl = gsap.timeline({
+      onComplete: () => {
+        menuToggle.classList.remove("open");
+        dropdown.classList.remove("open");
 
-      gsap.set(dropdown, {
-        visibility: "hidden"
-      });
+        gsap.set(dropdown, {
+          visibility: "hidden"
+        });
 
-      isAnimating = false;
-    }
-  });
+        isAnimating = false;
+      }
+    });
 
-  /*
-    Make sure "Close" is completely visible
-    before beginning the closing timeline.
-  */
-  tl.set(menuLabel, {
-    autoAlpha: 1,
-    y: 0
-  })
+    tl.set(menuLabel, {
+      autoAlpha: 1,
+      y: 0
+    })
 
-  /*
-    1. Animate "Close" out by itself.
-  */
-  .to({}, { duration: 0.12 }) // small pause
+    .to(menuLabel, {
+      y: -7,
+      autoAlpha: 0,
+      duration: .1,
+      ease: "power2.in"
+    })
 
-.to(menuLabel, {
-  y: -10,
-  autoAlpha: 0,
-  duration: .18,
-  ease: "power2.inOut"
-})
+    .to(menuLinks, {
+      autoAlpha: 0,
+      y: -10,
+      rotateX: -10,
+      duration: .18,
+      stagger: {
+        each: .025,
+        from: "end"
+      },
+      ease: "power3.in"
+    }, "-=.03")
 
-  /*
-    2. Links begin leaving only after
-    "Close" has fully disappeared.
-  */
-  .to(menuLinks, {
-    autoAlpha: 0,
-    y: -14,
-    rotateX: -15,
-    duration: .34,
-    stagger: {
-      each: .04,
-      from: "end"
-    },
-    ease: "power3.in"
-  }, "-=.04")
+    .to(menuBg, {
+      height: closedHeight,
+      borderRadius: 14,
+      duration: .22,
+      ease: "expo.inOut"
+    }, "-=.04")
 
-  /*
-    3. Collapse the background.
-  */
-  .to(menuBg, {
-    height: closedHeight,
-    borderRadius: 14,
-    duration: .08,
-    ease: "expo.inOut"
-  }, "-=.08")
+    .to(menuToggle, {
+      borderRadius: 14,
+      boxShadow:
+        "0 10px 30px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.07)",
+      duration: .18,
+      ease: "expo.inOut"
+    }, "<")
 
-  .to(menuToggle, {
-    borderRadius: 14,
-    boxShadow:
-      "0 10px 30px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.07)",
-    duration: .08,
-    ease: "expo.inOut"
-  }, "<")
+    .to(bars[0], {
+      rotation: 0,
+      y: -4,
+      width: 22,
+      duration: .18,
+      ease: "power3.inOut"
+    }, "<")
 
-  /*
-    4. Turn the X back into the hamburger.
-  */
-  .to(bars[0], {
-    rotation: 0,
-    y: -4,
-    width: 22,
-    duration: .12,
-    ease: "power3.inOut"
-  }, "<+.06")
+    .to(bars[1], {
+      rotation: 0,
+      y: 4,
+      width: 22,
+      duration: .18,
+      ease: "power3.inOut"
+    }, "<")
 
-  .to(bars[1], {
-    rotation: 0,
-    y: 4,
-    width: 22,
-    duration: .42,
-    ease: "power3.inOut"
-  }, "<")
+    .add(() => {
+      menuLabel.textContent = "Menu";
+    })
 
-  /*
-    5. Change the hidden label to "Menu".
-  */
-  .add(() => {
-    menuLabel.textContent = "Menu";
-  })
-
-  /*
-    6. Bring "Menu" in only after
-    the menu has finished collapsing.
-  */
- .fromTo(menuLabel, {
-  y: 6,
-  autoAlpha: 0
-}, {
-  y: 0,
-  autoAlpha: 1,
-  duration: .18,
-  ease: "power2.out"
-});
-};
+    .fromTo(menuLabel, {
+      y: 5,
+      autoAlpha: 0
+    }, {
+      y: 0,
+      autoAlpha: 1,
+      duration: .14,
+      ease: "power2.out"
+    });
+  };
 
   menuToggle.addEventListener("click", () => {
     isOpen ? closeMenu() : openMenu();
   });
 
-  /* Close when clicking a navigation link */
   menuLinks.forEach(link => {
     link.addEventListener("click", closeMenu);
   });
 
-  /* Close when clicking outside */
   document.addEventListener("click", event => {
     if (
       isOpen &&
@@ -2123,57 +2469,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* Close with Escape */
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && isOpen) {
       closeMenu();
     }
   });
 
-  /* Button hover motion */
   menuToggle.addEventListener("mouseenter", () => {
     if (isOpen) return;
 
     gsap.to(menuToggle, {
       y: -2,
-      duration: .3,
+      duration: .2,
       ease: "power2.out"
     });
-
-    gsap.fromTo(
-      menuToggle,
-      {
-        "--shine-position": "-100%"
-      },
-      {
-        "--shine-position": "100%",
-        duration: .7
-      }
-    );
-
-    gsap.fromTo(
-      menuToggle.querySelector("::before"),
-      {},
-      {}
-    );
   });
 
   menuToggle.addEventListener("mouseleave", () => {
     gsap.to(menuToggle, {
       y: 0,
-      duration: .35,
+      duration: .22,
       ease: "power3.out"
     });
   });
 
-  /* Individual link hover movement */
   menuLinks.forEach(link => {
-    const arrowDistance = 5;
-
     link.addEventListener("mouseenter", () => {
       gsap.to(link, {
-        x: arrowDistance,
-        duration: .3,
+        x: 5,
+        duration: .2,
         ease: "power3.out"
       });
     });
@@ -2181,13 +2505,12 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("mouseleave", () => {
       gsap.to(link, {
         x: 0,
-        duration: .4,
+        duration: .25,
         ease: "power3.out"
       });
     });
   });
 
-  /* Feature bar entrance */
   if (featureItems.length) {
     gsap.fromTo(
       featureItems,
@@ -2200,16 +2523,15 @@ document.addEventListener("DOMContentLoaded", () => {
         autoAlpha: 1,
         y: 0,
         filter: "blur(0px)",
-        duration: 1,
-        stagger: .1,
-        delay: .35,
+        duration: .7,
+        stagger: .07,
+        delay: .25,
         ease: "power3.out",
         clearProps: "filter"
       }
     );
   }
 
-  /* View Project hover animation */
   const viewProject = document.querySelector(".view-project");
 
   if (viewProject) {
@@ -2218,7 +2540,7 @@ document.addEventListener("DOMContentLoaded", () => {
     viewProject.addEventListener("mouseenter", () => {
       gsap.to(viewText, {
         x: 5,
-        duration: .35,
+        duration: .22,
         ease: "power3.out"
       });
     });
@@ -2226,23 +2548,20 @@ document.addEventListener("DOMContentLoaded", () => {
     viewProject.addEventListener("mouseleave", () => {
       gsap.to(viewText, {
         x: 0,
-        duration: .4,
+        duration: .25,
         ease: "power3.out"
       });
     });
   }
 
-  /* Keep correct menu height after resizing */
   window.addEventListener("resize", () => {
-    if (isOpen) {
-      gsap.set(menuBg, {
-        height: openHeight()
-      });
-    } else {
-      gsap.set(menuBg, {
-        height: window.innerWidth <= 600 ? 50 : 54
-      });
-    }
+    gsap.set(menuBg, {
+      height: isOpen
+        ? openHeight()
+        : window.innerWidth <= 600
+          ? 50
+          : 54
+    });
   });
 });
 </script>
