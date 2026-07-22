@@ -1078,7 +1078,7 @@ body.nav-open{
 @media(max-width:600px){
   .menu-wrap{
     top:16px;
-    width:min(260px, calc(100vw - 36px));
+    width:min(200px, calc(100vw - 36px));
   }
 
   .menu-toggle{
@@ -1102,6 +1102,42 @@ body.nav-open{
     min-height:45px;
     font-size:1.15rem;
   }
+}
+@media (max-width:768px){
+  html,
+  body{
+    width:100%;
+    overscroll-behavior-x:none;
+  }
+}
+@media (max-width: 768px){
+
+  .edge-bottom-left{
+    left:22px;
+    right:22px;
+    bottom:22px;
+    max-width:none;
+  }
+
+  .edge-bottom-left p{
+    font-size:clamp(1rem, 2.2vw, 1.2rem);
+    line-height:1.05;
+    max-width:40ch;
+  }
+
+  .edge-bottom-right{
+    left:22px;
+    right:22px;
+    bottom:105px;
+    text-align:left;
+  }
+
+  .edge-bottom-right p{
+    font-size:.8rem;
+    line-height:1.45;
+    letter-spacing:.08em;
+  }
+
 }
 </style>
 
@@ -1256,7 +1292,7 @@ body.nav-open{
   .fj-split__media,.fj-split__card:nth-child(2) .fj-split__media{height:60vh;min-height:420px}
 }
 @media(max-width:600px){
-  .fj-work__head h2{font-size:clamp(3rem,5vw,5rem);line-height:.96}
+  .fj-work__head h2{font-size:clamp(2.5rem,3.5vw,3.5rem);line-height:.96}
   .fj-story h3{font-size:clamp(2.6rem,4vw,4.4rem)}
   .fj-project__media,.fj-split__media,.fj-split__card:nth-child(2) .fj-split__media{height:58vh;min-height:390px}
   .fj-capstone{height:68vh;min-height:500px}
