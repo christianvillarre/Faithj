@@ -1314,9 +1314,9 @@ body.nav-open{
 .fj-service__number{
   display:block;
   color:#c31313;
-  font-size:1.74rem;
+  font-size:.74rem;
   font-weight:650;
-  letter-spacing:.02em;
+  letter-spacing:.22em;
   text-transform:uppercase;
 }
 
@@ -1450,7 +1450,7 @@ body.nav-open{
   display:grid;
   grid-template-columns:minmax(0,1.05fr) minmax(330px,.95fr);
   gap:clamp(38px,6vw,94px);
-  align-items:start;
+  align-items:center;
   overflow:hidden;
   background:var(--service-bg);
   color:var(--service-text);
@@ -1465,11 +1465,10 @@ body.nav-open{
 
 .fj-service__content{
   min-width:0;
-  align-self:start;
+  align-self:stretch;
   display:flex;
   flex-direction:column;
-  justify-content:flex-start;
-  padding-top:0;
+  justify-content:center;
 }
 
 .fj-service__heading{
@@ -1733,249 +1732,43 @@ body.nav-open{
 .fj-about__top{grid-template-columns:minmax(0,.9fr) minmax(360px,1.1fr);gap:clamp(40px,7vw,110px);align-items:center}
 .fj-about h2{max-width:none;white-space:nowrap;font-size:clamp(2.8rem,5.3vw,5.6rem);line-height:.94}
 .fj-about__copy{padding-top:0}
-.fj-about__lead{font-size:clamp(1.18rem,1.65vw,1.55rem);max-width:98ch}
-.fj-about__body{margin-top:22px;max-width:80ch}
+.fj-about__lead{font-size:clamp(1.18rem,1.65vw,1.55rem);max-width:38ch}
+.fj-about__body{margin-top:22px}
 .fj-about__image{height:min(68vh,650px);min-height:430px;overflow:hidden}
 .fj-about__image img{width:100%;height:100%;display:block;object-fit:cover}
 .fj-about__values{display:none}
 .fj-services-intro h2{font-size:clamp(3rem,6.2vw,6.2rem);line-height:.9;max-width:12ch}
-.fj-service__heading{font-size:clamp(2rem,2.2vw,2.7rem);line-height:.92;max-width:25ch;font-weight:800}
+.fj-service__heading{font-size:clamp(2.35rem,4.2vw,4.7rem);line-height:.92;max-width:15ch}
 .fj-service__icon{width:26px;height:26px;flex:0 0 26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.78}
 @media(max-width:900px){.fj-about__top{grid-template-columns:1fr}.fj-about h2{white-space:normal}.fj-about__image{height:56svh;min-height:360px}.fj-service__heading{font-size:clamp(2.25rem,8vw,4rem)}}
 @media(max-width:600px){.fj-about h2{font-size:clamp(2.45rem,11vw,3.7rem)}.fj-about__image{height:48svh;min-height:320px}.fj-services-intro h2{font-size:clamp(2.75rem,13vw,4.4rem)}.fj-service__heading{font-size:clamp(2.05rem,10vw,3.3rem)}}
-
-
-/* Section heading + two-column content refinement */
-.fj-section-heading{
-  width:100%;
-  margin:0 0 clamp(42px,6vh,72px);
-}
-
-.fj-section-heading h2{
-  margin:14px 0 0;
-}
-
-.fj-about__grid,
-.fj-services-intro__grid{
-  display:grid;
-  grid-template-columns:minmax(0,.9fr) minmax(360px,1.1fr);
-  gap:clamp(40px,7vw,110px);
-  align-items:center;
-}
-
-.fj-about__copy{
-  max-width:54ch;
-}
-
-.fj-about__image,
-.fj-services-intro__image{
-  position:relative;
-  width:100%;
-  height:min(62vh,620px);
-  min-height:420px;
-  overflow:hidden;
-}
-
-.fj-about__image img,
-.fj-services-intro__image img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-}
-
-.fj-services-intro{
-  display:block;
-  min-height:auto;
-  padding-top:clamp(90px,12vh,140px);
-  padding-bottom:clamp(90px,12vh,140px);
-}
-
-.fj-services-intro .fj-section-heading h2{
-  max-width:15ch;
-}
-
-.fj-services-intro__grid p{
-  margin:0;
-  max-width:48ch;
-  align-self:start;
-  font-size:clamp(1.1rem,1.5vw,1.45rem);
-  line-height:1.55;
-}
-
-@media(max-width:900px){
-  .fj-about__grid,
-  .fj-services-intro__grid{
-    grid-template-columns:1fr;
-    gap:34px;
-  }
-
-  .fj-section-heading{
-    margin-bottom:36px;
-  }
-
-  .fj-about__image,
-  .fj-services-intro__image{
-    height:52svh;
-    min-height:340px;
-  }
-}
-
-@media(max-width:600px){
-  .fj-section-heading{
-    margin-bottom:28px;
-  }
-
-  .fj-about__image,
-  .fj-services-intro__image{
-    height:44svh;
-    min-height:300px;
-  }
-
-  .fj-services-intro__grid p{
-    font-size:1.05rem;
-  }
-}
-
-
-/* Final overview layout: full-width heading, two-column content beneath */
-.fj-overview{
-  display:block !important;
-  min-height:auto !important;
-  padding:clamp(88px,12vh,132px) clamp(24px,7vw,104px) !important;
-}
-
-.fj-overview__heading{
-  display:block;
-  width:100%;
-  margin:0 0 clamp(42px,6vh,72px);
-}
-
-.fj-overview__heading h2{
-  width:100%;
-  max-width:none !important;
-  margin:14px 0 0 !important;
-  font-size:clamp(2.8rem,5.2vw,5.4rem) !important;
-  line-height:.94 !important;
-  letter-spacing:-.05em !important;
-  white-space:normal;
-  text-transform: none;
-}
-
-.fj-overview__content{
-  display:grid;
-  grid-template-columns:minmax(0,.88fr) minmax(420px,1.12fr);
-  gap:clamp(42px,7vw,112px);
-  align-items:start;
-  width:100%;
-}
-
-.fj-overview__copy{
-  width: 100%;
-  padding:0 !important;
-}
-
-.fj-overview__image{
-  width:100%;
-  height:clamp(410px,58vh,620px);
-  margin:0;
-  overflow:hidden;
-  background:#bcbcbc;
-}
-
-.fj-overview__image img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.fj-services-intro__lead{
-  margin:0 !important;
-  max-width:42ch !important;
-  color:rgba(255,255,255,.72) !important;
-  font-size:clamp(1.15rem,1.55vw,1.5rem) !important;
-  line-height:1.55 !important;
-}
-
-@media(max-width:900px){
-  .fj-overview__content{
-    grid-template-columns:1fr;
-    gap:34px;
-  }
-
-  .fj-overview__heading{
-    margin-bottom:34px;
-  }
-
-  .fj-about .fj-overview__heading h2{
-    white-space:normal;
-  }
-
-  .fj-overview__image{
-    height:52svh;
-    min-height:340px;
-  }
-}
-
-@media(max-width:600px){
-  .fj-overview{
-    padding:78px 20px !important;
-  }
-
-  .fj-overview__heading h2{
-    font-size:clamp(2.45rem,11vw,3.65rem) !important;
-  }
-
-  .fj-overview__image{
-    height:44svh;
-    min-height:300px;
-  }
-}
-
 </style>
 
-<section class="fj-about fj-overview" id="about">
-  <header class="fj-overview__heading">
-    <span class="fj-about__eyebrow">About Faith J.</span>
-    <h2>Multifamily, Commercial & Residential Construction Built on Trust</h2>
-  </header>
-
-  <div class="fj-overview__content">
-    <div class="fj-overview__copy">
-      <p class="fj-about__lead">Faith J. Construction is a family-owned and operated general contractor with more than 25 years of experience delivering dependable construction, remodeling, restoration, and property improvement services. As a fully licensed and insured contractor, we proudly serve multifamily apartment communities, commercial properties, and residential clients throughout Houston, Texas and across the United States.</p>
-      <p class="fj-about__body">From new construction and large-scale renovations to interior and exterior improvements, every project is managed with a commitment to quality craftsmanship, clear communication, and dependable execution. We understand that successful projects are built on more than materials—they're built on trust, accountability, and relationships that last.<br><br>
-                                Driven by our mission to operate with integrity in everything we do, we approach every job with care, professionalism, and the belief that every task should be completed in good faith. By combining experienced project management, high construction standards, and a relentless focus on customer satisfaction, we deliver spaces that perform better, look better, and stand the test of time.</p>
+<section class="fj-about" id="about">
+  <div class="fj-about__top">
+    <div class="fj-about__copy">
+      <span class="fj-about__eyebrow">About Faith J.</span>
+      <h2>Built in Good Faith.</h2>
+      <p class="fj-about__lead">Faith J. Construction is a full-service construction partner committed to dependable work, honest communication, and lasting results.</p>
+      <p class="fj-about__body">We support multifamily, commercial, and residential properties through renovations, repairs, improvements, restoration, and project coordination. From initial planning through final completion, every project is approached with care, accountability, and a commitment to excellence.</p>
     </div>
-
-    <figure class="fj-overview__image">
-      <img src="/images/image5.jpg" alt="Faith J. Construction team and project work">
-    </figure>
+    <div class="fj-about__image"><img src="/images/image5.jpg" alt="Faith J. Construction team and project work"></div>
   </div>
 </section>
 
 <section class="fj-services" id="services">
-  <header class="fj-services-intro fj-overview fj-overview--dark">
-    <div class="fj-overview__heading">
-      <span class="fj-services-intro__eyebrow">What we do</span>
-      <h2>Your full-service construction project partner.</h2>
-    </div>
-
-    <div class="fj-overview__content">
-      <div class="fj-overview__copy">
-        <p class="fj-services-intro__lead">Comprehensive property services designed to improve performance, protect your investment, and create spaces residents are proud to call home.</p>
-      </div>
-
-      <figure class="fj-overview__image">
-        <img src="/images/image1.png" alt="Faith J. Construction multifamily property project">
-      </figure>
-    </div>
+  <header class="fj-services-intro">
+    <span class="fj-services-intro__eyebrow">What we do</span>
+    <h2>Your full-service construction project partner.</h2>
+    <p>
+      Comprehensive property services designed to improve performance, protect your investment, and create spaces residents are proud to call home.
+    </p>
   </header>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">01 / Exterior Services</span>-->
-      <h3 class="fj-service__heading">Exterior Services</h3>
+      <span class="fj-service__number">01 / Exterior Services</span>
+      <h3 class="fj-service__heading">Protect the property. Elevate the curb appeal.</h3>
       <p class="fj-service__description">
         Attract and retain residents with exterior projects that not only boost your property's curb appeal, but also protect your investment.
       </p>
@@ -1994,15 +1787,15 @@ body.nav-open{
       <a class="fj-service__link" href="/services/exterior.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image6.jpg" alt="Exterior construction services">
+      <img src="/images/iStock-1170226423 (square).jpg" alt="Exterior construction services">
       <span class="fj-service__photo-label">Exterior Services</span>
     </div>
   </article>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">02 / Interior Services</span>-->
-      <h3 class="fj-service__heading">Interior Services</h3>
+      <span class="fj-service__number">02 / Interior Services</span>
+      <h3 class="fj-service__heading">Upgrade every unit from the inside out.</h3>
       <p class="fj-service__description">
         Are your interiors outdated or defective? We can upgrade your units with a vast array of renovation and make-ready services.
       </p>
@@ -2021,15 +1814,15 @@ body.nav-open{
       <a class="fj-service__link" href="/services/interior.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image2.jpg" alt="Interior renovation services">
+      <img src="/images/interiors 3 (square).jpg" alt="Interior renovation services">
       <span class="fj-service__photo-label">Interior Services</span>
     </div>
   </article>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">03 / Facility Remodels &amp; Conversions</span>-->
-      <h3 class="fj-service__heading">Facility Remodels &amp; Conversions.</h3>
+      <span class="fj-service__number">03 / Facility Remodels &amp; Conversions</span>
+      <h3 class="fj-service__heading">Transform the spaces residents share.</h3>
       <p class="fj-service__description">
         Impress prospects and residents with transformational remodels and conversions of your shared spaces. Amenities make a difference.
       </p>
@@ -2048,15 +1841,15 @@ body.nav-open{
       <a class="fj-service__link" href="/services/facility-remodels.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image7.jpg" alt="Facility remodeling and amenity upgrades">
+      <img src="/images/fitness center.jpg" alt="Facility remodeling and amenity upgrades">
       <span class="fj-service__photo-label">Facility Remodels</span>
     </div>
   </article>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">04 / Disaster Recovery &amp; Restoration</span>-->
-      <h3 class="fj-service__heading">Disaster Recovery &amp; Restoration</h3>
+      <span class="fj-service__number">04 / Disaster Recovery &amp; Restoration</span>
+      <h3 class="fj-service__heading">Rapid response when your property needs it most.</h3>
       <p class="fj-service__description">
         Whether it's fire, wind, flood, ice, or hail damage, you can trust our experienced rapid response team to get your property quickly back to normal for staff and residents.
       </p>
@@ -2073,7 +1866,7 @@ body.nav-open{
       <a class="fj-service__link" href="/services/disaster-recovery.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image9.jpg" alt="Disaster recovery and restoration">
+      <img src="/images/restoration (square).jpg" alt="Disaster recovery and restoration">
       <span class="fj-service__photo-label">Recovery &amp; Restoration</span>
     </div>
   </article>
@@ -2734,7 +2527,6 @@ const heroDescription = document.querySelector(".hero-description");
 let heroIndex = 0;
 let heroTimer = null;
 let heroChanging = false;
-let queuedHeroIndex = null;
 
 function startHeroProgress(index){
   heroTabs.forEach((tab, i) => {
@@ -2767,22 +2559,13 @@ function scheduleNextHero(){
 }
 
 function changeHero(nextIndex){
-  if (!heroSlides[nextIndex]) return;
-
-  // Remember the latest requested tab while animation is running
-  if (heroChanging) {
-    queuedHeroIndex = nextIndex;
-    return;
-  }
+  if (heroChanging || !heroSlides[nextIndex]) return;
 
   if (nextIndex === heroIndex) {
-    queuedHeroIndex = null;
     startHeroProgress(heroIndex);
     scheduleNextHero();
     return;
   }
-
-  queuedHeroIndex = null;
 
   heroChanging = true;
   clearTimeout(heroTimer);
@@ -2810,15 +2593,11 @@ function changeHero(nextIndex){
   gsap.set(nextSlide, {
     autoAlpha: 1,
     visibility: "visible",
-    zIndex: 2,
-    xPercent: 105
+    zIndex: 2
   });
 
-  gsap.set(nextImage, {
-    scale:1.12,
-    opacity:1
-  });
-
+  gsap.set(nextImage, {scale:1.07,opacity:1});
+  gsap.set(nextSlide, {xPercent:100});
 
   const nextCopy = heroCopy[nextIndex];
   if (heroTitle && heroDescription && nextCopy) {
@@ -2844,15 +2623,6 @@ function changeHero(nextIndex){
       });
 
       heroChanging = false;
-
-      if (
-        queuedHeroIndex !== null &&
-        queuedHeroIndex !== heroIndex
-      ) {
-        const nextQueuedIndex = queuedHeroIndex;
-        queuedHeroIndex = null;
-        changeHero(nextQueuedIndex);
-      }
     }
   })
   .to(currentSlide, {xPercent:-100,duration:.72,ease:"power3.inOut"},0)

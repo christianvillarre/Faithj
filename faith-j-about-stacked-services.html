@@ -279,37 +279,6 @@ body{overflow-x:hidden}
   text-wrap:balance;
   pointer-events:none;
 }
-.hero-copy{
-  position:absolute;
-  z-index:3;
-  left:clamp(24px,5vw,76px);
-  right:clamp(24px,5vw,76px);
-  top:48%;
-  transform:translateY(-50%);
-  max-width:min(760px,78vw);
-  color:#fff;
-  pointer-events:none;
-}
-.hero-title{
-  position:static;
-  margin:0;
-  max-width:10ch;
-  color:#fff;
-  font-family:var(--headline);
-  font-size:clamp(4rem,9vw,9rem);
-  font-weight:620;
-  line-height:.84;
-  letter-spacing:-.065em;
-  text-transform:uppercase;
-  text-wrap:balance;
-}
-.hero-description{
-  margin:24px 0 0;
-  max-width:48ch;
-  color:rgba(255,255,255,.78);
-  font-size:clamp(.95rem,1.2vw,1.15rem);
-  line-height:1.55;
-}
 .hero-tabs{
   position:absolute;
   z-index:4;
@@ -318,85 +287,166 @@ body{overflow-x:hidden}
   bottom:clamp(18px,3vw,36px);
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
-  border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.28);
-  backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,.42);
+  background:rgba(0,0,0,.18);
+  backdrop-filter:blur(10px);
 }
 .hero-tab{
   position:relative;
   min-width:0;
-  min-height:62px;
-  padding:0 16px;
+  min-height:158px;
+  padding:22px 18px 18px;
   border:0;
-  border-right:1px solid rgba(255,255,255,.18);
+  border-right:1px solid rgba(255,255,255,.2);
   background:transparent;
   color:#fff;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
+  text-align:left;
   font:inherit;
   cursor:pointer;
   overflow:hidden;
-  transition:background .25s ease;
 }
-.hero-tab:last-of-type{border-right:0}
-.hero-tab:hover,.hero-tab.is-active{background:rgba(255,255,255,.1)}
+.hero-tab:last-child{border-right:0}
+.hero-tab::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.09);
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.hero-tab:hover::before,
+.hero-tab.is-active::before{opacity:1}
 .hero-tab__progress{
   position:absolute;
+  top:-1px;
   left:0;
-  right:0;
-  bottom:0;
-  height:2px;
+  width:100%;
+  height:3px;
   background:#c31313;
   transform:scaleX(0);
   transform-origin:left center;
 }
+.hero-tab__number{
+  position:relative;
+  display:block;
+  margin-bottom:17px;
+  font-size:.68rem;
+  letter-spacing:.18em;
+  opacity:.65;
+}
 .hero-tab h2{
   position:relative;
-  margin:0;
-  font-size:clamp(.72rem,.9vw,.9rem);
-  line-height:1.1;
-  font-weight:600;
+  margin:0 0 9px;
+  font-size:clamp(.95rem,1.15vw,1.15rem);
+  line-height:1.05;
+  font-weight:620;
   text-transform:uppercase;
-  letter-spacing:.03em;
+  letter-spacing:-.025em;
 }
-.hero-tab__arrow{
+.hero-tab p{
   position:relative;
-  flex:0 0 auto;
-  width:16px;
-  height:16px;
-  transition:transform .25s ease;
+  margin:0;
+  max-width:30ch;
+  font-size:clamp(.72rem,.78vw,.82rem);
+  line-height:1.4;
+  color:rgba(255,255,255,.7);
 }
-.hero-tab:hover .hero-tab__arrow{transform:translateX(3px)}
+.hero-tab__link{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-top:13px;
+  color:#fff;
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.hero-tab__link svg{width:12px;height:12px}
+
 .hero-arrow{display:none}
 
 @media(max-width:900px){
   .hero{min-height:680px}
-  .hero-copy{top:38%;max-width:calc(100vw - 44px)}
-  .hero-title{font-size:clamp(3.35rem,14vw,6.5rem);max-width:8ch}
-  .hero-description{margin-top:16px;font-size:.9rem;max-width:34ch}
-  .hero-tabs{
-    left:14px;right:14px;bottom:14px;
-    grid-template-columns:44px minmax(0,1fr) 44px;
-    border-radius:12px;overflow:hidden;
+
+  .hero-title{
+    top:39%;
+    transform:translateY(-50%);
+    font-size:clamp(3.6rem,14vw,7rem);
+    max-width:8ch;
   }
-  .hero-tab{display:none;min-height:58px;padding:0 14px;border-left:1px solid rgba(255,255,255,.14);border-right:1px solid rgba(255,255,255,.14)}
-  .hero-tab.is-active{display:flex}
-  .hero-tab h2{font-size:.78rem}
-  .hero-arrow{display:grid;place-items:center;width:44px;min-height:58px;padding:0;border:0;background:transparent;color:#fff;cursor:pointer}
-  .hero-arrow:active{background:rgba(255,255,255,.12)}
-  .hero-arrow svg{width:21px;height:21px}
+
+  .hero-tabs{
+    left:16px;
+    right:16px;
+    bottom:16px;
+    display:grid;
+    grid-template-columns:52px minmax(0,1fr) 52px;
+    align-items:stretch;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:16px;
+    overflow:hidden;
+    background:rgba(0,0,0,.42);
+    -webkit-backdrop-filter:blur(14px);
+    backdrop-filter:blur(14px);
+  }
+
+  .hero-tab{
+    display:none;
+    width:100%;
+    min-width:0;
+    min-height:164px;
+    padding:20px 18px 18px;
+    border:0;
+    border-left:1px solid rgba(255,255,255,.16);
+    border-right:1px solid rgba(255,255,255,.16);
+  }
+
+  .hero-tab.is-active{display:block}
+  .hero-tab h2{font-size:1rem}
+  .hero-tab p{font-size:.78rem;max-width:34ch}
+
+  .hero-arrow{
+    display:grid;
+    place-items:center;
+    width:52px;
+    min-height:100%;
+    padding:0;
+    border:0;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+  }
+
+  .hero-arrow:hover{background:rgba(255,255,255,.08)}
+  .hero-arrow:active{background:rgba(255,255,255,.14)}
+  .hero-arrow svg{width:24px;height:24px}
 }
+
 @media(max-width:600px){
   .hero{height:100svh;min-height:650px}
-  .hero-copy{left:22px;right:22px;top:34%}
-  .hero-title{font-size:clamp(3rem,14vw,5rem);line-height:.86}
-  .hero-description{font-size:.84rem;line-height:1.45}
-  .hero-tabs{left:10px;right:10px;bottom:10px;grid-template-columns:42px minmax(0,1fr) 42px}
-  .hero-arrow{width:42px;min-height:54px}
-  .hero-tab{min-height:54px;padding:0 12px}
+
+  .hero-title{
+    left:22px;
+    right:22px;
+    top:35%;
+    font-size:clamp(3.25rem,15vw,5.4rem);
+    line-height:.86;
+  }
+
+  .hero-tabs{
+    left:10px;
+    right:10px;
+    bottom:10px;
+    grid-template-columns:46px minmax(0,1fr) 46px;
+  }
+
+  .hero-arrow{width:46px}
+  .hero-tab{
+    height:100px;
+    padding:18px 14px 16px;
+  }
 }
 
 /* STATS */
@@ -1269,19 +1319,68 @@ body.nav-open{
     </figure>
   </div>
 
-  <div class="hero-copy"><h1 class="hero-title">Cortland Wortham</h1><p class="hero-description">Multifamily construction completed with organized execution and close attention to detail.</p></div>
+  <h1 class="hero-title">Built in Good Faith.</h1>
 
   <div class="hero-tabs" role="tablist" aria-label="Choose a featured project">
     <button class="hero-arrow hero-arrow--prev" type="button" aria-label="Previous project">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </button>
-    <a class="hero-tab is-active" href="/projects/cortland-wortham.html" role="tab" aria-selected="true" data-index="0"><span class="hero-tab__progress"></span><h2>Cortland Wortham</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <a class="hero-tab" href="/projects/interior-renovation.html" role="tab" aria-selected="false" data-index="1"><span class="hero-tab__progress"></span><h2>Interior Renovation</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <a class="hero-tab" href="/projects/commercial-buildout.html" role="tab" aria-selected="false" data-index="2"><span class="hero-tab__progress"></span><h2>Commercial Buildout</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <a class="hero-tab" href="/projects/exterior-improvements.html" role="tab" aria-selected="false" data-index="3"><span class="hero-tab__progress"></span><h2>Exterior Improvements</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <a class="hero-tab" href="/projects/residential-remodel.html" role="tab" aria-selected="false" data-index="4"><span class="hero-tab__progress"></span><h2>Residential Remodel</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <button class="hero-tab is-active" type="button" role="tab" aria-selected="true" data-index="0">
+      <span class="hero-tab__progress"></span>
+      <span class="hero-tab__number">01</span>
+      <h2>Cortland Wortham</h2>
+      <p>Multifamily construction completed with organized execution and close attention to detail.</p>
+      <span class="hero-tab__link">Read more
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </button>
+
+    <button class="hero-tab" type="button" role="tab" aria-selected="false" data-index="1">
+      <span class="hero-tab__progress"></span>
+      <span class="hero-tab__number">02</span>
+      <h2>Interior Renovation</h2>
+      <p>Apartment and commercial interiors shaped for durability, function, and a refined finish.</p>
+      <span class="hero-tab__link">Read more
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </button>
+
+    <button class="hero-tab" type="button" role="tab" aria-selected="false" data-index="2">
+      <span class="hero-tab__progress"></span>
+      <span class="hero-tab__number">03</span>
+      <h2>Commercial Buildout</h2>
+      <p>Purpose-built spaces delivered through dependable planning, craftsmanship, and coordination.</p>
+      <span class="hero-tab__link">Read more
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </button>
+
+    <button class="hero-tab" type="button" role="tab" aria-selected="false" data-index="3">
+      <span class="hero-tab__progress"></span>
+      <span class="hero-tab__number">04</span>
+      <h2>Exterior Improvements</h2>
+      <p>Exterior upgrades designed to improve performance, curb appeal, and long-term value.</p>
+      <span class="hero-tab__link">Read more
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </button>
+
+    <button class="hero-tab" type="button" role="tab" aria-selected="false" data-index="4">
+      <span class="hero-tab__progress"></span>
+      <span class="hero-tab__number">05</span>
+      <h2>Residential Remodel</h2>
+      <p>Thoughtful remodeling that brings new function and lasting quality to existing spaces.</p>
+      <span class="hero-tab__link">Read more
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </button>
+
     <button class="hero-arrow hero-arrow--next" type="button" aria-label="Next project">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </button>
   </div>
 </section>
@@ -1314,9 +1413,9 @@ body.nav-open{
 .fj-service__number{
   display:block;
   color:#c31313;
-  font-size:1.74rem;
+  font-size:.74rem;
   font-weight:650;
-  letter-spacing:.02em;
+  letter-spacing:.22em;
   text-transform:uppercase;
 }
 
@@ -1450,7 +1549,7 @@ body.nav-open{
   display:grid;
   grid-template-columns:minmax(0,1.05fr) minmax(330px,.95fr);
   gap:clamp(38px,6vw,94px);
-  align-items:start;
+  align-items:center;
   overflow:hidden;
   background:var(--service-bg);
   color:var(--service-text);
@@ -1465,11 +1564,10 @@ body.nav-open{
 
 .fj-service__content{
   min-width:0;
-  align-self:start;
+  align-self:stretch;
   display:flex;
   flex-direction:column;
-  justify-content:flex-start;
-  padding-top:0;
+  justify-content:center;
 }
 
 .fj-service__heading{
@@ -1727,353 +1825,157 @@ body.nav-open{
     min-height:320px;
   }
 }
-
-/* Refined About layout */
-.fj-about{min-height:auto;padding-top:clamp(90px,12vh,130px);padding-bottom:clamp(90px,12vh,130px)}
-.fj-about__top{grid-template-columns:minmax(0,.9fr) minmax(360px,1.1fr);gap:clamp(40px,7vw,110px);align-items:center}
-.fj-about h2{max-width:none;white-space:nowrap;font-size:clamp(2.8rem,5.3vw,5.6rem);line-height:.94}
-.fj-about__copy{padding-top:0}
-.fj-about__lead{font-size:clamp(1.18rem,1.65vw,1.55rem);max-width:98ch}
-.fj-about__body{margin-top:22px;max-width:80ch}
-.fj-about__image{height:min(68vh,650px);min-height:430px;overflow:hidden}
-.fj-about__image img{width:100%;height:100%;display:block;object-fit:cover}
-.fj-about__values{display:none}
-.fj-services-intro h2{font-size:clamp(3rem,6.2vw,6.2rem);line-height:.9;max-width:12ch}
-.fj-service__heading{font-size:clamp(2rem,2.2vw,2.7rem);line-height:.92;max-width:25ch;font-weight:800}
-.fj-service__icon{width:26px;height:26px;flex:0 0 26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.78}
-@media(max-width:900px){.fj-about__top{grid-template-columns:1fr}.fj-about h2{white-space:normal}.fj-about__image{height:56svh;min-height:360px}.fj-service__heading{font-size:clamp(2.25rem,8vw,4rem)}}
-@media(max-width:600px){.fj-about h2{font-size:clamp(2.45rem,11vw,3.7rem)}.fj-about__image{height:48svh;min-height:320px}.fj-services-intro h2{font-size:clamp(2.75rem,13vw,4.4rem)}.fj-service__heading{font-size:clamp(2.05rem,10vw,3.3rem)}}
-
-
-/* Section heading + two-column content refinement */
-.fj-section-heading{
-  width:100%;
-  margin:0 0 clamp(42px,6vh,72px);
-}
-
-.fj-section-heading h2{
-  margin:14px 0 0;
-}
-
-.fj-about__grid,
-.fj-services-intro__grid{
-  display:grid;
-  grid-template-columns:minmax(0,.9fr) minmax(360px,1.1fr);
-  gap:clamp(40px,7vw,110px);
-  align-items:center;
-}
-
-.fj-about__copy{
-  max-width:54ch;
-}
-
-.fj-about__image,
-.fj-services-intro__image{
-  position:relative;
-  width:100%;
-  height:min(62vh,620px);
-  min-height:420px;
-  overflow:hidden;
-}
-
-.fj-about__image img,
-.fj-services-intro__image img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-}
-
-.fj-services-intro{
-  display:block;
-  min-height:auto;
-  padding-top:clamp(90px,12vh,140px);
-  padding-bottom:clamp(90px,12vh,140px);
-}
-
-.fj-services-intro .fj-section-heading h2{
-  max-width:15ch;
-}
-
-.fj-services-intro__grid p{
-  margin:0;
-  max-width:48ch;
-  align-self:start;
-  font-size:clamp(1.1rem,1.5vw,1.45rem);
-  line-height:1.55;
-}
-
-@media(max-width:900px){
-  .fj-about__grid,
-  .fj-services-intro__grid{
-    grid-template-columns:1fr;
-    gap:34px;
-  }
-
-  .fj-section-heading{
-    margin-bottom:36px;
-  }
-
-  .fj-about__image,
-  .fj-services-intro__image{
-    height:52svh;
-    min-height:340px;
-  }
-}
-
-@media(max-width:600px){
-  .fj-section-heading{
-    margin-bottom:28px;
-  }
-
-  .fj-about__image,
-  .fj-services-intro__image{
-    height:44svh;
-    min-height:300px;
-  }
-
-  .fj-services-intro__grid p{
-    font-size:1.05rem;
-  }
-}
-
-
-/* Final overview layout: full-width heading, two-column content beneath */
-.fj-overview{
-  display:block !important;
-  min-height:auto !important;
-  padding:clamp(88px,12vh,132px) clamp(24px,7vw,104px) !important;
-}
-
-.fj-overview__heading{
-  display:block;
-  width:100%;
-  margin:0 0 clamp(42px,6vh,72px);
-}
-
-.fj-overview__heading h2{
-  width:100%;
-  max-width:none !important;
-  margin:14px 0 0 !important;
-  font-size:clamp(2.8rem,5.2vw,5.4rem) !important;
-  line-height:.94 !important;
-  letter-spacing:-.05em !important;
-  white-space:normal;
-  text-transform: none;
-}
-
-.fj-overview__content{
-  display:grid;
-  grid-template-columns:minmax(0,.88fr) minmax(420px,1.12fr);
-  gap:clamp(42px,7vw,112px);
-  align-items:start;
-  width:100%;
-}
-
-.fj-overview__copy{
-  width: 100%;
-  padding:0 !important;
-}
-
-.fj-overview__image{
-  width:100%;
-  height:clamp(410px,58vh,620px);
-  margin:0;
-  overflow:hidden;
-  background:#bcbcbc;
-}
-
-.fj-overview__image img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.fj-services-intro__lead{
-  margin:0 !important;
-  max-width:42ch !important;
-  color:rgba(255,255,255,.72) !important;
-  font-size:clamp(1.15rem,1.55vw,1.5rem) !important;
-  line-height:1.55 !important;
-}
-
-@media(max-width:900px){
-  .fj-overview__content{
-    grid-template-columns:1fr;
-    gap:34px;
-  }
-
-  .fj-overview__heading{
-    margin-bottom:34px;
-  }
-
-  .fj-about .fj-overview__heading h2{
-    white-space:normal;
-  }
-
-  .fj-overview__image{
-    height:52svh;
-    min-height:340px;
-  }
-}
-
-@media(max-width:600px){
-  .fj-overview{
-    padding:78px 20px !important;
-  }
-
-  .fj-overview__heading h2{
-    font-size:clamp(2.45rem,11vw,3.65rem) !important;
-  }
-
-  .fj-overview__image{
-    height:44svh;
-    min-height:300px;
-  }
-}
-
 </style>
 
-<section class="fj-about fj-overview" id="about">
-  <header class="fj-overview__heading">
-    <span class="fj-about__eyebrow">About Faith J.</span>
-    <h2>Multifamily, Commercial & Residential Construction Built on Trust</h2>
-  </header>
-
-  <div class="fj-overview__content">
-    <div class="fj-overview__copy">
-      <p class="fj-about__lead">Faith J. Construction is a family-owned and operated general contractor with more than 25 years of experience delivering dependable construction, remodeling, restoration, and property improvement services. As a fully licensed and insured contractor, we proudly serve multifamily apartment communities, commercial properties, and residential clients throughout Houston, Texas and across the United States.</p>
-      <p class="fj-about__body">From new construction and large-scale renovations to interior and exterior improvements, every project is managed with a commitment to quality craftsmanship, clear communication, and dependable execution. We understand that successful projects are built on more than materials—they're built on trust, accountability, and relationships that last.<br><br>
-                                Driven by our mission to operate with integrity in everything we do, we approach every job with care, professionalism, and the belief that every task should be completed in good faith. By combining experienced project management, high construction standards, and a relentless focus on customer satisfaction, we deliver spaces that perform better, look better, and stand the test of time.</p>
+<section class="fj-about" id="about">
+  <div class="fj-about__top">
+    <div>
+      <span class="fj-about__eyebrow">About Faith J.</span>
+      <h2>Built on faith. Proven through the work.</h2>
     </div>
 
-    <figure class="fj-overview__image">
-      <img src="/images/image5.jpg" alt="Faith J. Construction team and project work">
-    </figure>
+    <div class="fj-about__copy">
+      <p class="fj-about__lead">
+        We are a full-service construction partner committed to dependable work, honest communication, and lasting results.
+      </p>
+      <p class="fj-about__body">
+        Faith J. Construction supports multifamily, commercial, and residential properties through renovations, repairs, improvements, and restoration. From early planning through final completion, our team approaches every project with care, accountability, and a commitment to working in good faith.
+      </p>
+    </div>
+  </div>
+
+  <div class="fj-about__values">
+    <article class="fj-about__value">
+      <span>01</span>
+      <h3>Good Faith</h3>
+      <p>Integrity and responsibility guide every relationship, recommendation, and project decision.</p>
+    </article>
+
+    <article class="fj-about__value">
+      <span>02</span>
+      <h3>Full-Service Support</h3>
+      <p>One dependable partner for exterior work, interiors, amenities, restoration, and property evaluation.</p>
+    </article>
+
+    <article class="fj-about__value">
+      <span>03</span>
+      <h3>Built to Last</h3>
+      <p>Quality workmanship focused on stronger properties, better resident experiences, and long-term value.</p>
+    </article>
   </div>
 </section>
 
 <section class="fj-services" id="services">
-  <header class="fj-services-intro fj-overview fj-overview--dark">
-    <div class="fj-overview__heading">
-      <span class="fj-services-intro__eyebrow">What we do</span>
-      <h2>Your full-service construction project partner.</h2>
-    </div>
-
-    <div class="fj-overview__content">
-      <div class="fj-overview__copy">
-        <p class="fj-services-intro__lead">Comprehensive property services designed to improve performance, protect your investment, and create spaces residents are proud to call home.</p>
-      </div>
-
-      <figure class="fj-overview__image">
-        <img src="/images/image1.png" alt="Faith J. Construction multifamily property project">
-      </figure>
-    </div>
+  <header class="fj-services-intro">
+    <span class="fj-services-intro__eyebrow">What we do</span>
+    <h2>Your full-service construction project partner.</h2>
+    <p>
+      Comprehensive property services designed to improve performance, protect your investment, and create spaces residents are proud to call home.
+    </p>
   </header>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">01 / Exterior Services</span>-->
-      <h3 class="fj-service__heading">Exterior Services</h3>
+      <span class="fj-service__number">01 / Exterior Services</span>
+      <h3 class="fj-service__heading">Protect the property. Elevate the curb appeal.</h3>
       <p class="fj-service__description">
         Attract and retain residents with exterior projects that not only boost your property's curb appeal, but also protect your investment.
       </p>
       <ul class="fj-service__list">
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Carpentry</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Concrete Repairs</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Drainage &amp; Erosion</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Fencing</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Lighting</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Painting</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Roofing</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Siding</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Stucco Remediation</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Windows</li>
+        <li><img src="/images/carpentry.png" alt="">Carpentry</li>
+        <li><img src="/images/concrete.png" alt="">Concrete Repairs</li>
+        <li><img src="/images/drainage.png" alt="">Drainage &amp; Erosion</li>
+        <li><img src="/images/fencing.png" alt="">Fencing</li>
+        <li><img src="/images/lighting.png" alt="">Lighting</li>
+        <li><img src="/images/paint.png" alt="">Painting</li>
+        <li><img src="/images/roofing.png" alt="">Roofing</li>
+        <li><img src="/images/siding.png" alt="">Siding</li>
+        <li><img src="/images/stucco.png" alt="">Stucco Remediation</li>
+        <li><img src="/images/window.png" alt="">Windows</li>
       </ul>
       <a class="fj-service__link" href="/services/exterior.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image6.jpg" alt="Exterior construction services">
+      <img src="/images/iStock-1170226423 (square).jpg" alt="Exterior construction services">
       <span class="fj-service__photo-label">Exterior Services</span>
     </div>
   </article>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">02 / Interior Services</span>-->
-      <h3 class="fj-service__heading">Interior Services</h3>
+      <span class="fj-service__number">02 / Interior Services</span>
+      <h3 class="fj-service__heading">Upgrade every unit from the inside out.</h3>
       <p class="fj-service__description">
         Are your interiors outdated or defective? We can upgrade your units with a vast array of renovation and make-ready services.
       </p>
       <ul class="fj-service__list">
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Appliance Packages</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Cabinetry</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Countertops</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Doors &amp; Locks</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Electrical &amp; Lighting</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Fire &amp; Life Safety</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Flooring</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>HVAC</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Painting</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Plumbing</li>
+        <li><img src="/images/appliance kit.png" alt="">Appliance Packages</li>
+        <li><img src="/images/cabinetry.png" alt="">Cabinetry</li>
+        <li><img src="/images/countertops 2.png" alt="">Countertops</li>
+        <li><img src="/images/door knob.png" alt="">Doors &amp; Locks</li>
+        <li><img src="/images/indoor lighting.png" alt="">Electrical &amp; Lighting</li>
+        <li><img src="/images/exit 2.png" alt="">Fire &amp; Life Safety</li>
+        <li><img src="/images/flooring.png" alt="">Flooring</li>
+        <li><img src="/images/hvac.png" alt="">HVAC</li>
+        <li><img src="/images/interior painting 2v2.png" alt="">Painting</li>
+        <li><img src="/images/plumbing.png" alt="">Plumbing</li>
       </ul>
       <a class="fj-service__link" href="/services/interior.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image2.jpg" alt="Interior renovation services">
+      <img src="/images/interiors 3 (square).jpg" alt="Interior renovation services">
       <span class="fj-service__photo-label">Interior Services</span>
     </div>
   </article>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">03 / Facility Remodels &amp; Conversions</span>-->
-      <h3 class="fj-service__heading">Facility Remodels &amp; Conversions.</h3>
+      <span class="fj-service__number">03 / Facility Remodels &amp; Conversions</span>
+      <h3 class="fj-service__heading">Transform the spaces residents share.</h3>
       <p class="fj-service__description">
         Impress prospects and residents with transformational remodels and conversions of your shared spaces. Amenities make a difference.
       </p>
       <ul class="fj-service__list">
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Clubhouses &amp; Offices</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Dog Parks</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Fitness Centers</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Laundry Facilities</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Mail Rooms</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Outdoor Kitchens</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Playgrounds</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Pools &amp; Hardscapes</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Sports Courts</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Unit Repositions</li>
+        <li><img src="/images/office 2.png" alt="">Clubhouses &amp; Offices</li>
+        <li><img src="/images/dog park 2.png" alt="">Dog Parks</li>
+        <li><img src="/images/exercise 2.png" alt="">Fitness Centers</li>
+        <li><img src="/images/laundry.png" alt="">Laundry Facilities</li>
+        <li><img src="/images/mail.png" alt="">Mail Rooms</li>
+        <li><img src="/images/kitchen outdoor.png" alt="">Outdoor Kitchens</li>
+        <li><img src="/images/playground.png" alt="">Playgrounds</li>
+        <li><img src="/images/swim.png" alt="">Pools &amp; Hardscapes</li>
+        <li><img src="/images/sports courts.png" alt="">Sports Courts</li>
+        <li><img src="/images/reposition.png" alt="">Unit Repositions</li>
       </ul>
       <a class="fj-service__link" href="/services/facility-remodels.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image7.jpg" alt="Facility remodeling and amenity upgrades">
+      <img src="/images/fitness center.jpg" alt="Facility remodeling and amenity upgrades">
       <span class="fj-service__photo-label">Facility Remodels</span>
     </div>
   </article>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">04 / Disaster Recovery &amp; Restoration</span>-->
-      <h3 class="fj-service__heading">Disaster Recovery &amp; Restoration</h3>
+      <span class="fj-service__number">04 / Disaster Recovery &amp; Restoration</span>
+      <h3 class="fj-service__heading">Rapid response when your property needs it most.</h3>
       <p class="fj-service__description">
         Whether it's fire, wind, flood, ice, or hail damage, you can trust our experienced rapid response team to get your property quickly back to normal for staff and residents.
       </p>
       <ul class="fj-service__list">
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Content &amp; Debris Removal</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Damage Assessments</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Emergency Tarping &amp; Board-Ups</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Fire &amp; Smoke Mitigation</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Interior &amp; Exterior Restorations</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Safety Fencing</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Water Damage Mitigation</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Water Extraction</li>
+        <li><img src="/images/trash pick up.png" alt="">Content &amp; Debris Removal</li>
+        <li><img src="/images/assessment.png" alt="">Damage Assessments</li>
+        <li><img src="/images/board up.png" alt="">Emergency Tarping &amp; Board-Ups</li>
+        <li><img src="/images/building fire.png" alt="">Fire &amp; Smoke Mitigation</li>
+        <li><img src="/images/shiny exterior.png" alt="">Interior &amp; Exterior Restorations</li>
+        <li><img src="/images/fencing emergency.png" alt="">Safety Fencing</li>
+        <li><img src="/images/water mitigation 2.png" alt="">Water Damage Mitigation</li>
+        <li><img src="/images/water extraction.png" alt="">Water Extraction</li>
       </ul>
       <a class="fj-service__link" href="/services/disaster-recovery.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image9.jpg" alt="Disaster recovery and restoration">
+      <img src="/images/restoration (square).jpg" alt="Disaster recovery and restoration">
       <span class="fj-service__photo-label">Recovery &amp; Restoration</span>
     </div>
   </article>
@@ -2086,14 +1988,14 @@ body.nav-open{
         Our team can provide crucial insights into a property's value, condition, and risks, helping you make informed decisions that support long-term profitability.
       </p>
       <ul class="fj-service__list">
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Financial Reviews</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Insurance Considerations</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Investment Analysis</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Negotiation Leverage</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Operational Insights</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Regulatory Compliance</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Risk Mitigation Assessments</li>
-        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Strategic Planning</li>
+        <li><img src="/images/financial eval.png" alt="">Financial Reviews</li>
+        <li><img src="/images/insurance.png" alt="">Insurance Considerations</li>
+        <li><img src="/images/investment.png" alt="">Investment Analysis</li>
+        <li><img src="/images/negotiation 2.png" alt="">Negotiation Leverage</li>
+        <li><img src="/images/operation insights.png" alt="">Operational Insights</li>
+        <li><img src="/images/regulations.png" alt="">Regulatory Compliance</li>
+        <li><img src="/images/risk mitigation.png" alt="">Risk Mitigation Assessments</li>
+        <li><img src="/images/strategic planning.png" alt="">Strategic Planning</li>
       </ul>
       <a class="fj-service__link" href="/services/due-diligence.html">Read More</a>
     </div>
@@ -2721,20 +2623,10 @@ const heroTabs = gsap.utils.toArray(".hero-tab");
 const previousHeroButton = document.querySelector(".hero-arrow--prev");
 const nextHeroButton = document.querySelector(".hero-arrow--next");
 const heroDuration = 6;
-const heroCopy = [
-  {title:"Cortland Wortham",description:"Multifamily construction completed with organized execution and close attention to detail."},
-  {title:"Interior Renovation",description:"Apartment and commercial interiors shaped for durability, function, and a refined finish."},
-  {title:"Commercial Buildout",description:"Purpose-built spaces delivered through dependable planning, craftsmanship, and coordination."},
-  {title:"Exterior Improvements",description:"Exterior upgrades designed to improve performance, curb appeal, and long-term value."},
-  {title:"Residential Remodel",description:"Thoughtful remodeling that brings new function and lasting quality to existing spaces."}
-];
-const heroTitle = document.querySelector(".hero-title");
-const heroDescription = document.querySelector(".hero-description");
 
 let heroIndex = 0;
 let heroTimer = null;
 let heroChanging = false;
-let queuedHeroIndex = null;
 
 function startHeroProgress(index){
   heroTabs.forEach((tab, i) => {
@@ -2767,22 +2659,13 @@ function scheduleNextHero(){
 }
 
 function changeHero(nextIndex){
-  if (!heroSlides[nextIndex]) return;
-
-  // Remember the latest requested tab while animation is running
-  if (heroChanging) {
-    queuedHeroIndex = nextIndex;
-    return;
-  }
+  if (heroChanging || !heroSlides[nextIndex]) return;
 
   if (nextIndex === heroIndex) {
-    queuedHeroIndex = null;
     startHeroProgress(heroIndex);
     scheduleNextHero();
     return;
   }
-
-  queuedHeroIndex = null;
 
   heroChanging = true;
   clearTimeout(heroTimer);
@@ -2810,25 +2693,13 @@ function changeHero(nextIndex){
   gsap.set(nextSlide, {
     autoAlpha: 1,
     visibility: "visible",
-    zIndex: 2,
-    xPercent: 105
+    zIndex: 2
   });
 
   gsap.set(nextImage, {
-    scale:1.12,
-    opacity:1
+    scale: 1.1,
+    opacity: 0
   });
-
-
-  const nextCopy = heroCopy[nextIndex];
-  if (heroTitle && heroDescription && nextCopy) {
-    gsap.to([heroTitle,heroDescription], {x:-28,opacity:0,duration:.22,ease:"power2.in",onComplete:()=>{
-      heroTitle.textContent=nextCopy.title;
-      heroDescription.textContent=nextCopy.description;
-      gsap.set([heroTitle,heroDescription],{x:28});
-      gsap.to([heroTitle,heroDescription],{x:0,opacity:1,duration:.42,stagger:.05,ease:"power3.out"});
-    }});
-  }
 
   gsap.timeline({
     onComplete: () => {
@@ -2836,28 +2707,32 @@ function changeHero(nextIndex){
       nextSlide.classList.add("is-active");
 
       gsap.set(currentSlide, {
-        autoAlpha:0,visibility:"hidden",zIndex:0,xPercent:0
+        autoAlpha: 0,
+        visibility: "hidden",
+        zIndex: 0
       });
 
       gsap.set(nextSlide, {
-        autoAlpha:1,visibility:"visible",zIndex:1,xPercent:0
+        autoAlpha: 1,
+        visibility: "visible",
+        zIndex: 1
       });
 
       heroChanging = false;
-
-      if (
-        queuedHeroIndex !== null &&
-        queuedHeroIndex !== heroIndex
-      ) {
-        const nextQueuedIndex = queuedHeroIndex;
-        queuedHeroIndex = null;
-        changeHero(nextQueuedIndex);
-      }
     }
   })
-  .to(currentSlide, {xPercent:-100,duration:.72,ease:"power3.inOut"},0)
-  .to(nextSlide, {xPercent:0,duration:.72,ease:"power3.inOut"},0)
-  .fromTo(nextImage,{scale:1.12},{scale:1.07,duration:.9,ease:"power3.out"},0);
+  .to(currentImage, {
+    scale: 1.03,
+    opacity: 0,
+    duration: .45,
+    ease: "power2.inOut"
+  }, 0)
+  .to(nextImage, {
+    scale: 1.07,
+    opacity: 1,
+    duration: .6,
+    ease: "power3.out"
+  }, .04);
 }
 
 function showPreviousHero(){
@@ -2870,12 +2745,14 @@ function showNextHero(){
   changeHero((heroIndex + 1) % heroSlides.length);
 }
 
-heroTabs.forEach((tab,index)=>{
-  tab.addEventListener("mouseenter",()=>{
-    if(window.innerWidth>900 && index!==heroIndex) changeHero(index);
-  });
-  tab.addEventListener("focus",()=>{
-    if(index!==heroIndex) changeHero(index);
+heroTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => {
+    if (index === heroIndex) {
+      document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+
+    changeHero(index);
   });
 });
 
