@@ -1172,19 +1172,42 @@ body.nav-open{
     
   }
   .nav-split-logo{
-  height: 44px;
+  height: 50px;
   padding-top: 1rem;
-  padding-left: 0.3rem;
+  margin-left: -0.8rem;
   z-index: 999;
+  transition:margin-left .3s ease;
 }
+.nav-split-logo.open{
+    margin-left:0.5rem;
+  }
 
-  .menu-toggle{
+   .menu-toggle{
     height:70px;
     padding-left:20px;
-    display: flex;
-    justify-content: flex-end;
-    background: transparent;
+    display:flex;
+    justify-content:flex-end;
+    background:transparent;
+    -webkit-tap-highlight-color:transparent;
+
+    background:transparent !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    box-shadow:none !important;
+    -webkit-tap-highlight-color:transparent;
   }
+
+  .menu-toggle:hover,
+  .menu-toggle:active,
+  .menu-toggle:focus{
+    background:transparent !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    box-shadow:none !important;
+    transform:none;
+    outline:none;
+  }
+  
   .menu-toggle__label{
     display:none;
   }
@@ -2441,6 +2464,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navDropdown = document.getElementById("navDropdown");
   const menuBg = document.getElementById("menuBg");
   const menuWrap = document.getElementById("menuWrap");
+  const logo = document.querySelector(".nav-split-logo");
 
   if (!menuToggle || !navDropdown || !menuBg || !menuWrap) return;
 
@@ -2448,14 +2472,17 @@ document.addEventListener("DOMContentLoaded", () => {
     menuToggle.classList.add("open");
     navDropdown.classList.add("open");
     menuBg.classList.add("open");
+    logo.classList.add("open"); 
     document.body.classList.add("nav-open");
     menuToggle.setAttribute("aria-expanded","true");
+    
   }
 
   function closeMenu(){
     menuToggle.classList.remove("open");
     navDropdown.classList.remove("open");
     menuBg.classList.remove("open");
+    logo.classList.remove("open"); 
     document.body.classList.remove("nav-open");
     menuToggle.setAttribute("aria-expanded","false");
   }
