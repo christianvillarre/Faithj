@@ -1192,6 +1192,7 @@ body.nav-open{overflow:hidden}
 /* Animated center menu — matched to the index page. */
 document.addEventListener("DOMContentLoaded", () => {
   const menuWrap = document.querySelector(".menu-wrap");
+  const logo = document.querySelector(".nav-split-logo");
   const menuToggle = document.querySelector(".menu-toggle");
   const menuBg = document.querySelector(".menu-bg");
   const dropdown = document.querySelector(".nav-dropdown");
@@ -1221,6 +1222,7 @@ document.addEventListener("DOMContentLoaded", () => {
     isAnimating = true;
     menuToggle.classList.add("open");
     dropdown.classList.add("open");
+    logo?.classList.add("open");
     menuBg.classList.add("open");
     document.body.classList.add("nav-open");
     menuToggle.setAttribute("aria-expanded", "true");
@@ -1284,6 +1286,7 @@ document.addEventListener("DOMContentLoaded", () => {
       onComplete: () => {
         menuToggle.classList.remove("open");
         dropdown.classList.remove("open");
+        logo?.classList.remove("open");
         menuBg.classList.remove("open");
         gsap.set(dropdown, { visibility: "hidden" });
         isAnimating = false;
