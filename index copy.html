@@ -14,10 +14,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="/images/stock13.jpeg" fetchpriority="high">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.2/css/jsvectormap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.2/js/jsvectormap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.2/maps/us-aea-en.min.js"></script>
-
 
 
 <style>
@@ -118,7 +114,6 @@ body{overflow-x:hidden}
   display:flex;
   align-items:center;
   will-change:width;
-  margin-top: 1.5rem;
 }
 
 .loader-icon2{
@@ -127,8 +122,8 @@ body{overflow-x:hidden}
   width:auto;
   max-width:none;
   opacity:0;
+  transform:translateX(-28px);
   will-change:transform, opacity;
-
 }
 
 .loader h1{
@@ -447,8 +442,7 @@ body{overflow-x:hidden}
     clamp(110px,3vh,180px)
     clamp(28px,7vw,104px)
     clamp(110px,16vh,180px);
-  padding-bottom:clamp(90px,12vh,150px);
-  overflow:visible;
+  padding-bottom: 0;
 }
 .stats-head{
   max-width:156ch;
@@ -505,8 +499,6 @@ body{overflow-x:hidden}
 
 /* STATS MAP */
 .stats-map{
-  width:100%;
-  min-width:0;
   margin-top:12vh;
   padding-top:6vh;
   border-top:1px solid var(--line-light);
@@ -533,58 +525,59 @@ body{overflow-x:hidden}
 .stat-map{
   position:relative;
   width:100%;
-  min-width:0;
-  max-width:1100px;
+  max-width:960px;
   margin:0 auto;
-  overflow:visible;
 }
-.stat-map__mount{
-  position:relative;
+.stat-map__img{
   width:100%;
-  aspect-ratio:1.62 / 1;
   height:auto;
-  min-height:0;
-  overflow:visible;
-}
-.stat-map__mount .jsvmap-container{
-  position:absolute !important;
-  inset:0 !important;
-  width:100% !important;
-  height:100% !important;
-  background:transparent !important;
-  overflow:visible !important;
-}
-.stat-map__mount svg{
   display:block;
-  width:100% !important;
-  height:100% !important;
-  max-width:100%;
-  overflow:visible;
+  opacity:.9;
 }
-.stat-map__mount .jsvmap-region{
-  transition:fill .25s ease, filter .25s ease;
-}
-.stat-map__mount .jsvmap-region[fill="#c31313"]{
-  filter:drop-shadow(0 0 4px rgba(195,19,19,.28));
-}
-.stat-map__mount .jsvmap-zoom-btn{display:none}
-.stat-map__fallback{
+.stat-map__pins{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
-  display:grid;
-  place-items:center;
-  color:rgba(239,233,220,.45);
-  border:1px solid rgba(239,233,220,.12);
-  border-radius:16px;
+  overflow:visible;
+}
+.stat-map__pin{
+  cursor:default;
+}
+.stat-map__ring{
+  fill:none;
+  stroke:var(--cream);
+  stroke-width:1.5;
+  opacity:0;
+  transform-origin:center;
+  animation:mapPing 2.6s ease-out infinite;
+}
+.stat-map__dot{
+  fill:var(--cream);
+}
+.stat-map__pin--hq .stat-map__dot{
+  fill:var(--gold);
+  r:6;
+}
+.stat-map__pin--hq .stat-map__ring{
+  stroke:var(--gold);
+}
+.stat-map__label{
+  font-size:11px;
+  letter-spacing:.03em;
+  fill:var(--cream);
+  opacity:.55;
+}
+@keyframes mapPing{
+  0%{ r:5; opacity:.55; }
+  80%{ r:20; opacity:0; }
+  100%{ r:20; opacity:0; }
 }
 @media(max-width:800px){
-  .stats-map__head{flex-direction:column;align-items:flex-start}
-  .stat-map{max-width:100%}
-  .stat-map__mount{width:100%;aspect-ratio:1.62 / 1;height:auto;min-height:0}
-}
-@media(max-width:600px){
-  .stats-map{width:100%}
-  .stat-map__mount{aspect-ratio:1.62 / 1}
+  .stats-map__head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 }
 
 /* FAQ — matches interior page */
@@ -711,7 +704,7 @@ body{overflow-x:hidden}
   color:var(--cream);
   border-top:0;
   padding:
-    clamp(110px,12vh,180px)
+    clamp(110px,16vh,180px)
     clamp(28px,7vw,104px)
     clamp(60px,8vh,100px);
 }
@@ -1455,7 +1448,7 @@ body.nav-open{
 .fj-services-intro__eyebrow,
 .fj-service__number{
   display:block;
-  color:var(--gold);
+  color:#fcfcfc;
   font-size:1.74rem;
   font-weight:650;
   letter-spacing:.02em;
@@ -1677,46 +1670,20 @@ body.nav-open{
 }
 
 .fj-service__link{
-  position:relative;
-  z-index:0;
-  overflow:hidden;
   width:min(100%,340px);
   margin-top:32px;
-  margin-left:-16px;
   display:inline-flex;
   align-items:center;
   justify-content:space-between;
   gap:20px;
-  padding:12px 16px 16px;
+  padding-bottom:14px;
   border-bottom:1px solid rgba(0,0,0,.5);
-  border-radius:2px;
   color:#111;
   text-decoration:none;
   font-size:.74rem;
   font-weight:700;
   letter-spacing:.16em;
   text-transform:uppercase;
-  transition:color .3s ease .08s, border-color .3s ease;
-}
-
-.fj-service__link::before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  inset:0;
-  background:#111;
-  transform:scaleY(0);
-  transform-origin:bottom;
-  transition:transform .45s cubic-bezier(.76,0,.24,1);
-}
-
-.fj-service__link:hover{
-  color:#fff;
-  border-color:transparent;
-}
-
-.fj-service__link:hover::before{
-  transform:scaleY(1);
 }
 
 .fj-service__link::after{
@@ -1727,11 +1694,10 @@ body.nav-open{
   background:
     no-repeat center/contain
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Cpath d='M5 16h20M17 8l8 8-8 8' stroke='%23111' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1) .05s, filter .3s ease .08s;
+  transition:transform .3s ease;
 }
 .fj-service__link:hover::after{
-  transform:rotate(180deg);
-  filter:brightness(0) invert(1);
+  transform:translateX(5px);
 }
 
 .fj-service__media{
@@ -1843,7 +1809,7 @@ body.nav-open{
   .stats-head span,
   .faq-section .section-head span{
     display:block;
-    color:var(--gold);
+    color:#fcfcfc;
     font-size:1.1rem;
     font-weight:650;
     letter-spacing:.02em;
@@ -1910,7 +1876,7 @@ body.nav-open{
     .fj-service__link{
     margin-top:18px;
     gap:14px;
-    padding:9px 12px 12px;
+    padding-bottom:10px;
     font-size:.68rem;
     letter-spacing:.12em;
   }
@@ -1935,16 +1901,8 @@ body.nav-open{
 .fj-about__copy{padding-top:0}
 .fj-about__lead{font-size:clamp(1.18rem,1.65vw,1.55rem);max-width:98ch}
 .fj-about__quote{
-  position:relative;
-  z-index:0;
-  overflow:hidden;
-  display:inline-flex;
-  align-items:center;
-  gap:16px;
+  display:inline-block;
   margin-top:8px;
-  margin-left:-14px;
-  padding:10px 14px 14px;
-  border-radius:2px;
   color:#fff;
   font-size:.78rem;
   font-weight:700;
@@ -1952,33 +1910,10 @@ body.nav-open{
   text-decoration:none;
   text-transform:uppercase;
   border-bottom:1px solid rgba(255,255,255,.65);
-  transition:color .3s ease .08s, border-color .3s ease;
+  padding-bottom:6px;
+  transition:border-color .25s ease,opacity .25s ease;
 }
-.fj-about__quote::before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  inset:0;
-  background:#fff;
-  transform:scaleY(0);
-  transform-origin:bottom;
-  transition:transform .45s cubic-bezier(.76,0,.24,1);
-}
-.fj-about__quote::after{
-  content:"";
-  flex:0 0 22px;
-  width:22px;
-  height:22px;
-  background:
-    no-repeat center/contain
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Cpath d='M5 16h20M17 8l8 8-8 8' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1) .05s, filter .3s ease .08s;
-}
-.bold {font-weight:700}
-.italic {font-style:italic}
-.fj-about__quote:hover{color:#111;border-color:transparent}
-.fj-about__quote:hover::before{transform:scaleY(1)}
-.fj-about__quote:hover::after{transform:rotate(180deg);filter:brightness(0)}
+.fj-about__quote:hover{border-color:#fff;opacity:.78}
 .fj-about__body{margin-top:22px;max-width:80ch}
 .fj-about__image{height:min(68vh,650px);min-height:430px;overflow:hidden}
 .fj-about__image img{width:100%;height:100%;display:block;object-fit:cover}
@@ -2135,35 +2070,6 @@ body.nav-open{
   object-fit:cover;
 }
 
-.fj-about .fj-overview__image{
-  height:auto;
-  overflow:visible;
-  background:transparent;
-}
-
-.fj-about .fj-overview__image img{
-  height:clamp(410px,58vh,620px);
-}
-
-.fj-about__scripture{
-  margin-top:24px;
-  color:#fff;
-  font-size:clamp(1.18rem,1.65vw,1.55rem);
-  line-height:1.35;
-}
-
-.fj-about__scripture p{
-  margin:0;
-  font-style:italic;
-}
-
-.fj-about__scripture cite{
-  display:block;
-  margin-top:8px;
-  font-style:normal;
-  font-weight:700;
-}
-
 .fj-services-intro__lead{
   margin:0 !important;
   max-width:42ch !important;
@@ -2190,16 +2096,6 @@ body.nav-open{
     height:52svh;
     min-height:340px;
   }
-
-  .fj-about .fj-overview__image{
-    height:auto;
-    min-height:0;
-  }
-
-  .fj-about .fj-overview__image img{
-    height:52svh;
-    min-height:340px;
-  }
 }
 
 @media(max-width:600px){
@@ -2212,16 +2108,6 @@ body.nav-open{
   }
 
   .fj-overview__image{
-    height:44svh;
-    min-height:300px;
-  }
-
-  .fj-about .fj-overview__image{
-    height:auto;
-    min-height:0;
-  }
-
-  .fj-about .fj-overview__image img{
     height:44svh;
     min-height:300px;
   }
@@ -2239,34 +2125,25 @@ body.nav-open{
     border-radius:24px 24px 0 0;
   }
 }
-</style>rt
+</style>
 
 <section class="fj-about fj-overview" id="about">
   <header class="fj-overview__heading">
-    <span class="fj-about__eyebrow">Our Faith. Our Purpose. Our Mission.</span>
-    <h2>Building More Than Buildings</h2>
+    <span class="fj-about__eyebrow">About Faith J.</span>
+    <h2>Experience. Integrity. Good Faith.</h2>
   </header>
 
   <div class="fj-overview__content">
     <div class="fj-overview__copy">
       <p class="fj-about__lead">
-        At <span class="bold">Faith J. Construction</span>, our faith isn’t simply part of our name—it is at the foundation of who we are.<br><br>
-        We believe God has blessed our company with opportunities and resources for a purpose greater than ourselves. That’s why a portion of the funds generated through Faith J. Construction is committed to supporting Christian churches, ministries, missionaries, and organizations dedicated to spreading the Gospel and serving others.<br><br>
-        Through the years, we have been blessed with opportunities to support ministries and churches doing meaningful work in their communities. Every project entrusted to us gives us another opportunity to give back and make an impact beyond the jobsite.<br><br>
-        Our faith also shapes the way we do business. We strive to lead with integrity, honesty, excellence, and generosity in the way we serve our clients, our employees, and our communities.<br><br>
-        For us, success isn’t measured only by the buildings we construct or the properties we improve. Success is also measured by how we use what God has entrusted to us to help build His Kingdom.<br><br>
-        Build with excellence. Lead with integrity. Give with purpose. Keep God at the center.<br><br>
-        <span class="bold">FAITH J. CONSTRUCTION</span><br>
-        <span class="italic">Building with purpose. Building through faith.</span><br><br>
+        Faith J. Construction is a family-owned and operated general contractor with over 25 years of experience in construction, remodeling, restoration, and property improvements.<br><br>
+        From new construction and large-scale renovations to interior and exterior improvements, we bring quality craftsmanship, dependable execution, and clear communication to every project.<br><br>
+        Fully licensed and insured, we serve multifamily, commercial, and residential clients throughout Houston and across the United States. Built on integrity, experience, and lasting relationships, we approach every project with one commitment: to get the job done right and in good faith.<br><br>
         <a class="fj-about__quote" href="#contact">Request a Quote</a></p>
     </div>
 
     <figure class="fj-overview__image">
       <img src="/images/cortland1.jpg" alt="Faith J. Construction team and project work">
-      <figcaption class="fj-about__scripture">
-        <p>“Whatever you do, work at it with all your heart, as working for the Lord.”</p>
-        <cite>— Colossians 3:23</cite>
-      </figcaption>
     </figure>
   </div>
 </section>
@@ -2274,62 +2151,8 @@ body.nav-open{
 <section class="fj-services" id="services">
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">01 / Multifamily Exterior Painting</span>-->
-      <h3 class="fj-service__heading">Multifamily Exterior Painting</h3>
-      <p class="fj-service__description">
-        As an experienced general contractor, we don't just paint — we handle the exterior repairs a property needs first, then prep, prime, and finish coat it, all under one team.
-      </p>
-      <ul class="fj-service__list">
-        <li>Siding</li>
-        <li>Fascia &amp; Soffit</li>
-        <li>Exterior Trim</li>
-        <li>Stucco</li>
-        <li>Wood &amp; Carpentry</li>
-        <li>Balconies &amp; Railings</li>
-        <li>Doors &amp; Frames</li>
-        <li>Caulking &amp; Sealants</li>
-        <li>Substrates</li>
-        <li>Metal Components</li>
-      </ul>
-      <a class="fj-service__link" href="#contact">Exterior Painting Services</a>
-    </div>
-    <div class="fj-service__media">
-      <img src="/images/image2.jpg" alt="Multifamily exterior painting project">
-      <span class="fj-service__photo-label">Exterior Painting</span>
-    </div>
-  </article>
-
-  <article class="fj-service">
-    <div class="fj-service__content">
-      <!--<span class="fj-service__number">02 / Interior Renovations</span>-->
-      <h3 class="fj-service__heading">Interior Renovations</h3>
-      <p class="fj-service__description">
-        Are your interiors outdated or defective? We can upgrade your units with a vast array of renovation and make-ready services.
-      </p>
-      <ul class="fj-service__list">
-        <li>Appliance Packages</li>
-        <li>Cabinetry</li>
-        <li>Countertops</li>
-        <li>Doors &amp; Locks</li>
-        <li>Electrical &amp; Lighting</li>
-        <li>Fire &amp; Life Safety</li>
-        <li>Flooring</li>
-        <li>HVAC</li>
-        <li>Painting</li>
-        <li>Plumbing</li>
-      </ul>
-      <a class="fj-service__link" href="/interior.html">Interior Renovation Services</a> 
-    </div>
-    <div class="fj-service__media">
-      <img src="/images/image1.jpg" alt="Interior renovation services">
-      <span class="fj-service__photo-label">Interior Renovations</span>
-    </div>
-  </article>
-
-  <article class="fj-service">
-    <div class="fj-service__content">
-      <!--<span class="fj-service__number">03 / Exterior Repairs & Complete Exterior Remodel</span>-->
-      <h3 class="fj-service__heading">Exterior Repairs &amp; Complete Exterior Remodel</h3>
+      <!--<span class="fj-service__number">01 / Exterior Services</span>-->
+      <h3 class="fj-service__heading">Exterior Services</h3>
       <p class="fj-service__description">
         Attract and retain residents with exterior projects that not only boost your property's curb appeal, but also protect your investment.
       </p>
@@ -2339,70 +2162,139 @@ body.nav-open{
         <li>Drainage &amp; Erosion</li>
         <li>Fencing</li>
         <li>Lighting</li>
+        <li>Painting</li>
         <li>Roofing</li>
         <li>Siding</li>
         <li>Stucco Remediation</li>
         <li>Windows</li>
       </ul>
-      <a class="fj-service__link" href="/exterior.html">Exterior Repair Services</a>
+      <a class="fj-service__link" href="/exterior.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image6.jpg" alt="Exterior construction services">
-      <span class="fj-service__photo-label">Exterior Repairs</span>
+      <img src="/images/image2.jpg" alt="Exterior construction services">
+      <span class="fj-service__photo-label">Exterior Services</span>
     </div>
   </article>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">04 / Building Reconfigurations</span>-->
-      <h3 class="fj-service__heading">Building Reconfigurations</h3>
+      <!--<span class="fj-service__number">02 / Interior Services</span>-->
+      <h3 class="fj-service__heading">Interior Services</h3>
+      <p class="fj-service__description">
+        Are your interiors outdated or defective? We can upgrade your units with a vast array of renovation and make-ready services.
+      </p>
+      <ul class="fj-service__list">
+        <li>Appliance Packages</li>
+
+<li>Cabinetry</li>
+
+<li>Countertops</li>
+
+<li>Doors &amp; Locks</li>
+
+<li>Electrical &amp; Lighting</li>
+
+<li>Fire &amp; Life Safety</li>
+
+<li>Flooring</li>
+
+<li>HVAC</li>
+
+<li>Painting</li>
+
+<li>Plumbing</li>
+      </ul>
+      <a class="fj-service__link" href="/interior.html">Read More</a> 
+    </div>
+    <div class="fj-service__media">
+      <img src="/images/image1.jpg" alt="Interior renovation services">
+      <span class="fj-service__photo-label">Interior Services</span>
+    </div>
+  </article>
+
+  <article class="fj-service">
+    <div class="fj-service__content">
+      <!--<span class="fj-service__number">03 / Facility Remodels &amp; Conversions</span>-->
+      <h3 class="fj-service__heading">Facility Remodels &amp; Conversions.</h3>
       <p class="fj-service__description">
         Impress prospects and residents with transformational remodels and conversions of your shared spaces. Amenities make a difference.
       </p>
       <ul class="fj-service__list">
         <li>Clubhouses &amp; Offices</li>
-        <li>Dog Parks</li>
-        <li>Fitness Centers</li>
-        <li>Laundry Facilities</li>
-        <li>Mail Rooms</li>
-        <li>Outdoor Kitchens</li>
-        <li>Playgrounds</li>
-        <li>Pools &amp; Hardscapes</li>
-        <li>Sports Courts</li>
-        <li>Unit Repositions</li>
+
+<li>Dog Parks</li>
+
+<li>Fitness Centers</li>
+
+<li>Laundry Facilities</li>
+
+<li>Mail Rooms</li>
+
+<li>Outdoor Kitchens</li>
+
+<li>Playgrounds</li>
+
+<li>Pools &amp; Hardscapes</li>
+
+<li>Sports Courts</li>
+
+<li>Unit Repositions</li>
       </ul>
-      <a class="fj-service__link" href="/facility-remodels.html">Reconfiguration Services</a>
+      <a class="fj-service__link" href="/facility-remodels.html">Read More</a>
     </div>
     <div class="fj-service__media">
       <img src="/images/stock10.webp" alt="Facility remodeling and amenity upgrades">
-      <span class="fj-service__photo-label">Building Reconfigurations</span>
+      <span class="fj-service__photo-label">Facility Remodels</span>
     </div>
   </article>
 
   <article class="fj-service">
     <div class="fj-service__content">
-      <!--<span class="fj-service__number">05 / Project Management</span>-->
-      <h3 class="fj-service__heading">Project Management</h3>
+      <!--<span class="fj-service__number">04 / Disaster Recovery &amp; Restoration</span>-->
+      <h3 class="fj-service__heading">Disaster Recovery &amp; Restoration</h3>
       <p class="fj-service__description">
-        Every project we run is backed by hands-on project management — from initial scope and scheduling through daily site supervision and final walkthrough. One team, one point of accountability, start to finish.
+        Whether it's fire, wind, flood, ice, or hail damage, you can trust our experienced rapid response team to get your property quickly back to normal for staff and residents.
       </p>
       <ul class="fj-service__list">
-        <li>Scheduling &amp; Sequencing</li>
-        <li>Budget Oversight</li>
-        <li>Vendor Coordination</li>
-        <li>Permitting &amp; Compliance</li>
-        <li>Site Supervision</li>
-        <li>Quality Control</li>
-        <li>Owner Reporting</li>
-        <li>Risk Mitigation</li>
-        <li>Punch List Management</li>
-        <li>Contract Administration</li>
+        <li>Content &amp; Debris Removal</li>
+        <li>Damage Assessments</li>
+        <li>Emergency Tarping &amp; Board-Ups</li>
+        <li>Fire &amp; Smoke Mitigation</li>
+        <li>Interior &amp; Exterior Restorations</li>
+        <li>Safety Fencing</li>
+        <li>Water Damage Mitigation</li>
+        <li>Water Extraction</li>
       </ul>
-      <a class="fj-service__link" href="#contact">Project Management Services</a>
+      <a class="fj-service__link" href="/disaster-recovery.html">Read More</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/stock17.jpeg" alt="Construction project management">
-      <span class="fj-service__photo-label">Project Management</span>
+      <img src="/images/stock15.jpeg" alt="Disaster recovery and restoration">
+      <span class="fj-service__photo-label">Recovery &amp; Restoration</span>
+    </div>
+  </article>
+
+  <article class="fj-service">
+    <div class="fj-service__content">
+      <!--<span class="fj-service__number">05 / Due Diligence Property Services</span>-->
+      <h3 class="fj-service__heading">Due Diligence Inspections</h3>
+      <p class="fj-service__description">
+        Our team can provide crucial insights into a property's value, condition, and risks, helping you make informed decisions that support long-term profitability.
+      </p>
+      <ul class="fj-service__list">
+        <li>Financial Reviews</li>
+        <li>Insurance Considerations</li>
+        <li>Investment Analysis</li>
+        <li>Negotiation Leverage</li>
+        <li>Operational Insights</li>
+        <li>Regulatory Compliance</li>
+        <li>Risk Mitigation Assessments</li>
+        <li>Strategic Planning</li>
+      </ul>
+      <a class="fj-service__link" href="/due-diligence.html">Read More</a>
+    </div>
+    <div class="fj-service__media">
+      <img src="/images/stock17.jpeg" alt="Property evaluation and due diligence services">
+      <span class="fj-service__photo-label">Due Diligence</span>
     </div>
   </article>
 </section>
@@ -2431,13 +2323,13 @@ body.nav-open{
     <h2>Measured growth, project oriented.</h2>
   </div>
   <div class="stats-grid">
-    <div class="stat" data-value="26" data-suffix="+">
+    <div class="stat" data-value="20" data-suffix="+">
       <h3><span class="stat-num">0</span></h3>
-      <p>Years in business</p>
+      <p>Years building in Houston</p>
     </div>
-    <div class="stat" data-value="300" data-suffix="+">
+    <div class="stat" data-value="180" data-suffix="+">
       <h3><span class="stat-num">0</span></h3>
-      <p>Apartment projects completed</p>
+      <p>Projects delivered</p>
     </div>
     <div class="stat" data-static="true" data-static-text="1.2M">
       <h3><span class="stat-num">0</span></h3>
@@ -2455,8 +2347,69 @@ body.nav-open{
       <p>Headquartered in Houston, with completed projects across Texas, the Gulf South, and select markets nationwide.</p>
     </div>
 
-    <div class="stat-map" aria-label="Faith J. Construction project states across the United States">
-      <div class="stat-map__mount" aria-hidden="true"></div>
+    <div class="stat-map">
+      <img class="stat-map__img" src="/images/us-map-outline.png" alt="Outline map of the United States" width="1060" height="640" loading="lazy">
+
+      <svg class="stat-map__pins" viewBox="0 0 1060 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Faith J. Construction project locations, concentrated across the southern states">
+        <!-- Southern-focused pins -->
+        <g class="stat-map__pin stat-map__pin--hq" transform="translate(591,520.5)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="6"/>
+          <title>Houston, TX — Headquarters</title>
+        </g>
+        <g class="stat-map__pin" transform="translate(563.3,451.4)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>Dallas, TX</title>
+        </g>
+        <g class="stat-map__pin" transform="translate(529.1,527.7)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>San Antonio, TX</title>
+        </g>
+        <g class="stat-map__pin" transform="translate(695.6,512.6)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>New Orleans, LA</title>
+        </g>
+        <g class="stat-map__pin" transform="translate(796.6,415.8)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>Atlanta, GA</title>
+        </g>
+        <g class="stat-map__pin" transform="translate(746.5,365.6)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>Nashville, TN</title>
+        </g>
+        <g class="stat-map__pin" transform="translate(871,525.8)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>Orlando, FL</title>
+        </g>
+
+        <!-- Other markets -->
+        <g class="stat-map__pin" transform="translate(276.3,410.4)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>Phoenix, AZ</title>
+        </g>
+        <g class="stat-map__pin" transform="translate(422.6,283.9)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>Denver, CO</title>
+        </g>
+        <g class="stat-map__pin" transform="translate(719.5,235.9)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>Chicago, IL</title>
+        </g>
+        <g class="stat-map__pin" transform="translate(952.1,225.6)">
+          <circle class="stat-map__ring" cx="0" cy="0" r="5"/>
+          <circle class="stat-map__dot" cx="0" cy="0" r="5"/>
+          <title>New York, NY</title>
+        </g>
+      </svg>
     </div>
   </div>
 </section>
@@ -3670,151 +3623,38 @@ gsap.from(".stat", {
   }
 });
 
-/* ---------- Count-up stats ---------- */
-
-document.querySelectorAll('.stat').forEach((el) => {
-  const numEl = el.querySelector('.stat-num');
-
-  if (!numEl) return;
-
-  if (el.dataset.static) {
-    ScrollTrigger.create({
-      trigger: el,
-      start: "top 85%",
-      once: true,
-      onEnter: () => {
-        numEl.textContent = el.dataset.staticText;
-      }
-    });
-
-    return;
-  }
-
-  const target = Number(el.dataset.value);
-  const suffix = el.dataset.suffix || '';
-  const obj = {
-    val: 0
-  };
-
-  ScrollTrigger.create({
-    trigger: el,
-    start: "top 85%",
-    once: true,
-    onEnter: () => {
-      gsap.to(obj, {
-        val: target,
-        duration: 1.7,
-        ease: "power2.out",
-        onUpdate: () => {
-          numEl.textContent = Math.round(obj.val) + suffix;
-        }
-      });
-    }
-  });
-});
-
-
-/* ---------- Vector U.S. state map ---------- */
-/* Isolated from the rest of the page so a map/CDN failure can never stop counters or other animations. */
-window.addEventListener("load", () => {
-  const mapMount = document.querySelector(".stat-map__mount");
-  if (!mapMount) return;
-
-  try {
-    if (typeof window.jsVectorMap !== "function") {
-      mapMount.innerHTML = '<div class="stat-map__fallback">Map unavailable</div>';
-      return;
-    }
-
-    const projectStates = [
-      "US-TX","US-LA","US-GA","US-TN","US-FL",
-      "US-AZ","US-CO","US-IL","US-NY","US-VA",
-      "US-WA","US-OK","US-NC","US-AL"
-    ];
-
-    const projectMap = new window.jsVectorMap({
-      selector: ".stat-map__mount",
-      map: "us_aea_en",
-      backgroundColor: "transparent",
-      zoomButtons: false,
-      zoomOnScroll: false,
-      panOnDrag: false,
-      regionsSelectable: false,
-      regionStyle: {
-        initial: {
-          fill: "#343431",
-          fillOpacity: 1,
-          stroke: "#8f8b82",
-          strokeWidth: 1.05
-        },
-        hover: {
-          fill: "#343431",
-          fillOpacity: 1,
-          cursor: "default"
-        }
-      },
-      series: {
-        regions: [{
-          attribute: "fill",
-          scale: {
-            project: "#c31313",
-            base: "#343431"
-          },
-          values: Object.fromEntries(
-            Object.keys({
-              "US-AL":1,"US-AK":1,"US-AZ":1,"US-AR":1,"US-CA":1,"US-CO":1,"US-CT":1,"US-DE":1,"US-DC":1,"US-FL":1,
-              "US-GA":1,"US-HI":1,"US-ID":1,"US-IL":1,"US-IN":1,"US-IA":1,"US-KS":1,"US-KY":1,"US-LA":1,"US-ME":1,
-              "US-MD":1,"US-MA":1,"US-MI":1,"US-MN":1,"US-MS":1,"US-MO":1,"US-MT":1,"US-NE":1,"US-NV":1,"US-NH":1,
-              "US-NJ":1,"US-NM":1,"US-NY":1,"US-NC":1,"US-ND":1,"US-OH":1,"US-OK":1,"US-OR":1,"US-PA":1,"US-RI":1,
-              "US-SC":1,"US-SD":1,"US-TN":1,"US-TX":1,"US-UT":1,"US-VT":1,"US-VA":1,"US-WA":1,"US-WV":1,"US-WI":1,"US-WY":1
-            }).map(code => [code, projectStates.includes(code) ? "project" : "base"])
-          )
-        }]
-      },
-      onRegionClick(event) {
-        event.preventDefault();
-      }
-    });
-
-    /* Keep the rendered map fitted to its responsive wrapper after any viewport/layout change. */
-    let resizeFrame;
-    const resizeProjectMap = () => {
-      cancelAnimationFrame(resizeFrame);
-      resizeFrame = requestAnimationFrame(() => {
-        if (typeof projectMap.updateSize === "function") projectMap.updateSize();
-      });
-    };
-
-    window.addEventListener("resize", resizeProjectMap, { passive: true });
-    if (typeof ResizeObserver === "function") {
-      const mapResizeObserver = new ResizeObserver(resizeProjectMap);
-      mapResizeObserver.observe(mapMount);
-    }
-
-    /* Direct fallback styling: regardless of library theme rules, project states stay Faith J red. */
-    requestAnimationFrame(() => {
-      mapMount.querySelectorAll(".jsvmap-region").forEach(region => {
-        const code = region.getAttribute("data-code");
-        region.style.setProperty("fill", projectStates.includes(code) ? "#c31313" : "#343431", "important");
-        region.style.setProperty("stroke", projectStates.includes(code) ? "#e35b5b" : "#8f8b82", "important");
-      });
-      resizeProjectMap();
-      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
-    });
-  } catch (err) {
-    console.error("Project map failed to initialize:", err);
-    mapMount.innerHTML = '<div class="stat-map__fallback">Map unavailable</div>';
-  }
-});
-
-gsap.from(".stat-map", {
+gsap.from(".stats-map__head > *", {
+  y: 30,
   opacity: 0,
-  y: 20,
-  duration: 1.1,
+  stagger: .1,
+  duration: 1,
+  ease: "expo.out",
+  scrollTrigger: {
+    trigger: ".stats-map__head",
+    start: "top 85%"
+  }
+});
+
+gsap.from(".stat-map__outline", {
+  opacity: 0,
+  duration: 1.2,
   ease: "power2.out",
   scrollTrigger: {
     trigger: ".stat-map",
     start: "top 80%"
+  }
+});
+
+gsap.from(".stat-map__pin", {
+  scale: 0,
+  opacity: 0,
+  transformOrigin: "center",
+  stagger: .06,
+  duration: .6,
+  ease: "back.out(2)",
+  scrollTrigger: {
+    trigger: ".stat-map",
+    start: "top 75%"
   }
 });
 
@@ -3895,6 +3735,48 @@ gsap.from(".footer-top > *, .footer-bottom", {
   }
 });
 
+/* ---------- Count-up stats ---------- */
+
+document.querySelectorAll('.stat').forEach((el) => {
+  const numEl = el.querySelector('.stat-num');
+
+  if (!numEl) return;
+
+  if (el.dataset.static) {
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        numEl.textContent = el.dataset.staticText;
+      }
+    });
+
+    return;
+  }
+
+  const target = Number(el.dataset.value);
+  const suffix = el.dataset.suffix || '';
+  const obj = {
+    val: 0
+  };
+
+  ScrollTrigger.create({
+    trigger: el,
+    start: "top 85%",
+    once: true,
+    onEnter: () => {
+      gsap.to(obj, {
+        val: target,
+        duration: 1.7,
+        ease: "power2.out",
+        onUpdate: () => {
+          numEl.textContent = Math.round(obj.val) + suffix;
+        }
+      });
+    }
+  });
+});
 </script>
 
 
