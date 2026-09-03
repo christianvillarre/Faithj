@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Interior Services — Faith J Construction</title>
+<meta name="description" content="Full-scope interior renovation and make-ready services for multifamily, commercial, and residential properties — appliances, cabinetry, flooring, HVAC, electrical, and more.">
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/images/image8.jpg" fetchpriority="high">
+
+<style>
+:root{
+  --dark:#0b0b08;
+  --cream:#efe9dc;
+  --gold:#c31313;
+  --light:#cfcfcf;
+  --light-text:#111;
+  --light-body:rgba(0,0,0,.65);
+  --light-line:rgba(0,0,0,.2);
+  --line:rgba(0,0,0,.18);
+  --line-light:rgba(255,255,255,.16);
+  --ease-smooth:cubic-bezier(.16,1,.3,1);
+  --page-pad:clamp(42px, 7vw, 104px);
+  --headline:'archivo', Helvetica, Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  font-family:'archivo', Helvetica, Arial, sans-serif;
+  background:var(--dark);
+  color:var(--cream);
+}
+body{overflow-x:hidden}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+}
+
+a{color:inherit}
+
+/* LOADER */
+.loader{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  background:#000000;
+  display:grid;
+  place-items:center;
+}
+.loader-logo-wrap{position:relative}
+.loader-logo-row{
+  --loader-logo-h: clamp(48px, 7vw, 82px);
+  --loader-wordmark-w: clamp(115px, 26vw, 205px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  width:max-content;
+  max-width:86vw;
+  height:var(--loader-logo-h);
+  overflow:visible;
+  background:transparent;
+}
+.loader-split-logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:var(--loader-logo-h);
+  width:auto;
+  flex:0 0 auto;
+  overflow:hidden;
+  background:transparent;
+  clip-path:polygon(0 0, 0 0, 0 0);
+  will-change:transform, clip-path;
+}
+.loader-icon3{
+  display:block;
+  height:100%;
+  width:auto;
+  object-fit:contain;
+  opacity:1;
+  will-change:transform;
+}
+.loader-icon2-wrap{
+  width:0;
+  height:var(--loader-logo-h);
+  overflow:hidden;
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  will-change:width;
+}
+.loader-icon2{
+  display:block;
+  height:100%;
+  width:auto;
+  max-width:none;
+  opacity:0;
+  transform:translateX(-28px);
+  will-change:transform, opacity;
+}
+
+.logo-transition-layer{
+  position:fixed;
+  inset:0;
+  z-index:1001;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+}
+.logo-transition-layer .loader-logo-row{position:relative}
+
+/* TOP UI */
+.site-ui{
+  position:fixed;
+  inset:22px 28px auto;
+  z-index:200;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  pointer-events:none;
+}
+.site-ui>*{pointer-events:auto}
+.logo{
+  justify-self:start;
+  font-size:13px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  opacity:0;
+}
+.nav-split-logo{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  height:54px;
+  width:auto;
+  text-decoration:none;
+  line-height:0;
+}
+.nav-logo-icon{display:block;height:100%;width:auto;object-fit:contain}
+
+/* CENTER MENU */
+.menu-wrap{
+  position:fixed;
+  left:50%;
+  top:18px;
+  transform:translateX(-50%);
+  z-index:210;
+  width:min(290px, calc(100vw - 48px));
+  pointer-events:auto;
+}
+.menu-toggle{
+  position:relative;
+  z-index:3;
+  width:100%;
+  height:54px;
+  border:0;
+  border-radius:12px;
+  padding:0 16px 0 22px;
+  background:rgb(56,56,56);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  font-family:var(--headline);
+  font-size:14px;
+  font-weight:400;
+  line-height:1;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:transform .25s var(--ease-smooth), background .25s ease;
+}
+.menu-toggle:hover{transform:translateY(-1px);background:rgb(62,62,62)}
+.menu-toggle__label{line-height:1}
+.menu-toggle__box{position:relative;width:30px;height:30px;display:grid;place-items:center;flex-shrink:0}
+.menu-toggle__bar{
+  position:absolute;
+  width:22px;
+  height:1px;
+  border-radius:999px;
+  background:currentColor;
+  transform-origin:center;
+  transition:transform .3s var(--ease-smooth), width .3s var(--ease-smooth);
+}
+.menu-toggle__bar:first-child{transform:translateY(-4px)}
+.menu-toggle__bar:last-child{transform:translateY(4px)}
+.menu-toggle.open .menu-toggle__bar:first-child{transform:rotate(45deg)}
+.menu-toggle.open .menu-toggle__bar:last-child{transform:rotate(-45deg)}
+.menu-bg{
+  position:absolute;
+  z-index:1;
+  top:0;left:0;right:0;
+  height:54px;
+  border-radius:12px;
+  background:rgb(56,56,56);
+  opacity:0;
+  transform:scale(.98);
+  transform-origin:top center;
+  pointer-events:none;
+  transition:height .4s cubic-bezier(.76,0,.24,1), opacity .18s ease, transform .35s var(--ease-smooth), border-radius .4s var(--ease-smooth);
+}
+.menu-bg.open{height:330px;opacity:1;transform:scale(1);border-radius:22px}
+.nav-dropdown{
+  position:relative;
+  z-index:2;
+  display:grid;
+  gap:2px;
+  padding:68px 14px 14px;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-8px);
+  pointer-events:none;
+  transition:opacity .2s ease, transform .3s var(--ease-smooth), visibility 0s linear .3s;
+}
+.nav-dropdown.open{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;transition-delay:0s}
+.nav-dropdown a{
+  min-height:48px;
+  padding:0 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-radius:12px;
+  color:#fff;
+  text-decoration:none;
+  font-family:var(--headline);
+  font-size:clamp(1.2rem, 1.8vw, 1.6rem);
+  font-weight:500;
+  line-height:1;
+  letter-spacing:-.015em;
+  text-transform:uppercase;
+  transition:background .2s ease, transform .25s var(--ease-smooth);
+}
+.nav-dropdown a.is-current{color:#c31313}
+.nav-dropdown a::after{
+  content:"";
+  width:14px;
+  height:14px;
+  flex-shrink:0;
+  opacity:.45;
+  transform:translateX(-4px);
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 18L18 6M18 6H10M18 6V14' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  transition:opacity .2s ease, transform .25s var(--ease-smooth);
+}
+.nav-dropdown a:hover::after{opacity:1;transform:translateX(0)}
+body.nav-open{overflow:hidden}
+
+@media(max-width:800px){
+  .site-ui{grid-template-columns:1fr;gap:12px}
+  .logo{justify-self:start}
+}
+@media(max-width:600px){
+  .menu-wrap{top:16px;width:min(93vw, calc(100vw - 36px));z-index:99}
+  .nav-split-logo{height:50px;padding-top:1rem;margin-left:-0.8rem;z-index:999;transition:margin-left .3s ease}
+  .nav-split-logo.open{margin-left:0.5rem}
+  .menu-toggle{height:70px;padding-left:20px;display:flex;justify-content:flex-end;background:transparent!important;-webkit-tap-highlight-color:transparent}
+  .menu-toggle:hover,.menu-toggle:active,.menu-toggle:focus{background:transparent!important;transform:none;outline:none}
+  .menu-toggle__label{display:none}
+  .menu-bg{height:50px}
+  .menu-bg.open{height:338px!important}
+  .nav-dropdown{padding:62px 12px 12px}
+  .nav-dropdown a{min-height:45px;font-size:1.15rem}
+}
+@media (max-width:768px){html,body{width:100%;overscroll-behavior-x:none}}
+
+/* INTERIOR HERO */
+.interior-hero{
+  position:relative;
+  min-height:94svh;
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+  background:#050505;
+}
+.interior-hero__bg{
+  position:absolute;
+  inset:0;
+  clip-path:inset(10% round 26px);
+  will-change:clip-path;
+}
+.interior-hero__bg img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transform:scale(1.08);
+  filter:grayscale(.15) brightness(.6);
+}
+.interior-hero__scrim{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(to top, rgba(5,5,5,.96) 0%, rgba(5,5,5,.28) 48%, rgba(5,5,5,.5) 100%),
+    linear-gradient(to right, rgba(5,5,5,.3), transparent 55%);
+}
+.interior-hero__inner{
+  position:relative;
+  z-index:2;
+  padding: clamp(120px,18vh,200px) clamp(24px,7vw,104px) clamp(70px,10vh,120px);
+  max-width:980px;
+}
+.interior-hero__eyebrow{
+  display:block;
+  margin-bottom:18px;
+  color:#c31313;
+  font-size:.95rem;
+  font-weight:650;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.interior-hero__title{
+  margin:0;
+  color:#fff;
+  font-family:var(--headline);
+  font-size:clamp(3rem,7.4vw,6.6rem);
+  font-weight:640;
+  line-height:.9;
+  letter-spacing:-.055em;
+  text-transform:uppercase;
+  text-wrap:balance;
+}
+.interior-hero__desc{
+  margin:26px 0 0;
+  max-width:56ch;
+  color:rgba(239,233,220,.72);
+  font-size:clamp(1rem,1.3vw,1.18rem);
+  line-height:1.6;
+}
+.interior-hero__actions{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:clamp(18px,3vw,32px);
+  margin-top:clamp(34px,5vh,48px);
+}
+.interior-hero__cta{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  border:1px solid #fff;
+  border-radius:999px;
+  padding:16px 26px;
+  background:#fff;
+  color:#111;
+  text-decoration:none;
+  font-family:var(--headline);
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  transition:transform .3s var(--ease-smooth), background .3s ease, color .3s ease;
+}
+.interior-hero__cta:hover{transform:translateY(-2px);background:transparent;color:#fff}
+.interior-hero__cta svg{width:15px;height:15px}
+.interior-hero__link{
+  position:relative;
+  color:rgba(239,233,220,.85);
+  text-decoration:none;
+  font-size:.86rem;
+  font-weight:500;
+  letter-spacing:.05em;
+  padding-bottom:3px;
+  border-bottom:1px solid rgba(239,233,220,.4);
+  transition:border-color .3s var(--ease-smooth), color .3s var(--ease-smooth);
+}
+.interior-hero__link:hover{color:#fff;border-color:#fff}
+
+@media(max-width:600px){
+  .interior-hero{min-height:100svh}
+  .interior-hero__title{font-size:clamp(2.6rem,12vw,4.2rem)}
+  .interior-hero__desc{font-size:.96rem}
+}
+
+/* SECTION HEAD (shared kicker + heading, used by services / faq) */
+.section-head{
+  max-width:156ch;
+  margin-bottom:7vh;
+}
+.section-head span{
+  display:block;
+  color:#ffffff;
+  font-size:1.15rem;
+  font-weight:650;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.section-head h2{
+  width:100%;
+  max-width:44ch;
+  margin:14px 0 0;
+  font-size:clamp(2.6rem,4.8vw,4.9rem);
+  line-height:.96;
+  letter-spacing:-.045em;
+  text-transform:none;
+  color:#fff;
+}
+.section-head p{
+  max-width:62ch;
+  margin:22px 0 0;
+  color:rgba(239,233,220,.65);
+  font-size:1rem;
+  line-height:1.65;
+}
+
+/* SERVICES GRID */
+.services-section{
+  position:relative;
+  z-index:5;
+  background:var(--dark);
+  color:var(--cream);
+  padding:
+    clamp(110px,16vh,180px)
+    clamp(28px,7vw,104px)
+    clamp(90px,13vh,150px);
+}
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+  gap:clamp(44px,5vw,72px) clamp(32px,4vw,56px);
+}
+.service-card{
+  position:relative;
+  width:100%;
+  max-width:460px;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  border-radius:16px;
+  background:#101008;
+  isolation:isolate;
+  outline:none;
+  justify-self:center;
+}
+.service-card__media{
+  position:absolute;
+  inset:0;
+}
+.service-card__media img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transform:scale(1.16);
+  filter:grayscale(.35) brightness(.6) saturate(.9);
+  transition:transform 1s var(--ease-smooth), filter .7s ease;
+}
+.service-card__media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(5,5,4,.96) 0%, rgba(5,5,4,.25) 52%, rgba(5,5,4,.15) 100%);
+  transition:opacity .5s ease;
+}
+.service-card__overlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:#fff;
+  transform:translateY(101%);
+  transition:transform .65s var(--ease-smooth);
+}
+.service-card__index{
+  position:relative;
+  z-index:3;
+  display:block;
+  padding:22px 24px 0;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  color:rgba(239,233,220,.55);
+  transition:color .4s ease;
+}
+.service-card__body{
+  position:absolute;
+  z-index:3;
+  left:0;right:0;bottom:0;
+  padding:24px 26px 44px;
+  transform:translateY(30%);
+  transition:transform .6s var(--ease-smooth);
+}
+.service-card__title{
+  display:flex;
+  align-items:flex-end;
+  min-height:2.1em;
+  margin:0;
+  color:#fff;
+  font-family:var(--headline);
+  font-size:clamp(1.3rem,1.9vw,1.7rem);
+  font-weight:640;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  transition:color .45s ease;
+}
+.service-card__desc-wrap{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .55s var(--ease-smooth);
+}
+.service-card__desc-inner{overflow:hidden}
+.service-card__desc-inner ul{
+  list-style:none;
+  margin:14px 0 0;
+  padding:0;
+  max-width:34ch;
+}
+.service-card__desc-inner li{
+  position:relative;
+  margin:0 0 8px;
+  padding-left:16px;
+  color:rgba(239,233,220,.78);
+  font-size:.9rem;
+  line-height:1.5;
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity .4s ease .05s, transform .4s ease .05s, color .45s ease;
+}
+.service-card__desc-inner li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.62em;
+  width:7px;
+  height:1.5px;
+  background:currentColor;
+  opacity:.7;
+}
+.service-card:hover .service-card__media img,
+.service-card:focus-within .service-card__media img,
+.service-card.is-active .service-card__media img{
+  transform:scale(1.3) translateY(-2%);
+}
+.service-card:hover .service-card__overlay,
+.service-card:focus-within .service-card__overlay,
+.service-card.is-active .service-card__overlay{
+  transform:translateY(0);
+}
+.service-card:hover .service-card__index,
+.service-card:focus-within .service-card__index,
+.service-card.is-active .service-card__index{
+  color:rgba(17,17,17,.55);
+}
+.service-card:hover .service-card__body,
+.service-card:focus-within .service-card__body,
+.service-card.is-active .service-card__body{
+  transform:translateY(0);
+}
+.service-card:hover .service-card__title,
+.service-card:focus-within .service-card__title,
+.service-card.is-active .service-card__title{
+  color:#111;
+}
+.service-card:hover .service-card__desc-wrap,
+.service-card:focus-within .service-card__desc-wrap,
+.service-card.is-active .service-card__desc-wrap{
+  grid-template-rows:1fr;
+}
+.service-card:hover .service-card__desc-inner li,
+.service-card:focus-within .service-card__desc-inner li,
+.service-card.is-active .service-card__desc-inner li{
+  opacity:1;
+  transform:translateY(0);
+  color:#333;
+}
+
+@media(max-width:600px){
+  .services-grid{grid-template-columns:1fr;gap:28px;max-width:340px;margin:0 auto}
+  .service-card{aspect-ratio:3/4}
+}
+
+/* FAQ */
+.faq-section{
+  position:relative;
+  z-index:5;
+  background:var(--dark);
+  color:var(--cream);
+  padding:
+    clamp(90px,13vh,150px)
+    clamp(28px,7vw,104px)
+    clamp(110px,16vh,180px);
+}
+.faq-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,.72fr);
+  gap:clamp(50px,7vw,110px);
+  align-items:start;
+}
+.faq-media{
+  position:sticky;
+  top:clamp(90px,12vh,140px);
+  border-radius:18px;
+  overflow:hidden;
+  aspect-ratio:4/5;
+}
+.faq-media img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  filter:grayscale(.25) brightness(.72);
+}
+.faq-list{
+  border-top:1px solid var(--line-light);
+  max-width:none;
+}
+.faq-item{border-bottom:1px solid var(--line-light)}
+.faq-item__q{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:30px 0;
+  background:none;
+  border:0;
+  cursor:pointer;
+  text-align:left;
+  font-family:inherit;
+  font-size:clamp(1.05rem,1.6vw,1.3rem);
+  font-weight:500;
+  letter-spacing:-.01em;
+  color:var(--cream);
+}
+.faq-item__icon{position:relative;flex:0 0 auto;width:22px;height:22px}
+.faq-item__icon::before,.faq-item__icon::after{
+  content:"";
+  position:absolute;
+  top:50%;left:50%;
+  background:#fff;
+  transform:translate(-50%,-50%);
+  transition:transform .35s ease, opacity .35s ease;
+}
+.faq-item__icon::before{width:22px;height:2px}
+.faq-item__icon::after{width:2px;height:22px}
+.faq-item.is-open .faq-item__icon::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+.faq-item__a{height:0;overflow:hidden;transition:height .4s ease}
+.faq-item__a p{
+  margin:0 0 28px;
+  max-width:64ch;
+  color:rgba(239,233,220,.65);
+  font-size:.98rem;
+  line-height:1.6;
+}
+@media(max-width:900px){
+  .faq-inner{grid-template-columns:1fr;gap:36px}
+  .faq-media{position:relative;top:0;aspect-ratio:16/10;order:-1}
+}
+
+/* CONTACT */
+.contact-section{
+  position:relative;
+  z-index:5;
+  background:var(--dark);
+  color:var(--cream);
+  padding:clamp(100px,14vh,160px) clamp(28px,7vw,104px);
+}
+.contact-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);
+  gap:clamp(60px,9vw,150px);
+  align-items:start;
+}
+.contact-kicker{
+  display:block;
+  margin-bottom:20px;
+  color:var(--cream);
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+.contact-copy h2{
+  margin:0;
+  max-width:12ch;
+  font-size:clamp(3rem,7vw,7rem);
+  font-weight:620;
+  line-height:.92;
+  letter-spacing:-.055em;
+  text-transform:uppercase;
+}
+.contact-copy p{
+  max-width:42ch;
+  margin:28px 0 0;
+  color:rgba(239,233,220,.65);
+  font-size:1rem;
+  line-height:1.65;
+}
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:26px 20px}
+.contact-field{display:flex;flex-direction:column;gap:9px}
+.contact-field--full{grid-column:1/-1}
+.contact-field label{
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.contact-field input,.contact-field textarea,.contact-field select{
+  width:100%;
+  border:0;
+  border-bottom:1px solid rgba(239,233,220,.3);
+  border-radius:0;
+  padding:12px 0 14px;
+  background:transparent;
+  color:#fff;
+  font:inherit;
+  outline:none;
+  transition:border-color .25s ease;
+}
+.contact-field select option{background:#111;color:#fff}
+.contact-field textarea{min-height:120px;resize:vertical}
+.contact-field input:focus,.contact-field textarea:focus,.contact-field select:focus{border-color:#fff}
+.contact-submit{
+  grid-column:1/-1;
+  justify-self:start;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  border:1px solid #fff;
+  border-radius:999px;
+  padding:14px 22px;
+  background:#fff;
+  color:#111;
+  font-family:var(--headline);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:transform .3s var(--ease-smooth), background .3s ease, color .3s ease;
+}
+.contact-submit:hover{transform:translateY(-2px);background:transparent;color:#fff}
+.contact-submit svg{width:15px;height:15px}
+.contact-form__note{
+  grid-column:1/-1;
+  margin:2px 0 0;
+  font-size:.82rem;
+  color:rgba(239,233,220,.55);
+}
+@media(max-width:800px){
+  .contact-inner{grid-template-columns:1fr;gap:60px}
+  .contact-form{grid-template-columns:1fr}
+  .contact-field--full,.contact-submit{grid-column:auto}
+}
+
+/* FOOTER */
+.site-footer{
+  position:relative;
+  z-index:5;
+  background:#050503;
+  color:var(--cream);
+  padding:clamp(110px,16vh,180px) clamp(28px,7vw,104px) clamp(60px,8vh,100px);
+  border-top:1px solid var(--line-light);
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr;
+  gap:40px;
+  padding-bottom:8vh;
+}
+.footer-col span{
+  display:block;
+  font-size:.75rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--cream);
+  margin-bottom:16px;
+}
+.footer-col a{
+  display:block;
+  color:var(--cream);
+  text-decoration:none;
+  opacity:.72;
+  font-size:.95rem;
+  padding:6px 0;
+  transition:opacity .3s var(--ease-smooth);
+}
+.footer-col a:hover{opacity:1}
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:1px solid var(--line-light);
+  padding-top:24px;
+  font-size:.8rem;
+  opacity:.5;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.footer-logo{width:300px;max-width:60vw}
+.back-to-top{
+  color:var(--cream);
+  text-decoration:none;
+  opacity:1;
+  border:1px solid var(--line-light);
+  padding:9px 16px;
+  border-radius:999px;
+  transition:background .3s var(--ease-smooth);
+}
+.back-to-top:hover{background:rgba(255,255,255,.08)}
+@media(max-width:800px){
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{justify-content:flex-start}
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader"></div>
+
+<div class="logo-transition-layer">
+  <div class="loader-logo-wrap loader-logo-row">
+    <div class="loader-split-logo">
+      <img src="/images/icon3.png" class="loader-icon3" alt="Faith J logo">
+    </div>
+    <div class="loader-icon2-wrap">
+      <img src="/images/icon2.png" class="loader-icon2" alt="Faith J Construction">
+    </div>
+  </div>
+</div>
+
+<header class="site-ui">
+  <a class="logo nav-split-logo" href="/" aria-label="Home">
+    <img src="/images/icon3.png" class="nav-logo-icon" alt="">
+  </a>
+</header>
+
+<div class="menu-wrap" id="menuWrap">
+  <div class="menu-bg" id="menuBg"></div>
+  <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-expanded="false">
+    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__box" aria-hidden="true">
+      <span class="menu-toggle__bar"></span>
+      <span class="menu-toggle__bar"></span>
+    </span>
+  </button>
+  <nav class="nav-dropdown" id="navDropdown" aria-label="Main menu">
+    <a href="/">Home</a>
+    <a href="/#services" class="is-current">Services</a>
+    <a href="/#projects">Projects</a>
+    <a href="/about.html">About</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+</div>
+
+<main>
+
+  <section class="interior-hero" id="top">
+    <div class="interior-hero__bg">
+      <img src="/images/image10.jpg" alt="Renovated apartment interior">
+    </div>
+    <div class="interior-hero__scrim"></div>
+    <div class="interior-hero__inner">
+      <!--<span class="interior-hero__eyebrow">02 / Interior Services</span>-->
+      <h1 class="interior-hero__title">Interior<br>Services.</h1>
+      <p class="interior-hero__desc">
+        Full-scope renovation and make-ready work, built to hold up to turnover.
+      </p>
+      <div class="interior-hero__actions">
+        <a class="interior-hero__cta" href="#contact">
+          Start a project
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="interior-hero__link" href="#services">View all services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-section" id="services">
+    <div class="section-head">
+      <span>What we do</span>
+      <h2>Renovation &amp; make-ready services</h2>
+      <p>From single-unit turns to property-wide upgrades, our crews handle every trade under one roof —
+        so scheduling, quality, and communication stay consistent from walk-through to close-out.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">01</span>
+        <div class="service-card__media">
+          <img src="/images/image1.jpg" alt="Appliance package installation">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">Appliance Packages</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>Full appliance install and haul-away</li>
+                <li>Stainless, black, and white finish options</li>
+                <li>Bulk pricing for multi-unit turns</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">02</span>
+        <div class="service-card__media">
+          <img src="/images/image4.jpg" alt="Custom cabinetry installation">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">Cabinetry</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>Refacing, refinishing, or full replacement</li>
+                <li>Soft-close hinge and drawer upgrades</li>
+                <li>Custom sizing for odd layouts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">03</span>
+        <div class="service-card__media">
+          <img src="/images/stock10.webp" alt="Countertop installation">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">Countertops</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>Quartz, granite, and laminate options</li>
+                <li>In-house measuring and templating</li>
+                <li>Sink and backsplash tie-in</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">04</span>
+        <div class="service-card__media">
+          <img src="/images/image5.jpg" alt="Interior door and hardware replacement">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">Doors &amp; Locks</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>Interior door replacement</li>
+                <li>Keyed-alike lock upgrades</li>
+                <li>Weatherstripping and hardware</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">05</span>
+        <div class="service-card__media">
+          <img src="/images/stock13.jpeg" alt="Electrical and lighting upgrade">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">Electrical &amp; Lighting</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>Panel and outlet upgrades</li>
+                <li>Fixture and ceiling fan installs</li>
+                <li>Code-compliant wiring</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">06</span>
+        <div class="service-card__media">
+          <img src="/images/stock11.jpeg" alt="Fire and life safety inspection">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">Fire &amp; Life Safety</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>Smoke and CO detector installs</li>
+                <li>Extinguisher placement and tagging</li>
+                <li>Egress and signage compliance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">07</span>
+        <div class="service-card__media">
+          <img src="/images/stock14.jpeg" alt="Flooring installation">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">Flooring</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>LVP, tile, and carpet installation</li>
+                <li>Subfloor repair and leveling</li>
+                <li>Transition strips and trim work</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">08</span>
+        <div class="service-card__media">
+          <img src="/images/image8.jpg" alt="HVAC repair and replacement">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">HVAC</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>System repair and replacement</li>
+                <li>Duct cleaning and sealing</li>
+                <li>Seasonal tune-ups</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">09</span>
+        <div class="service-card__media">
+          <img src="/images/image1.png" alt="Interior painting">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">Painting</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>Interior painting, all rooms</li>
+                <li>Patch, prime, and touch-up work</li>
+                <li>Trim, ceiling, and accent walls</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card" tabindex="0">
+        <span class="service-card__index">10</span>
+        <div class="service-card__media">
+          <img src="/images/image4.jpg" alt="Plumbing fixture replacement">
+        </div>
+        <div class="service-card__overlay"></div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">Plumbing</h3>
+          <div class="service-card__desc-wrap">
+            <div class="service-card__desc-inner">
+              <ul>
+                <li>Fixture and faucet replacement</li>
+                <li>Leak detection and repair</li>
+                <li>Water heater service</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="section-head">
+      <span>FAQ</span>
+      <h2>Interior services, answered.</h2>
+    </div>
+    <div class="faq-inner">
+      <div class="faq-list">
+        <div class="faq-item is-open">
+          <button class="faq-item__q" type="button" aria-expanded="true">
+            Do you handle full unit turns, or single trades only?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__a">
+            <p>Both. We can take on a single trade — flooring or paint, for example — or manage a full unit turn start to finish with one point of contact.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__q" type="button" aria-expanded="false">
+            How fast can you turn a unit?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__a">
+            <p>Standard turns typically run 3–7 business days depending on scope. Larger renovations or multi-trade turns are scheduled around your move-in dates.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__q" type="button" aria-expanded="false">
+            Can you work around occupied units?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__a">
+            <p>Yes — a large share of our interior work happens in occupied multifamily properties. We coordinate access, noise windows, and site protection with your property team in advance.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__q" type="button" aria-expanded="false">
+            Do you supply materials, or do we?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__a">
+            <p>Either. We can source and supply appliances, cabinetry, flooring, and fixtures, or install materials you've already purchased or standardized on.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__q" type="button" aria-expanded="false">
+            How do I get a quote for interior work?
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__a">
+            <p>Send us your scope and unit count through the contact form below. We'll schedule a walkthrough and follow up with a detailed proposal and timeline.</p>
+          </div>
+        </div>
+      </div>
+      <figure class="faq-media">
+        <img src="/images/stock11.jpeg" alt="Completed interior renovation">
+      </figure>
+    </div>
+  </section>
+
+
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-copy">
+        <span class="contact-kicker">Start a project</span>
+        <h2>Let's upgrade your interiors.</h2>
+        <p>
+          Tell us about your unit turns, renovation, or make-ready scope. Our team will follow up
+          to discuss the property, timeline, and next steps.
+        </p>
+      </div>
+
+      <form class="contact-form" name="interior-services-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="interior-services-inquiry">
+        <p hidden>
+          <label>Do not fill this out: <input name="bot-field"></label>
+        </p>
+
+        <div class="contact-field">
+          <label for="contact-name">Name</label>
+          <input id="contact-name" name="name" type="text" autocomplete="name" required>
+        </div>
+
+        <div class="contact-field">
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" required>
+        </div>
+
+        <div class="contact-field">
+          <label for="contact-phone">Phone</label>
+          <input id="contact-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+
+        <div class="contact-field">
+          <label for="contact-type">Interior service</label>
+          <select id="contact-type" name="service-type" required>
+            <option value="" selected disabled>Select one</option>
+            <option>Full Unit Turn</option>
+            <option>Appliance Packages</option>
+            <option>Cabinetry</option>
+            <option>Countertops</option>
+            <option>Flooring</option>
+            <option>HVAC</option>
+            <option>Electrical &amp; Lighting</option>
+            <option>Plumbing</option>
+            <option>Painting</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="contact-field contact-field--full">
+          <label for="contact-message">Project details</label>
+          <textarea id="contact-message" name="message" placeholder="Tell us about the property, unit count, and timeline." required></textarea>
+        </div>
+
+        <button class="contact-submit" type="submit">
+          Send inquiry
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <p class="contact-form__note">We typically respond within one business day.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="/images/icon4.png" alt="Faith J Construction" class="footer-logo">
+    </div>
+    <div class="footer-col">
+      <span>Site</span>
+      <a href="/">Home</a>
+      <a href="/#services">Services</a>
+      <a href="/about.html">About</a>
+      <a href="/#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <span>Contact</span>
+      <a href="tel:+18005551234">(800) 555-1234</a>
+      <a href="mailto:hello@faithjconstruction.com">hello@faithjconstruction.com</a>
+      <a href="#">Houston, Texas</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year"></span> Faith J Construction. Built with restraint.</span>
+    <a class="back-to-top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const navDropdown = document.getElementById("navDropdown");
+  const menuBg = document.getElementById("menuBg");
+  const menuWrap = document.getElementById("menuWrap");
+  const logo = document.querySelector(".nav-split-logo");
+
+  if (!menuToggle || !navDropdown || !menuBg || !menuWrap) return;
+
+  function openMenu(){
+    menuToggle.classList.add("open");
+    navDropdown.classList.add("open");
+    menuBg.classList.add("open");
+    logo.classList.add("open");
+    document.body.classList.add("nav-open");
+    menuToggle.setAttribute("aria-expanded","true");
+  }
+  function closeMenu(){
+    menuToggle.classList.remove("open");
+    navDropdown.classList.remove("open");
+    menuBg.classList.remove("open");
+    logo.classList.remove("open");
+    document.body.classList.remove("nav-open");
+    menuToggle.setAttribute("aria-expanded","false");
+  }
+  menuToggle.addEventListener("click", () => {
+    menuToggle.classList.contains("open") ? closeMenu() : openMenu();
+  });
+  navDropdown.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+  document.addEventListener("click", (e) => { if (!menuWrap.contains(e.target)) closeMenu(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+});
+</script>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+gsap.registerPlugin(ScrollTrigger);
+
+/* ---------- Lenis smooth scroll ---------- */
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let lenis = null;
+
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+document.documentElement.style.scrollBehavior = "auto";
+document.documentElement.style.overflow = "hidden";
+document.body.style.overflow = "hidden";
+window.scrollTo(0, 0);
+
+if (!prefersReducedMotion && window.Lenis) {
+  lenis = new Lenis({
+    duration: 1.15,
+    easing: (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+    smoothWheel: true
+  });
+  lenis.stop();
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+
+function forceTop(){
+  window.scrollTo(0, 0);
+  if (lenis) lenis.scrollTo(0, { immediate: true, force: true });
+}
+forceTop();
+
+window.addEventListener("load", () => {
+  forceTop();
+  requestAnimationFrame(() => {
+    forceTop();
+    requestAnimationFrame(() => {
+      forceTop();
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, 1);
+      requestAnimationFrame(() => {
+        forceTop();
+        if (lenis) lenis.start();
+        ScrollTrigger.refresh();
+      });
+    });
+  });
+});
+window.addEventListener("pageshow", forceTop);
+
+/* ---------- Load-in sequence ---------- */
+gsap.set(".interior-hero__bg", { clipPath: "inset(10% round 26px)" });
+gsap.set(".loader-split-logo", { scale: 1, clipPath: "polygon(0 0, 0 0, 0 0, 0 0)" });
+gsap.set(".loader-icon3", { scale: 1.04 });
+gsap.set(".loader-icon2-wrap", { width: 0, y: 0 });
+gsap.set(".loader-icon2", { opacity: 0, x: -28 });
+
+const tl = gsap.timeline({ delay: .42, paused: true });
+
+tl.to(".loader-split-logo", { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", duration: 1.05, ease: "expo.inOut" })
+  .to(".loader-icon3", { scale: 1, duration: 1.05, ease: "expo.out" }, "<")
+  .to(".loader-icon2-wrap", { width: "clamp(150px, 32vw, 260px)", duration: .72, ease: "expo.inOut" }, "-=.12")
+  .to(".loader-icon2", { opacity: 1, x: 0, duration: .72, ease: "expo.out" }, "<")
+  .add(() => {
+    const loaderSplit = document.querySelector(".loader-split-logo");
+    const navLogo = document.querySelector(".nav-split-logo");
+    if (!loaderSplit || !navLogo) return;
+    const from = loaderSplit.getBoundingClientRect();
+    const to = navLogo.getBoundingClientRect();
+    const fromCenterX = from.left + from.width / 2;
+    const fromCenterY = from.top + from.height / 2;
+    const toCenterX = to.left + to.width / 2;
+    const toCenterY = to.top + to.height / 2;
+    loaderSplit.dataset.moveX = toCenterX - fromCenterX;
+    loaderSplit.dataset.moveY = toCenterY - fromCenterY;
+    loaderSplit.dataset.moveScale = (to.height / from.height) || .5;
+  })
+  .addLabel("loaderExit")
+  .to(".loader-split-logo", { x: () => Number(document.querySelector(".loader-split-logo")?.dataset.moveX || 0), duration: .9, ease: "power3.inOut" }, "loaderExit")
+  .to(".loader-split-logo", { y: () => Number(document.querySelector(".loader-split-logo")?.dataset.moveY || 0), duration: .92, ease: "expo.inOut" }, "loaderExit+=.18")
+  .to(".loader-split-logo", { scale: () => Number(document.querySelector(".loader-split-logo")?.dataset.moveScale || .5), duration: 1, ease: "power3.inOut" }, "loaderExit")
+  .to(".loader", { yPercent: -100, duration: 1.1, ease: "expo.inOut" }, "loaderExit")
+  .to(".loader-icon2-wrap", { y: "-110vh", duration: 1.1, ease: "expo.inOut" }, "loaderExit")
+  .to(".loader-split-logo", { opacity: 0, duration: .12, ease: "power1.out" }, "loaderExit+=.91")
+  .to(".nav-split-logo", { opacity: 1, duration: .12, ease: "power1.out" }, "loaderExit+=.91")
+  .to(".logo-transition-layer", { opacity: 0, duration: .18, ease: "power1.out" }, "loaderExit+=1")
+  .to(".interior-hero__bg", { clipPath: "inset(0% round 0px)", duration: 1.7, ease: "expo.inOut" }, "loaderExit+=.05")
+  .to(".logo", { opacity: 1, duration: .7, ease: "power2.out" }, "loaderExit+1.8")
+  .from(".interior-hero__eyebrow", { y: 24, opacity: 0, duration: .8, ease: "expo.out" }, "loaderExit+=.55")
+  .from(".interior-hero__title", { y: 55, opacity: 0, duration: 1.1, ease: "expo.out" }, "loaderExit+=.6")
+  .from(".interior-hero__desc", { y: 30, opacity: 0, duration: .9, ease: "expo.out" }, "loaderExit+=.7")
+  .from(".interior-hero__actions", { y: 24, opacity: 0, duration: .9, ease: "expo.out" }, "loaderExit+=.78");
+
+window.addEventListener("load", () => tl.play());
+setTimeout(() => { if (tl.paused()) tl.play(); }, 2600);
+
+/* ---------- Scroll reveals ---------- */
+gsap.utils.toArray(".section-head").forEach((el) => {
+  gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: "expo.out",
+    scrollTrigger: { trigger: el, start: "top 85%" } });
+});
+gsap.utils.toArray(".service-card").forEach((el, i) => {
+  gsap.from(el, { y: 40, opacity: 0, duration: .9, delay: (i % 3) * .06, ease: "expo.out",
+    scrollTrigger: { trigger: el, start: "top 90%" } });
+});
+gsap.from(".faq-item", { y: 30, opacity: 0, stagger: .08, duration: .9, ease: "expo.out",
+  scrollTrigger: { trigger: ".faq-list", start: "top 85%" } });
+gsap.from(".faq-media", { y: 40, opacity: 0, duration: 1, ease: "expo.out",
+  scrollTrigger: { trigger: ".faq-media", start: "top 88%" } });
+gsap.from(".footer-top > *, .footer-bottom", { y: 30, opacity: 0, stagger: .08, duration: .9, ease: "power2.out",
+  scrollTrigger: { trigger: ".site-footer", start: "top 90%" } });
+
+/* ---------- FAQ accordion ---------- */
+document.querySelectorAll('.faq-item').forEach((item) => {
+  const btn = item.querySelector('.faq-item__q');
+  const answer = item.querySelector('.faq-item__a');
+  const p = answer.querySelector('p');
+  const setHeight = (open) => { answer.style.height = open ? p.offsetHeight + 'px' : '0px'; };
+  setHeight(item.classList.contains('is-open'));
+  btn.addEventListener('click', () => {
+    const isOpen = item.classList.contains('is-open');
+    document.querySelectorAll('.faq-item.is-open').forEach((openItem) => {
+      if (openItem !== item) {
+        openItem.classList.remove('is-open');
+        openItem.querySelector('.faq-item__q').setAttribute('aria-expanded', 'false');
+        openItem.querySelector('.faq-item__a').style.height = '0px';
+      }
+    });
+    item.classList.toggle('is-open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    setHeight(!isOpen);
+  });
+  window.addEventListener('resize', () => { if (item.classList.contains('is-open')) setHeight(true); });
+});
+
+/* ---------- Service card touch support ---------- */
+const canHover = window.matchMedia("(hover: hover)").matches;
+if (!canHover) {
+  document.querySelectorAll('.service-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const isActive = card.classList.contains('is-active');
+      document.querySelectorAll('.service-card.is-active').forEach((c) => c.classList.remove('is-active'));
+      if (!isActive) card.classList.add('is-active');
+    });
+  });
+}
+</script>
+
+</body>
+</html>

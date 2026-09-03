@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FAQ — test</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{
+    margin:0;
+    font-family:Helvetica, Arial, sans-serif;
+    background:#0b0b08;
+    color:#efe9dc;
+  }
+  .faq-section{
+    max-width:820px;
+    margin:0 auto;
+    padding:80px 24px;
+  }
+  .faq-section h1{
+    font-size:2rem;
+    margin:0 0 40px;
+  }
+  .faq-list{
+    border-top:1px solid rgba(255,255,255,.16);
+  }
+  .faq-item{border-bottom:1px solid rgba(255,255,255,.16)}
+  .faq-item__q{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    padding:30px 0;
+    background:none;
+    border:0;
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+    font-size:1.2rem;
+    font-weight:500;
+    color:#efe9dc;
+  }
+  .faq-item__icon{position:relative;flex:0 0 auto;width:22px;height:22px}
+  .faq-item__icon::before,.faq-item__icon::after{
+    content:"";
+    position:absolute;
+    top:50%;left:50%;
+    background:#fff;
+    transform:translate(-50%,-50%);
+    transition:transform .35s ease, opacity .35s ease;
+  }
+  .faq-item__icon::before{width:22px;height:2px}
+  .faq-item__icon::after{width:2px;height:22px}
+  .faq-item.is-open .faq-item__icon::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+  .faq-item__a{max-height:0;overflow:hidden;transition:max-height .5s ease}
+  .faq-item.is-open .faq-item__a{max-height:400px}
+  .faq-item__a p{
+    margin:0 0 30px;
+    color:rgba(239,233,220,.65);
+    font-size:1rem;
+    line-height:1.6;
+  }
+  .status{
+    margin-top:40px;
+    padding:16px;
+    background:rgba(255,255,255,.06);
+    border-radius:8px;
+    font-size:.85rem;
+    color:#9f9a8c;
+  }
+</style>
+</head>
+<body>
+
+<section class="faq-section">
+  <h1>FAQ test</h1>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button type="button" class="faq-item__q">
+        Do you handle full unit turns, or single trades only?
+        <span class="faq-item__icon"></span>
+      </button>
+      <div class="faq-item__a">
+        <p>Both. We can take on a single trade — flooring or paint, for example — or manage a full unit turn start to finish with one point of contact.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-item__q">
+        How fast can you turn a unit?
+        <span class="faq-item__icon"></span>
+      </button>
+      <div class="faq-item__a">
+        <p>Standard turns typically run 3–7 business days depending on scope. Larger renovations or multi-trade turns are scheduled around your move-in dates.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-item__q">
+        Can you work around occupied units?
+        <span class="faq-item__icon"></span>
+      </button>
+      <div class="faq-item__a">
+        <p>Yes — a large share of our interior work happens in occupied multifamily properties. We coordinate access, noise windows, and site protection with your property team in advance.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-item__q">
+        Do you supply materials, or do we?
+        <span class="faq-item__icon"></span>
+      </button>
+      <div class="faq-item__a">
+        <p>Either. We can source and supply appliances, cabinetry, flooring, and fixtures, or install materials you've already purchased or standardized on.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-item__q">
+        How do I get a quote for interior work?
+        <span class="faq-item__icon"></span>
+      </button>
+      <div class="faq-item__a">
+        <p>Send us your scope and unit count through the contact form below. We'll schedule a walkthrough and follow up with a detailed proposal and timeline.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="status" id="status">Click count: 0</div>
+</section>
+
+<script>
+let clickCount = 0;
+const statusEl = document.getElementById('status');
+
+document.querySelectorAll('.faq-item__q').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    clickCount++;
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('is-open');
+    document.querySelectorAll('.faq-item.is-open').forEach((other) => {
+      if (other !== item) other.classList.remove('is-open');
+    });
+    item.classList.toggle('is-open', !isOpen);
+    statusEl.textContent = 'Click count: ' + clickCount + ' — last action: ' + (!isOpen ? 'opened' : 'closed') + ' "' + btn.textContent.trim() + '"';
+  });
+});
+</script>
+
+</body>
+</html>

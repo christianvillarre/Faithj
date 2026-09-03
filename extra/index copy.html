@@ -7,55 +7,158 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+
 
 <style>
 :root{
   --dark:#0b0b08;
   --cream:#efe9dc;
-  --gold:#b79b62;
+  --gold:#c31313;
+  --line:rgba(0,0,0,.18);
+  --line-light:rgba(255,255,255,.16);
+  --ease-smooth:cubic-bezier(.16,1,.3,1);
+  --page-pad:clamp(42px, 7vw, 104px);
+  --headline:'archivo', Helvetica, Arial, sans-serif;
 }
 
 *{box-sizing:border-box}
 html,body{
   margin:0;
-  font-family: Inter, Arial, sans-serif;
+  font-family:'archivo', Helvetica, Arial, sans-serif;
   background:var(--dark);
   color:var(--cream);
 }
 body{overflow-x:hidden}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+}
 
 /* LOADER */
 .loader{
   position:fixed;
   inset:0;
   z-index:999;
-  background:#b79b62;
+  background:#000000;
   display:grid;
   place-items:center;
 }
+
+.loader-logo-wrap{
+  position:relative;
+}
+
+.loader-logo-row{
+  /*
+  --loader-logo-h:clamp(64px, 9vw, 108px);
+  --loader-wordmark-w:clamp(150px, 32vw, 260px);*/
+  --loader-logo-h: clamp(48px, 7vw, 82px);
+  --loader-wordmark-w: clamp(115px, 26vw, 205px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  width:max-content;
+  max-width:86vw;
+  height:var(--loader-logo-h);
+  overflow:visible;
+  background:transparent;
+}
+
+.loader-split-logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  height:var(--loader-logo-h);
+  width:auto;
+  flex:0 0 auto;
+
+  overflow:hidden;
+  background:transparent;
+
+  clip-path:polygon(0 0, 0 0, 0 0);
+
+  will-change:transform, clip-path;
+}
+
+.loader-icon3{
+  display:block;
+  height:100%;
+  width:auto;
+  object-fit:contain;
+  opacity:1;
+
+  will-change:transform;
+}
+
+
+
+.loader-icon2-wrap{
+  width:0;
+  height:var(--loader-logo-h);
+  overflow:hidden;
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  will-change:width;
+}
+
+.loader-icon2{
+  display:block;
+  height:100%;
+  width:auto;
+  max-width:none;
+  opacity:0;
+  transform:translateX(-28px);
+  will-change:transform, opacity;
+}
+
 .loader h1{
   font-size:clamp(2.2rem,7vw,7rem);
   font-weight:300;
   letter-spacing:-.06em;
   color:#17130d;
+  overflow:hidden;
+}
+.loader h1 span{
+  display:inline-block;
+  will-change:transform;
 }
 
 /* TOP UI */
 .site-ui{
   position:fixed;
-  inset:22px 28px auto 28px;
-  z-index:50;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:start;
+  inset:22px 28px auto;
+  z-index:200;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
   pointer-events:none;
+}
+
+.site-ui>*{
+  pointer-events:auto;
 }
 .lets-talk,
 .logo{
   pointer-events:auto;
 }
 .lets-talk{
+  justify-self:end;      /* Right side */
+  position:relative;
   width:max-content;
+  margin-left:auto;
+
   color:#fff;
   text-decoration:none;
   border:1px solid rgba(255,255,255,.35);
@@ -65,328 +168,2901 @@ body{overflow-x:hidden}
   text-transform:uppercase;
   letter-spacing:.14em;
   backdrop-filter:blur(12px);
+
+  will-change:transform;
+  transition:
+    border-color .4s var(--ease-smooth),
+    background .4s var(--ease-smooth);
+}
+.lets-talk:hover{
+  border-color:rgba(255,255,255,.7);
+  background:rgba(255,255,255,.06);
 }
 .logo{
-  justify-self:end;
+  justify-self:start;   /* Home logo */
   font-size:13px;
   letter-spacing:.18em;
   text-transform:uppercase;
   opacity:0;
 }
 
-/* CENTER NAV */
-.center-nav{
-  pointer-events:auto;
-  justify-self:center;
-  display:flex;
-  gap:8px;
-  padding:8px;
-  border-radius:999px;
-  background:rgba(10,10,8,.38);
-  border:1px solid rgba(255,255,255,.16);
-  backdrop-filter:blur(16px);
-  transform-origin:top center;
-}
-.center-nav a,
-.center-nav button{
-  color:#fff;
-  background:transparent;
-  border:0;
+.nav-split-logo{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  height:54px;
+  width:auto;
   text-decoration:none;
-  padding:10px 15px;
-  border-radius:999px;
-  font-size:13px;
-  cursor:pointer;
+  line-height:0;
 }
-.center-nav a:hover,
-.center-nav button:hover{
-  background:rgba(255,255,255,.12);
+
+.nav-logo-icon{
+  display:block;
+  height:100%;
+  width:auto;
+  object-fit:contain;
 }
+
+.logo img:not(.nav-logo-half){
+  width:60px;
+}
+
 
 /* HERO */
 .hero{
-  min-height:100vh;
+  height:100svh;
+  min-height:720px;
   position:sticky;
   top:0;
   overflow:hidden;
+  isolation:isolate;
+  background:#050505;
 }
 .hero-bg{
   position:absolute;
   inset:0;
-  background:url("images/stock1.jpeg") center/cover no-repeat;
-  transform:scale(1.08);
+  overflow:hidden;
+  transform:scale(1.04);
+  transform-origin:center;
+  will-change:transform,clip-path;
+}
+
+.hero-slide.is-active{
+  opacity:1;
+  visibility:visible;
+  z-index:1;
+}
+.hero-slide{
+  position:absolute;
+  inset:0;
+  margin:0;
+  overflow:hidden;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.hero-slide img{
+  position:absolute;
+  top:-2%;
+  left:-2%;
+  width:104%;
+  height:104%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  transform:scale(1.07);
+  transform-origin:center;
+  will-change:transform,opacity;
+  backface-visibility:hidden;
 }
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(to bottom,rgba(0,0,0,.35),rgba(0,0,0,.8)),
-    radial-gradient(circle at 70% 40%,transparent,rgba(0,0,0,.65));
-}
-.edge{
-  position:absolute;
   z-index:2;
-  max-width:34ch;
+  pointer-events:none;
+  background:
+    linear-gradient(to bottom,rgba(0,0,0,.38) 0%,rgba(0,0,0,.08) 42%,rgba(0,0,0,.72) 100%),
+    linear-gradient(to right,rgba(0,0,0,.28),transparent 55%);
 }
-.edge h2{
-  font-size:clamp(3rem,9vw,9rem);
-  line-height:.85;
-  font-weight:250;
-  letter-spacing:-.08em;
+.hero-title{
+  position:absolute;
+  z-index:3;
+  left:clamp(24px,5vw,76px);
+  right:clamp(24px,5vw,76px);
+  top:50%;
   margin:0;
+  transform:translateY(-56%);
+  max-width:10ch;
+  color:#fff;
+  font-family:var(--headline);
+  font-size:clamp(4.2rem,10vw,10rem);
+  font-weight:620;
+  line-height:.82;
+  letter-spacing:-.07em;
+  text-transform:uppercase;
+  text-wrap:balance;
+  pointer-events:none;
 }
-.edge p{
-  font-size:clamp(.9rem,1.2vw,1.15rem);
+.hero-copy{
+  position:absolute;
+  z-index:3;
+  left:clamp(24px,5vw,76px);
+  right:clamp(24px,5vw,76px);
+  top:48%;
+  transform:translateY(-50%);
+  max-width:min(760px,78vw);
+  color:#fff;
+  pointer-events:none;
+}
+.hero-title{
+  position:static;
+  margin:0;
+  max-width:10ch;
+  color:#fff;
+  font-family:var(--headline);
+  font-size:clamp(4rem,9vw,9rem);
+  font-weight:620;
+  line-height:.84;
+  letter-spacing:-.065em;
+  text-transform:uppercase;
+  text-wrap:balance;
+}
+.hero-description{
+  margin:24px 0 0;
+  max-width:48ch;
+  color:rgba(255,255,255,.78);
+  font-size:clamp(.95rem,1.2vw,1.15rem);
   line-height:1.55;
-  opacity:.78;
 }
-.edge-top-left{left:28px;top:22vh}
-.edge-bottom-left{left:28px;bottom:28px}
-.edge-bottom-right{right:28px;bottom:28px;text-align:right}
+.hero-tabs{
+  position:absolute;
+  z-index:4;
+  left:clamp(18px,3vw,44px);
+  right:clamp(18px,3vw,44px);
+  bottom:clamp(18px,3vw,36px);
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(0,0,0,.28);
+  backdrop-filter:blur(12px);
+}
+.hero-tab{
+  position:relative;
+  min-width:0;
+  min-height:62px;
+  padding:0 16px;
+  border:0;
+  border-right:1px solid rgba(255,255,255,.18);
+  background:transparent;
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  font:inherit;
+  cursor:pointer;
+  overflow:hidden;
+  transition:background .25s ease;
+}
+.hero-tab:last-of-type{border-right:0}
+.hero-tab:hover,.hero-tab.is-active{background:rgba(255,255,255,.1)}
+.hero-tab__progress{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  background:#c31313;
+  transform:scaleX(0);
+  transform-origin:left center;
+}
+.hero-tab h2{
+  position:relative;
+  margin:0;
+  font-size:clamp(.72rem,.9vw,.9rem);
+  line-height:1.1;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+}
+.hero-tab__arrow{
+  position:relative;
+  flex:0 0 auto;
+  width:16px;
+  height:16px;
+  transition:transform .25s ease;
+}
+.hero-tab:hover .hero-tab__arrow{transform:translateX(3px)}
+.hero-arrow{display:none}
 
-/* SECOND SECTION */
-.work{
+@media(max-width:900px){
+  .hero{min-height:680px}
+  .hero-copy{top:38%;max-width:calc(100vw - 44px)}
+  .hero-title{font-size:clamp(3.35rem,14vw,6.5rem);max-width:8ch}
+  .hero-description{margin-top:16px;font-size:.9rem;max-width:34ch}
+  .hero-tabs{
+    left:14px;right:14px;bottom:14px;
+    grid-template-columns:44px minmax(0,1fr) 44px;
+    border-radius:12px;overflow:hidden;
+  }
+  .hero-tab{display:none;min-height:58px;padding:0 14px;border-left:1px solid rgba(255,255,255,.14);border-right:1px solid rgba(255,255,255,.14)}
+  .hero-tab.is-active{display:flex}
+  .hero-tab h2{font-size:.78rem}
+  .hero-arrow{display:grid;place-items:center;width:44px;min-height:58px;padding:0;border:0;background:transparent;color:#fff;cursor:pointer}
+  .hero-arrow:active{background:rgba(255,255,255,.12)}
+  .hero-arrow svg{width:21px;height:21px}
+}
+@media(max-width:600px){
+  .hero{height:100svh;min-height:650px}
+  .hero-copy{left:22px;right:22px;top:34%}
+  .hero-title{font-size:clamp(3rem,14vw,5rem);line-height:.86}
+  .hero-description{font-size:.84rem;line-height:1.45}
+  .hero-tabs{left:10px;right:10px;bottom:10px;grid-template-columns:42px minmax(0,1fr) 42px}
+  .hero-arrow{width:42px;min-height:54px}
+  .hero-tab{min-height:54px;padding:0 12px}
+}
+
+/* STATS */
+.stats{
   position:relative;
   z-index:5;
-  min-height:160vh;
-  background:#eee8dc;
-  color:#111;
-  padding:18vh 28px 12vh;
-  border-radius:34px 34px 0 0;
-}
-.work-head{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:30px;
-  margin-bottom:12vh;
-}
-.work-head h2{
-  font-size:clamp(3rem,8vw,8rem);
-  line-height:.9;
-  font-weight:260;
-  letter-spacing:-.07em;
-  margin:0;
-}
-.work-head p{
-  max-width:42ch;
-  font-size:1.05rem;
-  line-height:1.65;
-}
+  background:var(--dark);
+  color:var(--cream);
 
-.project-row{
-  display:grid;
-  grid-template-columns:1.1fr 1.5fr .8fr;
-  gap:24px;
-  align-items:end;
-  min-height:70vh;
-  border-top:1px solid rgba(0,0,0,.18);
-  padding:38px 0;
+  padding:
+    clamp(110px,16vh,180px)
+    clamp(28px,7vw,104px)
+    clamp(110px,16vh,180px);
+  padding-bottom: 0;
 }
-.project-row img{
-  width:100%;
-  height:62vh;
-  object-fit:cover;
+.stats-head{
+  max-width:156ch;
+  margin-bottom:10vh;
 }
-.project-info span{
+.stats-head span{
   font-size:.8rem;
   letter-spacing:.2em;
   text-transform:uppercase;
-  color:#8c7142;
+  color:var(--gold);
 }
-.project-info h3{
-  font-size:clamp(1.7rem,3vw,3.2rem);
-  font-weight:300;
+.stats-head h2{
+  font-size:clamp(2.2rem,5vw,4.2rem);
+  font-weight:260;
+  letter-spacing:-.05em;
+  line-height:1.1;
+  margin:14px 0 0;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+  border-top:1px solid var(--line-light);
+}
+.stat{
+  padding:34px 0 0;
+  border-right:1px solid var(--line-light);
+}
+.stat:last-child{border-right:0}
+.stat h3{
+  margin:0;
+  font-size:clamp(2.6rem,5.5vw,4.6rem);
+  font-weight:260;
   letter-spacing:-.04em;
-  margin:12px 0;
 }
-.project-info p{
-  line-height:1.55;
-  opacity:.75;
+.stat p{
+  margin:10px 0 0;
+  opacity:.65;
+  font-size:.95rem;
+  max-width:20ch;
 }
 
-.split-images{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-  margin-top:8vh;
+/* TESTIMONIALS */
+.testimonials{
+  position:relative;
+  z-index:5;
+  background:var(--dark);
+  color:var(--cream);
+  padding:
+    clamp(110px,16vh,180px)
+    clamp(28px,7vw,104px)
+    clamp(110px,16vh,180px);
 }
-.split-card:nth-child(2){margin-top:12vh}
-.split-card img{
-  width:100%;
-  height:55vh;
-  object-fit:cover;
-}
-.split-card:nth-child(2) img{height:72vh}
-.split-card span{
-  display:block;
-  margin-top:14px;
+.testimonials-head{
   font-size:.8rem;
-  letter-spacing:.18em;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:8vh;
+}
+.testimonial-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:40px;
+  border-top:1px solid var(--line-light);
+}
+.testimonial{
+  padding:36px 0 0;
+}
+.testimonial .mark{
+  font-size:3rem;
+  color:var(--gold);
+  line-height:1;
+  display:block;
+  margin-bottom:6px;
+}
+.testimonial p.quote{
+  font-size:1.15rem;
+  font-weight:300;
+  line-height:1.55;
+  letter-spacing:-.01em;
+  margin:0 0 22px;
+}
+.testimonial .who{
+  font-size:.85rem;
+  opacity:.6;
+}
+.testimonial .who strong{
+  display:block;
+  opacity:1;
+  font-weight:500;
+  color:var(--cream);
+  margin-bottom:2px;
+}
+
+
+/* CONTACT */
+.contact-section{
+  position:relative;
+  z-index:5;
+
+  background:#cfcfcf;
+  color:#111;
+
+  padding:
+    clamp(100px,14vh,160px)
+    clamp(28px,7vw,104px);
+}
+
+.contact-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);
+  gap:clamp(60px,9vw,150px);
+  align-items:start;
+}
+
+.contact-kicker{
+  display:block;
+
+  margin-bottom:20px;
+
+  color:#c31313;
+
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.2em;
   text-transform:uppercase;
 }
-.split-card h3{
-  font-weight:300;
-  font-size:clamp(1.6rem,3vw,3rem);
-  margin:8px 0;
+
+.contact-copy h2{
+  margin:0;
+
+  max-width:10ch;
+
+  font-size:clamp(3rem,7vw,7rem);
+  font-weight:620;
+  line-height:.92;
+  letter-spacing:-.055em;
+  text-transform:uppercase;
 }
+
+.contact-copy p{
+  max-width:42ch;
+
+  margin:28px 0 0;
+
+  color:rgba(0,0,0,.65);
+
+  font-size:1rem;
+  line-height:1.65;
+}
+
+.contact-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:26px 20px;
+}
+
+.contact-field{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.contact-field--full{
+  grid-column:1/-1;
+}
+
+.contact-field label{
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.contact-field input,
+.contact-field textarea,
+.contact-field select{
+  width:100%;
+
+  border:0;
+  border-bottom:1px solid rgba(0,0,0,.3);
+  border-radius:0;
+
+  padding:12px 0 14px;
+
+  background:transparent;
+  color:#111;
+
+  font:inherit;
+  outline:none;
+
+  transition:border-color .25s ease;
+}
+
+.contact-field textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus,
+.contact-field select:focus{
+  border-color:#111;
+}
+
+.contact-submit{
+  grid-column:1/-1;
+  justify-self:start;
+
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+
+  border:1px solid #111;
+  border-radius:999px;
+
+  padding:14px 22px;
+
+  background:#111;
+  color:#fff;
+
+  font-family:var(--headline);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+  transition:
+    transform .3s var(--ease-smooth),
+    background .3s ease,
+    color .3s ease;
+}
+
+.contact-submit:hover{
+  transform:translateY(-2px);
+  background:transparent;
+  color:#111;
+}
+
+.contact-submit svg{
+  width:15px;
+  height:15px;
+}
+
+@media(max-width:800px){
+  .contact-inner{
+    grid-template-columns:1fr;
+    gap:60px;
+  }
+
+  .contact-form{
+    grid-template-columns:1fr;
+  }
+
+  .contact-field--full,
+  .contact-submit{
+    grid-column:auto;
+  }
+}
+
+
+/* FOOTER */
+.site-footer{
+  position:relative;
+  z-index:5;
+  background:#050503;
+  color:var(--cream);
+  padding:
+    clamp(110px,16vh,180px)
+    clamp(28px,7vw,104px)
+    clamp(110px,16vh,180px);
+  border-top:1px solid var(--line-light);
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr;
+  gap:40px;
+  padding-bottom:8vh;
+}
+.footer-brand h3{
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:260;
+  letter-spacing:-.05em;
+  margin:0 0 14px;
+}
+.footer-brand p{
+  max-width:34ch;
+  opacity:.6;
+  line-height:1.55;
+  font-size:.95rem;
+}
+.footer-col span{
+  display:block;
+  font-size:.75rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:16px;
+}
+.footer-col a{
+  display:block;
+  color:var(--cream);
+  text-decoration:none;
+  opacity:.72;
+  font-size:.95rem;
+  padding:6px 0;
+  transition:opacity .3s var(--ease-smooth);
+}
+.footer-col a:hover{opacity:1}
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:1px solid var(--line-light);
+  padding-top:24px;
+  font-size:.8rem;
+  opacity:.5;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.footer-logo {
+  width: 300px;
+}
+.back-to-top{
+  color:var(--cream);
+  text-decoration:none;
+  opacity:1;
+  border:1px solid var(--line-light);
+  padding:9px 16px;
+  border-radius:999px;
+  transition:background .3s var(--ease-smooth);
+}
+.back-to-top:hover{background:rgba(255,255,255,.08)}
 
 @media(max-width:800px){
   .site-ui{
     grid-template-columns:1fr;
     gap:12px;
   }
-  .center-nav{
-    justify-self:start;
-    flex-wrap:wrap;
-    border-radius:18px;
-  }
+
   .logo{justify-self:start}
   .work-head,
   .project-row,
-  .split-images{
+  .split-images,
+  .stats-grid,
+  .testimonial-grid,
+  .footer-top{
     grid-template-columns:1fr;
   }
-  .edge-bottom-right{
-    left:28px;
-    right:auto;
-    text-align:left;
+
+  .feature-right{
+    gap:26px;
+  }
+  .stat{
+    border-right:0;
+    border-bottom:1px solid var(--line-light);
+    padding-bottom:24px;
+  }
+  .testimonial{
+    border-bottom:1px solid var(--line-light);
+    padding-bottom:28px;
+  }
+  .footer-bottom{
+    justify-content:flex-start;
   }
 }
+
+.logo-transition-layer{
+  position:fixed;
+  inset:0;
+  z-index:1001;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+}
+.logo-transition-layer .loader-logo-row{
+  position:relative;
+}
+
 </style>
+
+<style>
+
+
+/* Cleaner story text rhythm */
+.story-copy p,
+.story-note p,
+.story-specs li,
+.story-data__item span,
+.story-mini p{
+  font-size:clamp(.94rem, .98vw, 1rem);
+  line-height:1.55;
+}
+
+.story-copy p,
+.story-note p{
+  max-width:40ch;
+}
+
+.story-kicker{
+  font-size:.78rem;
+  letter-spacing:.18em;
+  margin-bottom:16px;
+}
+
+.story-specs{
+  gap:10px;
+  margin-top:24px;
+}
+
+.story-specs li strong{
+  font-size:.72rem;
+  margin-bottom:2px;
+}
+
+.story-divider{
+  width:54px;
+  margin:20px 0;
+}
+
+.story-note__side{
+  gap:14px;
+}
+
+.story-mini{
+  padding-top:14px;
+}
+
+@media(max-width:900px){
+  .site-ui{inset:18px 22px auto;}
+  .work,.stats,.testimonials,.site-footer{padding-left:22px;padding-right:22px;}
+  .work-head,
+  .story-row,
+  .story-row--reverse,
+  .story-note,
+  .story-pair,
+  .story-data{
+    grid-template-columns:1fr;
+  }
+  .story-row--reverse .story-media,
+  .story-row--reverse .story-copy{order:initial;}
+  .story-note__side,.story-data__grid{grid-template-columns:1fr;}
+  .story-row{min-height:auto;}
+  .story-card:nth-child(2){margin-top:0;}
+}
+</style>
+
+
+
+
+
+
 </head>
 
 <body>
 
-<div class="loader">
-  <h1>Faith J Construction</h1>
+<div class="loader"></div>
+
+<div class="logo-transition-layer">
+  <div class="loader-logo-wrap loader-logo-row">
+
+    <div class="loader-split-logo">
+      <img
+        src="/images/icon3.png"
+        class="loader-icon3"
+        alt="Faith J logo"
+      >
+    </div>
+
+    <div class="loader-icon2-wrap">
+      <img
+        src="/images/icon2.png"
+        class="loader-icon2"
+        alt="Faith J Construction"
+      >
+    </div>
+
+  </div>
 </div>
 
 <header class="site-ui">
-  <a class="lets-talk" href="/contact.html">Let’s Talk</a>
 
-  <nav class="center-nav">
-    <button>Services</button>
-    <a href="#work">Projects</a>
-    <a href="/about.html">About</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
+  <a class="logo nav-split-logo" href="/" aria-label="Home">
+    <img
+      src="/images/icon3.png"
+      class="nav-logo-icon"
+      alt=""
+    >
+  </a>
 
-  <div class="logo">Faith J</div>
+  <!--<a class="lets-talk" href="/contact.html">
+    Let’s Talk
+  </a>-->
+
 </header>
 
-<section class="hero">
-  <div class="hero-bg"></div>
+<!-- Simple Center Menu -->
+<div class="menu-wrap" id="menuWrap">
+  <div class="menu-bg" id="menuBg"></div>
 
-  <div class="edge edge-top-left">
-    <h2>Built with restraint.</h2>
+  <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-expanded="false">
+    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__box" aria-hidden="true">
+      <span class="menu-toggle__bar"></span>
+      <span class="menu-toggle__bar"></span>
+    </span>
+  </button>
+
+  <nav class="nav-dropdown" id="navDropdown" aria-label="Main menu">
+    <a href="#work"><span>Projects</span></a>
+    <a href="#work"><span>About</span></a>
+    <a href="#work"><span>Gallery</span></a>
+    <a href="#work"><span>Contact</span></a>
+  </nav>
+</div>
+
+<style>
+/* =========================================================
+   CENTER MENU
+========================================================= */
+/* =========================================================
+   SIMPLE CENTER MENU
+========================================================= */
+
+.menu-wrap{
+  position:fixed;
+  left:50%;
+  top:18px;
+  transform:translateX(-50%);
+  z-index:210;
+
+  width:min(290px, calc(100vw - 48px));
+
+  pointer-events:auto;
+}
+
+.menu-toggle{
+  position:relative;
+  z-index:3;
+
+  width:100%;
+  height:54px;
+
+  border:0;
+  border-radius:12px;
+  padding:0 16px 0 22px;
+
+  background:rgb(56,56,56);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  cursor:pointer;
+
+  font-family:var(--headline);
+  font-size:14px;
+  font-weight:400;
+  line-height:1;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+
+  transition:
+    transform .25s var(--ease-smooth),
+    background .25s ease;
+}
+
+.menu-toggle:hover{
+  transform:translateY(-1px);
+  background:rgb(62,62,62);
+}
+
+.menu-toggle__label{
+  line-height:1;
+}
+
+.menu-toggle__box{
+  position:relative;
+
+  width:30px;
+  height:30px;
+
+  display:grid;
+  place-items:center;
+
+  flex-shrink:0;
+}
+
+.menu-toggle__bar{
+  position:absolute;
+
+  width:22px;
+  height:1px;
+
+  border-radius:999px;
+  background:currentColor;
+
+  transform-origin:center;
+
+  transition:
+    transform .3s var(--ease-smooth),
+    width .3s var(--ease-smooth);
+}
+
+.menu-toggle__bar:first-child{
+  transform:translateY(-4px);
+}
+
+.menu-toggle__bar:last-child{
+  transform:translateY(4px);
+}
+
+.menu-toggle.open .menu-toggle__bar:first-child{
+  transform:rotate(45deg);
+}
+
+.menu-toggle.open .menu-toggle__bar:last-child{
+  transform:rotate(-45deg);
+}
+
+/* expanding background */
+
+.menu-bg{
+  position:absolute;
+  z-index:1;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:54px;
+
+  border-radius:12px;
+  background:rgb(56,56,56);
+
+  opacity:0;
+  transform:scale(.98);
+  transform-origin:top center;
+
+  pointer-events:none;
+
+  transition:
+    height .4s cubic-bezier(.76,0,.24,1),
+    opacity .18s ease,
+    transform .35s var(--ease-smooth),
+    border-radius .4s var(--ease-smooth);
+}
+
+.menu-bg.open{
+  height:330px;
+
+  opacity:1;
+  transform:scale(1);
+
+  border-radius:22px;
+}
+
+/* dropdown */
+
+.nav-dropdown{
+  position:relative;
+  z-index:2;
+
+  display:grid;
+  gap:2px;
+
+  padding:68px 14px 14px;
+
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-8px);
+
+  pointer-events:none;
+
+  transition:
+    opacity .2s ease,
+    transform .3s var(--ease-smooth),
+    visibility 0s linear .3s;
+}
+
+.nav-dropdown.open{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+
+  pointer-events:auto;
+
+  transition-delay:0s;
+}
+
+.nav-dropdown a{
+  min-height:48px;
+  padding:0 12px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  border-radius:12px;
+
+  color:#fff;
+  text-decoration:none;
+
+  font-family:var(--headline);
+  font-size:clamp(1.2rem, 1.8vw, 1.6rem);
+  font-weight:500;
+  line-height:1;
+  letter-spacing:-.015em;
+  text-transform:uppercase;
+
+  transition:
+    background .2s ease,
+    transform .25s var(--ease-smooth);
+}
+
+.nav-dropdown a::after{
+  content:"";
+
+  width:14px;
+  height:14px;
+  flex-shrink:0;
+
+  opacity:.45;
+  transform:translateX(-4px);
+
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 18L18 6M18 6H10M18 6V14' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+  transition:
+    opacity .2s ease,
+    transform .25s var(--ease-smooth);
+}
+
+.nav-dropdown a:hover::after{
+  opacity:1;
+  transform:translateX(0);
+}
+
+body.nav-open{
+  overflow:hidden;
+}
+
+@media(max-width:600px){
+  .menu-wrap{
+    top:16px;
+    width:min(93vw, calc(100vw - 36px));
+    z-index: 99;
+    
+  }
+  .nav-split-logo{
+  height: 50px;
+  padding-top: 1rem;
+  margin-left: -0.8rem;
+  z-index: 999;
+  transition:margin-left .3s ease;
+}
+.nav-split-logo.open{
+    margin-left:0.5rem;
+  }
+
+   .menu-toggle{
+    height:70px;
+    padding-left:20px;
+    display:flex;
+    justify-content:flex-end;
+    background:transparent;
+    -webkit-tap-highlight-color:transparent;
+
+    background:transparent !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    box-shadow:none !important;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .menu-toggle:hover,
+  .menu-toggle:active,
+  .menu-toggle:focus{
+    background:transparent !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    box-shadow:none !important;
+    transform:none;
+    outline:none;
+  }
+  
+  .menu-toggle__label{
+    display:none;
+  }
+  
+
+  .menu-bg{
+    height:50px;
+  }
+
+  .menu-bg.open{
+    height:338px!important;
+  }
+
+  .nav-dropdown{
+    padding:62px 12px 12px;
+  }
+
+  .nav-dropdown a{
+    min-height:45px;
+    font-size:1.15rem;
+  }
+  
+}
+@media (max-width:768px){
+  html,
+  body{
+    width:100%;
+    overscroll-behavior-x:none;
+  }
+}
+@media (max-width: 768px){
+
+  .edge-bottom-left{
+    left:22px;
+    right:22px;
+    bottom:102px;
+    max-width:none;
+  }
+
+  .edge-bottom-left p{
+    font-size:.8rem;
+    line-height:1.45;
+    letter-spacing:.08em;
+    max-width:52ch;
+  }
+
+  .edge-bottom-right{
+    left:22px;
+    right:22px;
+    bottom:56px;
+    text-align:left;
+  }
+
+  .edge-bottom-right p{
+    font-size:.8rem;
+    line-height:1.45;
+    letter-spacing:.08em;
+  }
+    .edge-bottom-right,
+    .edge-bottom-left{
+    left:28px;
+    right:auto;
+    text-align:left;
+  }
+  .feature-bar{
+    flex-direction:column;
+    align-items:flex-start;
+    top:69vh;
+    gap:8px;
+  }
+}
+</style>
+
+<section class="hero" aria-label="Featured projects">
+  <div class="hero-bg">
+    <figure class="hero-slide is-active" data-slide="0">
+      <img src="/images/stock13.jpeg" alt="Cortland Wortham multifamily construction project">
+    </figure>
+    <figure class="hero-slide" data-slide="1">
+      <img src="/images/image1.png" alt="Interior renovation and construction framing">
+    </figure>
+    <figure class="hero-slide" data-slide="2">
+      <img src="/images/stock11.jpeg" alt="Commercial interior construction detail">
+    </figure>
+    <figure class="hero-slide" data-slide="3">
+      <img src="/images/stock14.jpeg" alt="Exterior construction improvements">
+    </figure>
+    <figure class="hero-slide" data-slide="4">
+      <img src="/images/image4.jpg" alt="Completed interior remodeling project">
+    </figure>
   </div>
 
-  <div class="edge edge-bottom-left">
-    <p>Architectural construction shaped by precision, clean execution, and lasting material presence.</p>
-  </div>
+  <div class="hero-copy"><h1 class="hero-title">Cortland Wortham</h1><p class="hero-description">Multifamily construction completed with organized execution and close attention to detail.</p></div>
 
-  <div class="edge edge-bottom-right">
-    <p>Residential / Commercial<br>Houston, Texas</p>
+  <div class="hero-tabs" role="tablist" aria-label="Choose a featured project">
+    <button class="hero-arrow hero-arrow--prev" type="button" aria-label="Previous project">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a class="hero-tab is-active" href="/projects/cortland-wortham.html" role="tab" aria-selected="true" data-index="0"><span class="hero-tab__progress"></span><h2>Cortland Wortham</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="hero-tab" href="/projects/interior-renovation.html" role="tab" aria-selected="false" data-index="1"><span class="hero-tab__progress"></span><h2>Interior Renovation</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="hero-tab" href="/projects/commercial-buildout.html" role="tab" aria-selected="false" data-index="2"><span class="hero-tab__progress"></span><h2>Commercial Buildout</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="hero-tab" href="/projects/exterior-improvements.html" role="tab" aria-selected="false" data-index="3"><span class="hero-tab__progress"></span><h2>Exterior Improvements</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="hero-tab" href="/projects/residential-remodel.html" role="tab" aria-selected="false" data-index="4"><span class="hero-tab__progress"></span><h2>Residential Remodel</h2><svg class="hero-tab__arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <button class="hero-arrow hero-arrow--next" type="button" aria-label="Next project">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
   </div>
 </section>
 
-<section class="work" id="work">
-  <div class="work-head">
-    <h2>Selected work</h2>
-    <p>
-      A simple project rhythm built around scale, texture, and structure.
-      Each space is composed to feel grounded, quiet, and refined.
-    </p>
-  </div>
 
-  <div class="project-row">
-    <div></div>
-    <img src="images/stock2.jpeg" alt="">
-    <div class="project-info">
-      <span>01 / Exterior</span>
-      <h3>Modern facade systems</h3>
-      <p>Clean exterior lines, balanced openings, and materials selected for long-term presence.</p>
-    </div>
-  </div>
+<!-- ABOUT + STACKED SERVICES -->
+<style>
+.fj-about,
+.fj-services,
+.fj-about *,
+.fj-services *{
+  box-sizing:border-box;
+}
 
-  <div class="project-row">
-    <div class="project-info">
-      <span>02 / Interior</span>
-      <h3>Quiet interior structure</h3>
-      <p>Detailed interior builds with architectural restraint and functional clarity.</p>
-    </div>
-    <img src="images/stock3.jpeg" alt="">
-    <div></div>
-  </div>
+.fj-about{
+  position:relative;
+  z-index:5;
+  min-height:92svh;
+  padding:
+    clamp(90px,14vh,150px)
+    clamp(24px,7vw,104px);
+  background:#cfcfcf;
+  color:#111;
+  border-radius:34px 34px 0 0;
+  overflow:hidden;
+}
 
-  <div class="split-images">
-    <div class="split-card">
-      <img src="images/stock4.jpeg" alt="">
-      <span>03 / Detail</span>
-      <h3>Material finish</h3>
+.fj-about__eyebrow,
+.fj-services-intro__eyebrow,
+.fj-service__number{
+  display:block;
+  color:#c31313;
+  font-size:1.74rem;
+  font-weight:650;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+}
+
+.fj-about__top{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);
+  gap:clamp(50px,10vw,170px);
+  align-items:start;
+}
+
+.fj-about h2{
+  margin:18px 0 0;
+  max-width:9ch;
+  font-size:clamp(3.8rem,8vw,8rem);
+  font-weight:640;
+  line-height:.86;
+  letter-spacing:-.065em;
+  text-transform:uppercase;
+}
+
+.fj-about__copy{
+  padding-top:42px;
+}
+
+.fj-about__lead{
+  margin:0;
+  max-width:32ch;
+  font-size:clamp(1.35rem,2.1vw,2rem);
+  font-weight:450;
+  line-height:1.18;
+  letter-spacing:-.035em;
+}
+
+.fj-about__body{
+  margin:30px 0 0;
+  max-width:48ch;
+  color:rgba(0,0,0,.64);
+  font-size:1rem;
+  line-height:1.7;
+}
+
+.fj-about__values{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  margin-top:clamp(80px,13vh,140px);
+  border-top:1px solid rgba(0,0,0,.24);
+  border-bottom:1px solid rgba(0,0,0,.24);
+}
+
+.fj-about__value{
+  min-height:155px;
+  padding:28px 26px;
+  border-right:1px solid rgba(0,0,0,.18);
+}
+
+.fj-about__value:last-child{border-right:0}
+
+.fj-about__value span{
+  display:block;
+  margin-bottom:28px;
+  color:#c31313;
+  font-size:.7rem;
+  letter-spacing:.18em;
+}
+
+.fj-about__value h3{
+  margin:0;
+  font-size:clamp(1.3rem,2vw,2rem);
+  font-weight:520;
+  line-height:1;
+  letter-spacing:-.035em;
+}
+
+.fj-about__value p{
+  margin:12px 0 0;
+  max-width:31ch;
+  color:rgba(0,0,0,.62);
+  font-size:.9rem;
+  line-height:1.55;
+}
+
+/* Services intro */
+.fj-services{
+  position:relative;
+  z-index:6;
+  background:#0b0b08;
+}
+
+.fj-services-intro{
+  min-height:72svh;
+  padding:
+    clamp(100px,16vh,170px)
+    clamp(24px,7vw,104px);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:#0b0b08;
+  color:#efe9dc;
+}
+
+.fj-services-intro h2{
+  margin:20px 0 0;
+  max-width:11ch;
+  font-size:clamp(4rem,9vw,9rem);
+  font-weight:640;
+  line-height:.84;
+  letter-spacing:-.068em;
+  text-transform:uppercase;
+}
+
+.fj-services-intro p{
+  margin:32px 0 0 auto;
+  max-width:38ch;
+  color:rgba(255,255,255,.67);
+  font-size:clamp(1.05rem,1.5vw,1.3rem);
+  line-height:1.55;
+}
+
+/* Full-page stacked service panels */
+.fj-service{
+  --service-bg:#d0d0d0;
+  --service-text:#111;
+  position:sticky;
+  top:0;
+  min-height:100svh;
+  padding:
+    clamp(86px,11vh,120px)
+    clamp(24px,6vw,88px)
+    clamp(34px,5vh,58px);
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(330px,.95fr);
+  gap:clamp(38px,6vw,94px);
+  align-items:start;
+  overflow:hidden;
+  background:var(--service-bg);
+  color:var(--service-text);
+  border-radius:30px 30px 0 0;
+  box-shadow:0 -18px 45px rgba(0,0,0,.12);
+}
+
+.fj-service:nth-of-type(2){--service-bg:#d4d0c8}
+.fj-service:nth-of-type(3){--service-bg:#bfc2bd}
+.fj-service:nth-of-type(4){--service-bg:#c9c4ba}
+.fj-service:nth-of-type(5){--service-bg:#b9b8b2}
+
+.fj-service__content{
+  min-width:0;
+  align-self:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  padding-top:0;
+}
+
+.fj-service__heading{
+  margin:18px 0 0;
+  max-width:12ch;
+  font-size:clamp(3rem,5.8vw,6.7rem);
+  font-weight:640;
+  line-height:.87;
+  letter-spacing:-.06em;
+  text-transform:uppercase;
+}
+
+.fj-service__description{
+  margin:28px 0 0;
+  max-width:55ch;
+  color:rgba(0,0,0,.66);
+  font-size:clamp(.95rem,1.05vw,1.08rem);
+  line-height:1.63;
+}
+
+.fj-service__list{
+  list-style:none;
+  margin:clamp(28px,4vh,42px) 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:22px;
+  border-top:1px solid rgba(0,0,0,.24);
+}
+
+.fj-service__list li{
+  min-width:0;
+  min-height:52px;
+  padding:10px 4px 10px 0;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid rgba(0,0,0,.18);
+  font-size:clamp(.77rem,.85vw,.9rem);
+  font-weight:560;
+  line-height:1.2;
+}
+
+.fj-service__list img{
+  width:29px;
+  height:29px;
+  flex:0 0 29px;
+  object-fit:contain;
+}
+
+.fj-service__link{
+  width:max-content;
+  margin-top:32px;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  color:#111;
+  text-decoration:none;
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.fj-service__link::after{
+  content:"";
+  width:28px;
+  height:28px;
+  border:1px solid rgba(0,0,0,.5);
+  border-radius:50%;
+
+  background:
+    no-repeat center/12px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 17L17 7M17 7H9M17 7V15' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+  transition:
+    transform .3s ease,
+    background-color .3s ease;
+}
+.fj-service__link:hover::after{
+  transform:translate(3px,-3px);
+  background:#111;
+  color:#fff;
+}
+
+.fj-service__media{
+  position:relative;
+  min-width:0;
+  width:100%;
+  height:min(75svh,760px);
+  overflow:hidden;
+  border-radius:4px;
+  background:#aaa;
+}
+
+.fj-service__media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.28),transparent 45%);
+  pointer-events:none;
+}
+
+.fj-service__media img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transform:scale(1.06);
+  will-change:transform;
+}
+
+.fj-service__photo-label{
+  position:absolute;
+  z-index:2;
+  left:22px;
+  bottom:20px;
+  color:#fff;
+  font-size:.7rem;
+  font-weight:650;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+/* alternate every other panel */
+.fj-service:nth-child(even) .fj-service__content{order:2}
+.fj-service:nth-child(even) .fj-service__media{order:1}
+
+@media(max-width:900px){
+  .fj-about{
+    min-height:auto;
+    padding-top:100px;
+    border-radius:24px 24px 0 0;
+  }
+
+  .fj-about__top{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+
+  .fj-about__copy{padding-top:0}
+
+  .fj-about__values{
+    grid-template-columns:1fr;
+    margin-top:80px;
+  }
+
+  .fj-about__value{
+    min-height:auto;
+    border-right:0;
+    border-bottom:1px solid rgba(0,0,0,.18);
+  }
+
+  .fj-about__value:last-child{border-bottom:0}
+
+  .fj-services-intro{
+    min-height:60svh;
+  }
+
+  .fj-service{
+    position:relative;
+    top:auto;
+    min-height:100svh;
+    grid-template-columns:1fr;
+    gap:26px;
+    align-content:start;
+    padding-top:80px;
+    border-radius:24px 24px 0 0;
+  }
+
+  .fj-service__content,
+  .fj-service:nth-child(even) .fj-service__content{
+    order:1;
+  }
+
+  .fj-service__media,
+  .fj-service:nth-child(even) .fj-service__media{
+    order:2;
+  }
+
+  .fj-service__heading{
+    max-width:13ch;
+  }
+
+  .fj-service__media{
+    height:46svh;
+    min-height:340px;
+  }
+}
+
+@media(max-width:600px){
+  .fj-about,
+  .fj-services-intro,
+  .fj-service{
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  .fj-about h2{
+    font-size:clamp(3.4rem,17vw,5rem);
+  }
+
+  .fj-about__lead{
+    font-size:1.25rem;
+  }
+
+  .fj-services-intro{
+    min-height:52svh;
+    padding-top:90px;
+    padding-bottom:65px;
+  }
+
+  .fj-services-intro h2{
+    font-size:clamp(3.5rem,17vw,5.3rem);
+  }
+
+  .fj-services-intro p{
+    margin-left:0;
+  }
+
+  .fj-service{
+    min-height:auto;
+    padding-top:72px;
+    padding-bottom:54px;
+  }
+
+
+  .fj-service__description{
+    margin-top:20px;
+  }
+
+  .fj-service__list{
+    grid-template-columns:1fr 1fr;
+    column-gap:12px;
+    margin-top:15px;
+  }
+
+  .fj-service__list li{
+  min-height:38px;
+  padding:6px 2px 6px 0;
+  gap:6px;
+  font-size:.7rem;
+  line-height:1.1;
+}
+
+  .fj-service__list img{
+    width:24px;
+    height:24px;
+    flex-basis:24px;
+  }
+.fj-service__list img,
+.fj-service__icon{
+  width:20px;
+  height:20px;
+  flex:0 0 20px;
+}
+
+    .fj-service__link{
+    margin-top:18px;
+    gap:8px;
+    font-size:.68rem;
+    letter-spacing:.12em;
+  }
+
+  .fj-service__link::after{
+    width:28px;
+    height:28px;
+    font-size:.75rem;
+  }
+
+  .fj-service__media{
+    height:38svh;
+    min-height:220px;
+  }
+  
+}
+
+/* Refined About layout */
+.fj-about{min-height:auto;padding-top:clamp(90px,12vh,130px);padding-bottom:clamp(90px,12vh,130px)}
+.fj-about__top{grid-template-columns:minmax(0,.9fr) minmax(360px,1.1fr);gap:clamp(40px,7vw,110px);align-items:center}
+.fj-about h2{max-width:none;white-space:nowrap;font-size:clamp(2.8rem,5.3vw,5.6rem);line-height:.94}
+.fj-about__copy{padding-top:0}
+.fj-about__lead{font-size:clamp(1.18rem,1.65vw,1.55rem);max-width:98ch}
+.fj-about__body{margin-top:22px;max-width:80ch}
+.fj-about__image{height:min(68vh,650px);min-height:430px;overflow:hidden}
+.fj-about__image img{width:100%;height:100%;display:block;object-fit:cover}
+.fj-about__values{display:none}
+.fj-services-intro h2{font-size:clamp(3rem,6.2vw,6.2rem);line-height:.9;max-width:12ch}
+.fj-service__heading{font-size:clamp(2rem,2.2vw,2.7rem);line-height:.92;max-width:25ch;font-weight:800}
+.fj-service__icon{width:26px;height:26px;flex:0 0 26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.78}
+@media(max-width:900px){.fj-about__top{grid-template-columns:1fr}.fj-about h2{white-space:normal}.fj-about__image{height:56svh;min-height:360px}.fj-service__heading{font-size:clamp(1.25rem,8vw,4rem)}}
+@media(max-width:600px){.fj-about h2{font-size:clamp(2.45rem,11vw,3.7rem)}.fj-about__image{height:48svh;min-height:320px}.fj-services-intro h2{font-size:clamp(2.75rem,13vw,4.4rem)}.fj-service__heading{font-size:clamp(1.55rem,4vw,4.3rem)}}
+
+
+/* Section heading + two-column content refinement */
+.fj-section-heading{
+  width:100%;
+  margin:0 0 clamp(42px,6vh,72px);
+}
+
+.fj-section-heading h2{
+  margin:14px 0 0;
+}
+
+.fj-about__grid,
+.fj-services-intro__grid{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(360px,1.1fr);
+  gap:clamp(40px,7vw,110px);
+  align-items:center;
+}
+
+.fj-about__copy{
+  max-width:54ch;
+}
+
+.fj-about__image,
+.fj-services-intro__image{
+  position:relative;
+  width:100%;
+  height:min(62vh,620px);
+  min-height:420px;
+  overflow:hidden;
+}
+
+.fj-about__image img,
+.fj-services-intro__image img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+
+.fj-services-intro{
+  display:block;
+  min-height:auto;
+  padding-top:clamp(90px,12vh,140px);
+  padding-bottom:clamp(90px,12vh,140px);
+}
+
+.fj-services-intro .fj-section-heading h2{
+  max-width:15ch;
+}
+
+.fj-services-intro__grid p{
+  margin:0;
+  max-width:48ch;
+  align-self:start;
+  font-size:clamp(1.1rem,1.5vw,1.45rem);
+  line-height:1.55;
+}
+
+@media(max-width:900px){
+  .fj-about__grid,
+  .fj-services-intro__grid{
+    grid-template-columns:1fr;
+    gap:34px;
+  }
+
+  .fj-section-heading{
+    margin-bottom:36px;
+  }
+
+  .fj-about__image,
+  .fj-services-intro__image{
+    height:52svh;
+    min-height:340px;
+  }
+}
+
+@media(max-width:600px){
+  .fj-section-heading{
+    margin-bottom:28px;
+  }
+
+  .fj-about__image,
+  .fj-services-intro__image{
+    height:44svh;
+    min-height:300px;
+  }
+
+  .fj-services-intro__grid p{
+    font-size:1.05rem;
+  }
+}
+
+
+/* Final overview layout: full-width heading, two-column content beneath */
+.fj-overview{
+  display:block !important;
+  min-height:auto !important;
+  padding:clamp(88px,12vh,132px) clamp(24px,7vw,104px) !important;
+}
+
+.fj-overview__heading{
+  display:block;
+  width:100%;
+  margin:0 0 clamp(42px,6vh,72px);
+}
+
+.fj-overview__heading h2{
+  width:100%;
+  max-width:none !important;
+  margin:14px 0 0 !important;
+  font-size:clamp(2.8rem,5.2vw,5.4rem) !important;
+  line-height:.94 !important;
+  letter-spacing:-.05em !important;
+  white-space:normal;
+  text-transform: none;
+}
+
+.fj-overview__content{
+  display:grid;
+  grid-template-columns:minmax(0,.88fr) minmax(420px,1.12fr);
+  gap:clamp(42px,7vw,112px);
+  align-items:start;
+  width:100%;
+}
+
+.fj-overview__copy{
+  width: 100%;
+  padding:0 !important;
+}
+
+.fj-overview__image{
+  width:100%;
+  height:clamp(410px,58vh,620px);
+  margin:0;
+  overflow:hidden;
+  background:#bcbcbc;
+}
+
+.fj-overview__image img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.fj-services-intro__lead{
+  margin:0 !important;
+  max-width:42ch !important;
+  color:rgba(255,255,255,.72) !important;
+  font-size:clamp(1.15rem,1.55vw,1.5rem) !important;
+  line-height:1.55 !important;
+}
+
+@media(max-width:900px){
+  .fj-overview__content{
+    grid-template-columns:1fr;
+    gap:34px;
+  }
+
+  .fj-overview__heading{
+    margin-bottom:34px;
+  }
+
+  .fj-about .fj-overview__heading h2{
+    white-space:normal;
+  }
+
+  .fj-overview__image{
+    height:52svh;
+    min-height:340px;
+  }
+}
+
+@media(max-width:600px){
+  .fj-overview{
+    padding:78px 20px !important;
+  }
+
+  .fj-overview__heading h2{
+    font-size:clamp(2.45rem,11vw,3.65rem) !important;
+  }
+
+  .fj-overview__image{
+    height:44svh;
+    min-height:300px;
+  }
+}
+@media(max-width:900px){
+  .fj-service{
+    position:sticky;
+    top:0;
+
+    min-height:100svh;
+    grid-template-columns:1fr;
+    gap:26px;
+    align-content:start;
+    padding-top:60px;
+    border-radius:24px 24px 0 0;
+  }
+}
+</style>
+
+<section class="fj-about fj-overview" id="about">
+  <header class="fj-overview__heading">
+    <span class="fj-about__eyebrow">About Faith J.</span>
+    <h2>MULTIFAMILY COMMERCIAL SERVICES</h2>
+  </header>
+
+  <div class="fj-overview__content">
+    <div class="fj-overview__copy">
+      <p class="fj-about__lead">Faith J. Construction is a family-owned and operated general contractor with over 25 years of experience providing construction, remodeling, restoration, and property improvement services.</p>
+      <p class="fj-about__body">From new construction and large-scale renovations to interior and exterior improvements, every project is managed with a commitment to quality craftsmanship, clear communication, and dependable execution. We understand that successful projects are built on more than materials—they're built on trust, accountability, and relationships that last.<br><br>
+                                 As a fully licensed and insured contractor, we proudly serve multifamily, commercial, and residential clients throughout Houston and across the United States. Driven by our mission to operate with integrity in everything we do, we approach every job with care, professionalism, and the belief that every task should be completed in good faith. By combining experienced project management, high construction standards, and a relentless focus on customer satisfaction, we deliver spaces that perform better, look better, and stand the test of time.</p>
     </div>
 
-    <div class="split-card">
-      <img src="images/stock5.jpeg" alt="">
-      <span>04 / Build</span>
-      <h3>Structural rhythm</h3>
-    </div>
+    <figure class="fj-overview__image">
+      <img src="/images/image5.jpg" alt="Faith J. Construction team and project work">
+    </figure>
   </div>
+</section>
+
+<section class="fj-services" id="services">
+  <header class="fj-services-intro fj-overview fj-overview--dark">
+    <div class="fj-overview__heading">
+      <span class="fj-services-intro__eyebrow">What we do</span>
+      <h2>Complete Construction Solutions—<br>From Start to Finish.</h2>
+    </div>
+
+    <div class="fj-overview__content">
+      <div class="fj-overview__copy">
+        <p class="fj-services-intro__lead">Faith J. Construction provides comprehensive construction, remodeling, restoration, and property improvement services for multifamily apartment communities, commercial facilities, and residential properties. From new construction and capital improvements to interior renovations, exterior upgrades, and ongoing maintenance projects, we manage every phase with experienced project coordination, quality craftsmanship, and clear communication. Our goal is to deliver durable, cost-effective solutions that protect your investment, minimize disruptions, and create spaces that perform as well as they look.</p>
+      </div>
+
+      <figure class="fj-overview__image">
+        <img src="/images/image1.png" alt="Faith J. Construction multifamily property project">
+      </figure>
+    </div>
+  </header>
+
+  <article class="fj-service">
+    <div class="fj-service__content">
+      <!--<span class="fj-service__number">01 / Exterior Services</span>-->
+      <h3 class="fj-service__heading">Exterior Services</h3>
+      <p class="fj-service__description">
+        Attract and retain residents with exterior projects that not only boost your property's curb appeal, but also protect your investment.
+      </p>
+      <ul class="fj-service__list">
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M9 10l4-4 4 4-2 2 8 8-2 2-8-8-2 2-4-4z"></path><path d="M17 10l5-2 3 3-2 5"></path></svg>Carpentry</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="9" width="20" height="14"></rect><path d="M12 9v14M20 9v14M6 16h20"></path></svg>Concrete Repairs</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6c4 5 6 8 6 12a6 6 0 1 1-12 0c0-4 2-7 6-12z"></path></svg>Drainage &amp; Erosion</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 26V10l2-3 2 3v16"></path><path d="M16 26V10l2-3 2 3v16"></path><path d="M24 26V10l2-3 2 3v16"></path><path d="M8 15h20M8 21h20"></path></svg>Fencing</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 7a6 6 0 0 1 4 10l-1 1v3h-6v-3l-1-1a6 6 0 0 1 4-10z"></path><path d="M13 24h6M14 27h4"></path></svg>Lighting</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="8" width="11" height="5" rx="1"></rect><path d="M19 10h5v5"></path><path d="M24 15v9"></path></svg>Painting</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 16l10-8 10 8"></path><path d="M10 15v10h12V15"></path></svg>Roofing</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="7" width="18" height="18"></rect><path d="M7 13h18M7 19h18"></path></svg>Siding</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6L8 18h16L16 6z"></path><path d="M16 18v8"></path><path d="M14 26h4"></path></svg>Stucco Remediation</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="7" width="18" height="18"></rect><path d="M16 7v18M7 16h18"></path></svg>Windows</li>
+      </ul>
+      <a class="fj-service__link" href="/services/exterior.html">Read More</a>
+    </div>
+    <div class="fj-service__media">
+      <img src="/images/image6.jpg" alt="Exterior construction services">
+      <span class="fj-service__photo-label">Exterior Services</span>
+    </div>
+  </article>
+
+  <article class="fj-service">
+    <div class="fj-service__content">
+      <!--<span class="fj-service__number">02 / Interior Services</span>-->
+      <h3 class="fj-service__heading">Interior Services</h3>
+      <p class="fj-service__description">
+        Are your interiors outdated or defective? We can upgrade your units with a vast array of renovation and make-ready services.
+      </p>
+      <ul class="fj-service__list">
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true">
+  <rect x="10" y="4" width="12" height="24" rx="2"></rect>
+  <path d="M10 15h12"></path>
+  <path d="M19 10v2"></path>
+  <path d="M19 18v3"></path>
+  <path d="M13 28v2"></path>
+  <path d="M19 28v2"></path>
+</svg>Appliance Packages</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="8" width="20" height="16" rx="2"></rect><line x1="16" y1="8" x2="16" y2="24"></line><circle cx="13" cy="16" r="1"></circle><circle cx="19" cy="16" r="1"></circle></svg>Cabinetry</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 12h20"></path><path d="M10 12v8"></path><path d="M22 12v8"></path><path d="M10 20h12"></path></svg>Countertops</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="10" y="5" width="12" height="22" rx="1"></rect><circle cx="19" cy="16" r="1"></circle></svg>Doors &amp; Locks</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5l2 6h6l-5 4 2 6-5-3-5 3 2-6-5-4h6z"></path></svg>Electrical &amp; Lighting</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5l8 4v6c0 6-4 10-8 12-4-2-8-6-8-12V9z"></path><path d="M16 11v7"></path><circle cx="16" cy="21" r="1"></circle></svg>Fire &amp; Life Safety</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="6" width="8" height="8"></rect><rect x="18" y="6" width="8" height="8"></rect><rect x="6" y="18" width="8" height="8"></rect><rect x="18" y="18" width="8" height="8"></rect></svg>Flooring</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true">
+  <path d="M16 5v22"></path>
+  <path d="M5 16h22"></path>
+  <path d="M8.2 8.2l15.6 15.6"></path>
+  <path d="M23.8 8.2L8.2 23.8"></path>
+
+  <path d="M16 9l-2-2"></path>
+  <path d="M16 9l2-2"></path>
+
+  <path d="M16 23l-2 2"></path>
+  <path d="M16 23l2 2"></path>
+
+  <path d="M9 16l-2-2"></path>
+  <path d="M9 16l-2 2"></path>
+
+  <path d="M23 16l2-2"></path>
+  <path d="M23 16l2 2"></path>
+
+  <path d="M10.5 10.5h-3"></path>
+  <path d="M10.5 10.5v-3"></path>
+
+  <path d="M21.5 10.5h3"></path>
+  <path d="M21.5 10.5v-3"></path>
+
+  <path d="M10.5 21.5h-3"></path>
+  <path d="M10.5 21.5v3"></path>
+
+  <path d="M21.5 21.5h3"></path>
+  <path d="M21.5 21.5v3"></path>
+</svg>HVAC</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M10 20l10-10"></path><path d="M18 8l6 6"></path><path d="M8 22l4 2 2-4"></path></svg>Painting</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 10h10"></path><path d="M16 10h8"></path><path d="M16 8v4"></path><path d="M24 10v12"></path><path d="M14 22h10"></path><path d="M14 20v4"></path></svg>Plumbing</li>
+      </ul>
+      <a class="fj-service__link" href="/services/interior.html">Read More</a> 
+    </div>
+    <div class="fj-service__media">
+      <img src="/images/image2.jpg" alt="Interior renovation services">
+      <span class="fj-service__photo-label">Interior Services</span>
+    </div>
+  </article>
+
+  <article class="fj-service">
+    <div class="fj-service__content">
+      <!--<span class="fj-service__number">03 / Facility Remodels &amp; Conversions</span>-->
+      <h3 class="fj-service__heading">Facility Remodels &amp; Conversions.</h3>
+      <p class="fj-service__description">
+        Impress prospects and residents with transformational remodels and conversions of your shared spaces. Amenities make a difference.
+      </p>
+      <ul class="fj-service__list">
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 14h20"></path><path d="M9 14V8h14v6"></path><path d="M8 14v10"></path><path d="M24 14v10"></path><path d="M6 24h20"></path></svg>Clubhouses &amp; Offices</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="12" cy="11" r="2"></circle><circle cx="20" cy="11" r="2"></circle><circle cx="8" cy="16" r="1.5"></circle><circle cx="24" cy="16" r="1.5"></circle><path d="M12 15c2 3 6 3 8 0"></path></svg>Dog Parks</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="10" cy="16" r="2"></circle><circle cx="22" cy="16" r="2"></circle><path d="M12 16h8"></path><path d="M10 14v4"></path><path d="M22 14v4"></path></svg>Fitness Centers</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="5" width="16" height="22" rx="2"></rect><circle cx="16" cy="16" r="5"></circle></svg>Laundry Facilities</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="8" width="20" height="16" rx="2"></rect><path d="M6 10l10 8 10-8"></path></svg>Mail Rooms</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M9 20h14"></path><path d="M11 20v-6h10v6"></path><path d="M13 10h6"></path><path d="M16 10V6"></path></svg>Outdoor Kitchens</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 22l8-10 8 10"></path><path d="M12 17h8"></path><path d="M16 12v10"></path></svg>Playgrounds</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 20c3-2 5 2 8 0s5-2 8 0 5 2 6 0"></path><path d="M5 24c3-2 5 2 8 0s5-2 8 0 5 2 6 0"></path></svg>Pools &amp; Hardscapes</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="7" width="18" height="18" rx="2"></rect><circle cx="16" cy="16" r="3"></circle></svg>Sports Courts</li>
+
+<li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 16h16"></path><path d="M18 10l6 6-6 6"></path><rect x="6" y="10" width="8" height="12" rx="1"></rect></svg>Unit Repositions</li>
+      </ul>
+      <a class="fj-service__link" href="/services/facility-remodels.html">Read More</a>
+    </div>
+    <div class="fj-service__media">
+      <img src="/images/image7.jpg" alt="Facility remodeling and amenity upgrades">
+      <span class="fj-service__photo-label">Facility Remodels</span>
+    </div>
+  </article>
+
+  <article class="fj-service">
+    <div class="fj-service__content">
+      <!--<span class="fj-service__number">04 / Disaster Recovery &amp; Restoration</span>-->
+      <h3 class="fj-service__heading">Disaster Recovery &amp; Restoration</h3>
+      <p class="fj-service__description">
+        Whether it's fire, wind, flood, ice, or hail damage, you can trust our experienced rapid response team to get your property quickly back to normal for staff and residents.
+      </p>
+      <ul class="fj-service__list">
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Content &amp; Debris Removal</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Damage Assessments</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Emergency Tarping &amp; Board-Ups</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Fire &amp; Smoke Mitigation</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Interior &amp; Exterior Restorations</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Safety Fencing</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Water Damage Mitigation</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Water Extraction</li>
+      </ul>
+      <a class="fj-service__link" href="/services/disaster-recovery.html">Read More</a>
+    </div>
+    <div class="fj-service__media">
+      <img src="/images/image9.jpg" alt="Disaster recovery and restoration">
+      <span class="fj-service__photo-label">Recovery &amp; Restoration</span>
+    </div>
+  </article>
+
+  <article class="fj-service">
+    <div class="fj-service__content">
+      <!--<span class="fj-service__number">05 / Due Diligence Property Services</span>-->
+      <h3 class="fj-service__heading">Due Diligence Inspections</h3>
+      <p class="fj-service__description">
+        Our team can provide crucial insights into a property's value, condition, and risks, helping you make informed decisions that support long-term profitability.
+      </p>
+      <ul class="fj-service__list">
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Financial Reviews</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Insurance Considerations</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Investment Analysis</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Negotiation Leverage</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Operational Insights</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Regulatory Compliance</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Risk Mitigation Assessments</li>
+        <li><svg class="fj-service__icon" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="4"></rect><path d="M10 17l4 4 8-10"></path></svg>Strategic Planning</li>
+      </ul>
+      <a class="fj-service__link" href="/services/due-diligence.html">Read More</a>
+    </div>
+    <div class="fj-service__media">
+      <img src="/images/image5.jpg" alt="Property evaluation and due diligence services">
+      <span class="fj-service__photo-label">Due Diligence</span>
+    </div>
+  </article>
 </section>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) return;
+
+  gsap.from(".fj-about__top > *", {
+    y:60,
+    opacity:0,
+    stagger:.14,
+    duration:1,
+    ease:"expo.out",
+    scrollTrigger:{
+      trigger:".fj-about",
+      start:"top 76%",
+      once:true
+    }
+  });
+
+  gsap.from(".fj-about__value", {
+    y:45,
+    opacity:0,
+    stagger:.12,
+    duration:.8,
+    ease:"power3.out",
+    scrollTrigger:{
+      trigger:".fj-about__values",
+      start:"top 84%",
+      once:true
+    }
+  });
+
+  gsap.from(".fj-services-intro > *", {
+    y:55,
+    opacity:0,
+    stagger:.12,
+    duration:1,
+    ease:"expo.out",
+    scrollTrigger:{
+      trigger:".fj-services-intro",
+      start:"top 72%",
+      once:true
+    }
+  });
+
+  gsap.utils.toArray(".fj-service").forEach((panel) => {
+    const media = panel.querySelector(".fj-service__media img");
+    const content = panel.querySelectorAll(".fj-service__content > *");
+
+    gsap.from(content, {
+      y:34,
+      opacity:0,
+      stagger:.07,
+      duration:.75,
+      ease:"power3.out",
+      scrollTrigger:{
+        trigger:panel,
+        start:"top 72%",
+        once:true
+      }
+    });
+
+    if (media) {
+      gsap.fromTo(media,
+        {scale:1.12, yPercent:-3},
+        {
+          scale:1.04,
+          yPercent:3,
+          ease:"none",
+          scrollTrigger:{
+            trigger:panel,
+            start:"top bottom",
+            end:"bottom top",
+            scrub:1
+          }
+        }
+      );
+    }
+  });
+
+  requestAnimationFrame(() => ScrollTrigger.refresh());
+});
+</script>
+
+
+<section class="stats">
+  <div class="stats-head">
+    <span>By the numbers</span>
+    <h2>Two decades of measured growth, one project at a time.</h2>
+  </div>
+  <div class="stats-grid">
+    <div class="stat" data-value="20" data-suffix="+">
+      <h3><span class="stat-num">0</span></h3>
+      <p>Years building in Houston</p>
+    </div>
+    <div class="stat" data-value="180" data-suffix="+">
+      <h3><span class="stat-num">0</span></h3>
+      <p>Projects delivered</p>
+    </div>
+    <div class="stat" data-static="true" data-static-text="1.2M">
+      <h3><span class="stat-num">0</span></h3>
+      <p>Sq. ft. completed</p>
+    </div>
+    <div class="stat" data-value="96" data-suffix="%">
+      <h3><span class="stat-num">0</span></h3>
+      <p>Client referral rate</p>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="testimonials-head">What clients say</div>
+  <div class="testimonial-grid">
+    <div class="testimonial">
+      <span class="mark">“</span>
+      <p class="quote">Every deadline held and every detail matched the drawings. No surprises, which is rarer than it should be.</p>
+      <div class="who"><strong>R. Alvarez</strong>Principal, Alvarez Development</div>
+    </div>
+    <div class="testimonial">
+      <span class="mark">“</span>
+      <p class="quote">They build the way the plans read — quiet, precise, nothing added just to look busy on site.</p>
+      <div class="who"><strong>M. Okafor</strong>Architect, Okafor Studio</div>
+    </div>
+    <div class="testimonial">
+      <span class="mark">“</span>
+      <p class="quote">Our GC trusted their framing crew more than our own schedule. That says everything.</p>
+      <div class="who"><strong>T. Hollis</strong>Project Owner, Hollis Retail Group</div>
+    </div>
+  </div>
+</section>
+
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+
+    <div class="contact-copy">
+      <span class="contact-kicker">Start a project</span>
+
+      <h2>Let’s build something lasting.</h2>
+
+      <p>
+        Tell us about your construction, renovation, or remodeling
+        project. Our team will follow up to discuss the scope,
+        location, and next steps.
+      </p>
+    </div>
+
+    <form
+      class="contact-form"
+      name="project-inquiry"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+    >
+
+      <input
+        type="hidden"
+        name="form-name"
+        value="project-inquiry"
+      >
+
+      <p hidden>
+        <label>
+          Do not fill this out:
+          <input name="bot-field">
+        </label>
+      </p>
+
+      <div class="contact-field">
+        <label for="contact-name">Name</label>
+
+        <input
+          id="contact-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+        >
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-email">Email</label>
+
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-phone">Phone</label>
+
+        <input
+          id="contact-phone"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+        >
+      </div>
+
+      <div class="contact-field">
+        <label for="contact-type">Project type</label>
+
+        <select
+          id="contact-type"
+          name="project-type"
+          required
+        >
+          <option value="" selected disabled>
+            Select one
+          </option>
+
+          <option>Commercial Construction</option>
+          <option>Multifamily Renovation</option>
+          <option>Residential Construction</option>
+          <option>Interior Remodeling</option>
+          <option>Exterior Improvements</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="contact-field contact-field--full">
+        <label for="contact-message">
+          Project details
+        </label>
+
+        <textarea
+          id="contact-message"
+          name="message"
+          placeholder="Tell us about the location, scope, and timeline."
+          required
+        ></textarea>
+      </div>
+
+      <button class="contact-submit" type="submit">
+        Send inquiry
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M6 18L18 6M18 6H10M18 6V14"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="images/icon4.png" alt="Faith J Construction" class="footer-logo">
+      <!--<p>Architectural construction shaped by precision, clean execution, and lasting material presence. Based in Houston, building across Texas.</p>-->
+    </div>
+    <div class="footer-col">
+      <span>Site</span>
+      <a href="#work">Projects</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <span>Contact</span>
+      <a href="tel:+18005551234">(800) 555-1234</a>
+      <a href="mailto:hello@faithjconstruction.com">hello@faithjconstruction.com</a>
+      <a href="#">Houston, Texas</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year"></span> Faith J Construction. Built with restraint.</span>
+    <a class="back-to-top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const navDropdown = document.getElementById("navDropdown");
+  const menuBg = document.getElementById("menuBg");
+  const menuWrap = document.getElementById("menuWrap");
+  const logo = document.querySelector(".nav-split-logo");
+
+  if (!menuToggle || !navDropdown || !menuBg || !menuWrap) return;
+
+  function openMenu(){
+    menuToggle.classList.add("open");
+    navDropdown.classList.add("open");
+    menuBg.classList.add("open");
+    logo.classList.add("open"); 
+    document.body.classList.add("nav-open");
+    menuToggle.setAttribute("aria-expanded","true");
+    
+  }
+
+  function closeMenu(){
+    menuToggle.classList.remove("open");
+    navDropdown.classList.remove("open");
+    menuBg.classList.remove("open");
+    logo.classList.remove("open"); 
+    document.body.classList.remove("nav-open");
+    menuToggle.setAttribute("aria-expanded","false");
+  }
+
+  menuToggle.addEventListener("click", () => {
+    menuToggle.classList.contains("open") ? closeMenu() : openMenu();
+  });
+
+  navDropdown.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!menuWrap.contains(e.target)) closeMenu();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+});
+</script>
+
+
+<script>
+
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
 gsap.registerPlugin(ScrollTrigger);
 
-const tl = gsap.timeline();
+/* ---------- Lenis smooth scroll ---------- */
+/* ---------- Lenis smooth scroll ---------- */
 
-tl.from(".loader h1", {
-  y: 40,
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+let lenis = null;
+
+/* Prevent browser restoration */
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+/* Lock page at the top while loading */
+document.documentElement.style.scrollBehavior = "auto";
+document.documentElement.style.overflow = "hidden";
+document.body.style.overflow = "hidden";
+
+window.scrollTo(0, 0);
+
+if (!prefersReducedMotion && window.Lenis) {
+  lenis = new Lenis({
+    duration: 1.15,
+    easing: (t) =>
+      t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+    smoothWheel: true
+  });
+
+  lenis.stop();
+
+  lenis.on("scroll", ScrollTrigger.update);
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+
+  gsap.ticker.lagSmoothing(0);
+}
+
+function forceTop() {
+  window.scrollTo(0, 0);
+
+  if (lenis) {
+    lenis.scrollTo(0, {
+      immediate: true,
+      force: true
+    });
+  }
+}
+
+forceTop();
+
+window.addEventListener("load", () => {
+  forceTop();
+
+  requestAnimationFrame(() => {
+    forceTop();
+
+    requestAnimationFrame(() => {
+      forceTop();
+
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+
+      if (lenis) {
+        lenis.start();
+      }
+
+      ScrollTrigger.refresh();
+    });
+  });
+});
+
+window.addEventListener("pageshow", () => {
+  forceTop();
+});
+/* ---------- Load-in sequence ---------- */
+
+gsap.set(".hero-bg", {
+  clipPath: "inset(10% round 26px)"
+});
+
+gsap.set(".loader-split-logo", {
+  scale: 1,
+  clipPath: "polygon(0 0, 0 0, 0 0, 0 0)"
+});
+
+gsap.set(".loader-icon3", {
+  scale: 1.04
+});
+
+gsap.set(".loader-icon2-wrap", {
+  width: 0,
+  y: 0
+});
+
+gsap.set(".loader-icon2", {
   opacity: 0,
-  duration: .8,
-  ease: "power3.out"
+  x: -28
+});
+
+const tl = gsap.timeline({
+  delay: .42
+});
+
+tl.to(".loader-split-logo", {
+  clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+  duration: 1.05,
+  ease: "expo.inOut"
 })
+
+.to(".loader-icon3", {
+  scale: 1,
+  duration: 1.05,
+  ease: "expo.out"
+}, "<")
+
+/*
+.to(".loader-split-logo", {
+  scale: 1.06,
+  duration: .35,
+  ease: "power2.out"
+}, "-=.18")
+
+.to(".loader-split-logo", {
+  scale: 1,
+  duration: .35,
+  ease: "expo.out"
+})
+*/
+
+.to(".loader-icon2-wrap", {
+  width: "clamp(150px, 32vw, 260px)",
+  duration: .72,
+  ease: "expo.inOut"
+}, "-=.12")
+
+.to(".loader-icon2", {
+  opacity: 1,
+  x: 0,
+  duration: .72,
+  ease: "expo.out"
+}, "<")
+
+.add(() => {
+  const loaderSplit = document.querySelector(".loader-split-logo");
+  const navLogo = document.querySelector(".nav-split-logo");
+
+  if (!loaderSplit || !navLogo) return;
+
+  const from = loaderSplit.getBoundingClientRect();
+  const to = navLogo.getBoundingClientRect();
+
+  const fromCenterX = from.left + from.width / 2;
+  const fromCenterY = from.top + from.height / 2;
+
+  const toCenterX = to.left + to.width / 2;
+  const toCenterY = to.top + to.height / 2;
+
+  loaderSplit.dataset.moveX = toCenterX - fromCenterX;
+  loaderSplit.dataset.moveY = toCenterY - fromCenterY;
+
+  const scaleToNav = to.height / from.height;
+
+  loaderSplit.dataset.moveScale = scaleToNav || .5;
+})
+
+/* Everything below begins at the same exact time */
+/* Everything below begins from the same exit point */
+.addLabel("loaderExit")
+
+/* Horizontal movement */
+.to(".loader-split-logo", {
+  x: () => Number(
+    document.querySelector(".loader-split-logo")?.dataset.moveX || 0
+  ),
+  duration: 0.9,
+  ease: "power3.inOut"
+}, "loaderExit")
+
+/* Vertical movement begins slightly later, creating a curved path */
+.to(".loader-split-logo", {
+  y: () => Number(
+    document.querySelector(".loader-split-logo")?.dataset.moveY || 0
+  ),
+  duration: .92,
+  ease: "expo.inOut"
+}, "loaderExit+=.18")
+
+/* Logo scales down while traveling */
+.to(".loader-split-logo", {
+  scale: () => Number(
+    document.querySelector(".loader-split-logo")?.dataset.moveScale || .5
+  ),
+  duration: 1,
+  ease: "power3.inOut"
+}, "loaderExit")
+
+/* Whole loader moves upward */
 .to(".loader", {
   yPercent: -100,
-  duration: 1.05,
-  ease: "power4.inOut",
-  delay: .35
-})
-.from(".center-nav", {
-  y: -90,
-  rotateX: -80,
+  duration: 1.1,
+  ease: "expo.inOut"
+}, "loaderExit")
+
+/* Remaining loader text moves upward */
+.to(".loader-icon2-wrap", {
+  y: "-110vh",
+  duration: 1.1,
+  ease: "expo.inOut"
+}, "loaderExit")
+
+/* Fade moving logo out right before it reaches navbar */
+.to(".loader-split-logo", {
   opacity: 0,
-  duration: .9,
-  ease: "power4.out"
-}, "-=.25")
+  duration: .12,
+  ease: "power1.out"
+}, "loaderExit+=.91")
+
+/* Reveal permanent navbar logo at the same moment */
+.to(".nav-split-logo", {
+  opacity: 1,
+  duration: .12,
+  ease: "power1.out"
+}, "loaderExit+=.91")
+
+.to(".logo-transition-layer", {
+  opacity: 0,
+  duration: .18,
+  ease: "power1.out"
+}, "loaderExit+=1")
+
+.to(".hero-bg", {
+  clipPath: "inset(0% round 0px)",
+  duration: 1.7,
+  ease: "expo.inOut"
+}, "loaderExit+=.05")
+
 .to(".logo", {
   opacity: 1,
-  duration: .6
-}, "-=.5")
+  duration: .7,
+  ease: "power2.out"
+}, "loaderExit+1.8")
+
 .from(".lets-talk", {
   y: -20,
   opacity: 0,
-  duration: .6
-}, "-=.5")
-.from(".edge", {
-  y: 45,
+  duration: .7,
+  ease: "power2.out"
+}, "loaderExit+=.1")
+
+.from(".hero-title", {
+  y: 55,
   opacity: 0,
-  stagger: .12,
+  duration: 1.1,
+  ease: "expo.out"
+}, "loaderExit+=.55")
+
+.from(".hero-tab", {
+  y: 38,
+  opacity: 0,
+  stagger: .07,
   duration: .9,
-  ease: "power3.out"
-}, "-=.4");
+  ease: "expo.out"
+}, "loaderExit+=.68");
+
+/* ---------- Featured project hero slider ---------- */
+
+const heroSlides = gsap.utils.toArray(".hero-slide");
+const heroTabs = gsap.utils.toArray(".hero-tab");
+const previousHeroButton = document.querySelector(".hero-arrow--prev");
+const nextHeroButton = document.querySelector(".hero-arrow--next");
+const heroDuration = 6;
+const heroCopy = [
+  {title:"Cortland Wortham",description:"Multifamily construction completed with organized execution and close attention to detail."},
+  {title:"Interior Renovation",description:"Apartment and commercial interiors shaped for durability, function, and a refined finish."},
+  {title:"Commercial Buildout",description:"Purpose-built spaces delivered through dependable planning, craftsmanship, and coordination."},
+  {title:"Exterior Improvements",description:"Exterior upgrades designed to improve performance, curb appeal, and long-term value."},
+  {title:"Residential Remodel",description:"Thoughtful remodeling that brings new function and lasting quality to existing spaces."}
+];
+const heroTitle = document.querySelector(".hero-title");
+const heroDescription = document.querySelector(".hero-description");
+
+let heroIndex = 0;
+let heroTimer = null;
+let heroChanging = false;
+let queuedHeroIndex = null;
+
+function startHeroProgress(index){
+  heroTabs.forEach((tab, i) => {
+    const progress = tab.querySelector(".hero-tab__progress");
+    if (!progress) return;
+
+    gsap.killTweensOf(progress);
+    gsap.set(progress, {
+      scaleX: 0,
+      transformOrigin: "left center"
+    });
+
+    if (i === index && !prefersReducedMotion) {
+      gsap.to(progress, {
+        scaleX: 1,
+        duration: heroDuration,
+        ease: "none"
+      });
+    }
+  });
+}
+
+function scheduleNextHero(){
+  clearTimeout(heroTimer);
+  if (prefersReducedMotion || heroSlides.length < 2) return;
+
+  heroTimer = setTimeout(() => {
+    changeHero((heroIndex + 1) % heroSlides.length);
+  }, heroDuration * 1000);
+}
+
+function changeHero(nextIndex){
+  if (!heroSlides[nextIndex]) return;
+
+  // Remember the latest requested tab while animation is running
+  if (heroChanging) {
+    queuedHeroIndex = nextIndex;
+    return;
+  }
+
+  if (nextIndex === heroIndex) {
+    queuedHeroIndex = null;
+    startHeroProgress(heroIndex);
+    scheduleNextHero();
+    return;
+  }
+
+  queuedHeroIndex = null;
+
+  heroChanging = true;
+  clearTimeout(heroTimer);
+
+  const previousIndex = heroIndex;
+  const currentSlide = heroSlides[previousIndex];
+  const nextSlide = heroSlides[nextIndex];
+  const currentImage = currentSlide.querySelector("img");
+  const nextImage = nextSlide.querySelector("img");
+
+  heroIndex = nextIndex;
+
+  heroTabs.forEach((tab, index) => {
+    const active = index === nextIndex;
+    tab.classList.toggle("is-active", active);
+    tab.setAttribute("aria-selected", String(active));
+    tab.setAttribute("tabindex", active ? "0" : "-1");
+  });
+
+  startHeroProgress(heroIndex);
+  scheduleNextHero();
+
+  gsap.killTweensOf([currentSlide, nextSlide, currentImage, nextImage]);
+
+  gsap.set(nextSlide, {
+    autoAlpha: 1,
+    visibility: "visible",
+    zIndex: 2,
+    xPercent: 105
+  });
+
+  gsap.set(nextImage, {
+    scale:1.12,
+    opacity:1
+  });
+
+
+  const nextCopy = heroCopy[nextIndex];
+  if (heroTitle && heroDescription && nextCopy) {
+    gsap.to([heroTitle,heroDescription], {x:-28,opacity:0,duration:.22,ease:"power2.in",onComplete:()=>{
+      heroTitle.textContent=nextCopy.title;
+      heroDescription.textContent=nextCopy.description;
+      gsap.set([heroTitle,heroDescription],{x:28});
+      gsap.to([heroTitle,heroDescription],{x:0,opacity:1,duration:.42,stagger:.05,ease:"power3.out"});
+    }});
+  }
+
+  gsap.timeline({
+    onComplete: () => {
+      currentSlide.classList.remove("is-active");
+      nextSlide.classList.add("is-active");
+
+      gsap.set(currentSlide, {
+        autoAlpha:0,visibility:"hidden",zIndex:0,xPercent:0
+      });
+
+      gsap.set(nextSlide, {
+        autoAlpha:1,visibility:"visible",zIndex:1,xPercent:0
+      });
+
+      heroChanging = false;
+
+      if (
+        queuedHeroIndex !== null &&
+        queuedHeroIndex !== heroIndex
+      ) {
+        const nextQueuedIndex = queuedHeroIndex;
+        queuedHeroIndex = null;
+        changeHero(nextQueuedIndex);
+      }
+    }
+  })
+  .to(currentSlide, {xPercent:-100,duration:.72,ease:"power3.inOut"},0)
+  .to(nextSlide, {xPercent:0,duration:.72,ease:"power3.inOut"},0)
+  .fromTo(nextImage,{scale:1.12},{scale:1.07,duration:.9,ease:"power3.out"},0);
+}
+
+function showPreviousHero(){
+  if (heroChanging) return;
+  changeHero((heroIndex - 1 + heroSlides.length) % heroSlides.length);
+}
+
+function showNextHero(){
+  if (heroChanging) return;
+  changeHero((heroIndex + 1) % heroSlides.length);
+}
+
+heroTabs.forEach((tab,index)=>{
+  tab.addEventListener("mouseenter",()=>{
+    if(window.innerWidth>900 && index!==heroIndex) changeHero(index);
+  });
+  tab.addEventListener("focus",()=>{
+    if(index!==heroIndex) changeHero(index);
+  });
+});
+
+previousHeroButton?.addEventListener("click", showPreviousHero);
+nextHeroButton?.addEventListener("click", showNextHero);
+
+document.addEventListener("keydown", event => {
+  if (window.innerWidth > 900) return;
+  if (event.key === "ArrowLeft") showPreviousHero();
+  if (event.key === "ArrowRight") showNextHero();
+});
+
+tl.call(() => {
+  startHeroProgress(heroIndex);
+  scheduleNextHero();
+}, null, "loaderExit+=1.55");
+
+/* ---------- Magnetic Let's Talk button ---------- */
+
+const magnet = document.querySelector('.lets-talk');
+
+if (magnet && !prefersReducedMotion) {
+  const strength = 0.35;
+
+  const moveX = gsap.quickTo(magnet, "x", {
+    duration: .5,
+    ease: "power3"
+  });
+
+  const moveY = gsap.quickTo(magnet, "y", {
+    duration: .5,
+    ease: "power3"
+  });
+
+  magnet.addEventListener('mousemove', (e) => {
+    const bounds = magnet.getBoundingClientRect();
+
+    moveX(
+      (e.clientX - bounds.left - bounds.width / 2) * strength
+    );
+
+    moveY(
+      (e.clientY - bounds.top - bounds.height / 2) * strength
+    );
+  });
+
+  magnet.addEventListener('mouseleave', () => {
+    moveX(0);
+    moveY(0);
+  });
+}
+
+/* ---------- Hero parallax ---------- */
 
 gsap.to(".hero-bg", {
-  yPercent: 18,
+  yPercent: -18,
   scale: 1.14,
   ease: "none",
   scrollTrigger: {
     trigger: ".hero",
     start: "top top",
     end: "bottom top",
-    scrub: true
+    scrub: 1
   }
 });
+
+/* ---------- Work panel rising over hero ---------- */
 
 gsap.from(".work", {
   y: "28vh",
@@ -396,23 +3072,548 @@ gsap.from(".work", {
     trigger: ".work",
     start: "top bottom",
     end: "top top",
-    scrub: true
+    scrub: 1
   }
 });
 
-gsap.utils.toArray(".project-row, .split-card").forEach((el) => {
+/* ---------- Scroll reveals ---------- */
+
+gsap.utils.toArray(".story-reveal").forEach((el) => {
   gsap.from(el, {
-    y: 80,
+    y: 70,
     opacity: 0,
-    duration: 1,
-    ease: "power3.out",
+    duration: 1.1,
+    ease: "expo.out",
     scrollTrigger: {
       trigger: el,
-      start: "top 82%"
+      start: "top 85%"
+    }
+  });
+});
+
+gsap.utils.toArray(
+  ".work-project__media img, " +
+  ".work-project__media video, " +
+  ".work-card__media img, " +
+  ".work-card__media video, " +
+  ".work-feature__media img, " +
+  ".work-feature__media video"
+).forEach((media) => {
+  gsap.to(media, {
+    scale: 1,
+    yPercent: -5,
+    ease: "none",
+    scrollTrigger: {
+      trigger:
+        media.closest(
+          ".work-project, .work-card, .work-feature"
+        ) || media,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 1.1
+    }
+  });
+});
+
+/* ---------- Editorial text line reveals ---------- */
+
+document.querySelectorAll(
+  ".story-copy h3, .story-note h3, .story-data h3"
+).forEach((heading) => {
+  if (heading.dataset.split === "true") return;
+
+  const raw = heading.textContent.trim();
+  const words = raw.split(" ");
+  const lines = [];
+  let buffer = [];
+
+  words.forEach((word, index) => {
+    buffer.push(word);
+
+    if (buffer.length === 3 || index === words.length - 1) {
+      lines.push(buffer.join(" "));
+      buffer = [];
+    }
+  });
+
+  heading.innerHTML = lines
+    .map(
+      line =>
+        `<span class="story-line"><span>${line}</span></span>`
+    )
+    .join("");
+
+  heading.dataset.split = "true";
+});
+
+gsap.utils.toArray(
+  ".story-copy, .story-note, .story-data, .work-head"
+).forEach((block) => {
+  const lines = block.querySelectorAll(".story-line > span");
+
+  const paragraphs = block.querySelectorAll(
+    "p, .story-specs li, .story-mini, .story-data__item, .story-divider"
+  );
+
+  if (lines.length) {
+    gsap.from(lines, {
+      yPercent: 110,
+      opacity: 0,
+      duration: 1,
+      stagger: .08,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: block,
+        start: "top 82%",
+        once: true
+      }
+    });
+  }
+
+  if (paragraphs.length) {
+    gsap.from(paragraphs, {
+      y: 24,
+      opacity: 0,
+      duration: .75,
+      stagger: .055,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: block,
+        start: "top 82%",
+        once: true
+      }
+    });
+  }
+});
+
+gsap.from(".stats-head > *", {
+  y: 40,
+  opacity: 0,
+  stagger: .1,
+  duration: 1,
+  ease: "expo.out",
+  scrollTrigger: {
+    trigger: ".stats-head",
+    start: "top 85%"
+  }
+});
+
+gsap.from(".stat", {
+  y: 40,
+  opacity: 0,
+  stagger: .1,
+  duration: 1,
+  ease: "expo.out",
+  scrollTrigger: {
+    trigger: ".stats-grid",
+    start: "top 85%"
+  }
+});
+
+gsap.from(".testimonial", {
+  y: 40,
+  opacity: 0,
+  stagger: .12,
+  duration: 1,
+  ease: "expo.out",
+  scrollTrigger: {
+    trigger: ".testimonial-grid",
+    start: "top 85%"
+  }
+});
+
+gsap.from(".footer-top > *, .footer-bottom", {
+  y: 30,
+  opacity: 0,
+  stagger: .08,
+  duration: .9,
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: ".site-footer",
+    start: "top 90%"
+  }
+});
+
+/* ---------- Count-up stats ---------- */
+
+document.querySelectorAll('.stat').forEach((el) => {
+  const numEl = el.querySelector('.stat-num');
+
+  if (!numEl) return;
+
+  if (el.dataset.static) {
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        numEl.textContent = el.dataset.staticText;
+      }
+    });
+
+    return;
+  }
+
+  const target = Number(el.dataset.value);
+  const suffix = el.dataset.suffix || '';
+  const obj = {
+    val: 0
+  };
+
+  ScrollTrigger.create({
+    trigger: el,
+    start: "top 85%",
+    once: true,
+    onEnter: () => {
+      gsap.to(obj, {
+        val: target,
+        duration: 1.7,
+        ease: "power2.out",
+        onUpdate: () => {
+          numEl.textContent = Math.round(obj.val) + suffix;
+        }
+      });
     }
   });
 });
 </script>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuWrap = document.querySelector(".menu-wrap");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuBg = document.querySelector(".menu-bg");
+  const dropdown = document.querySelector(".nav-dropdown");
+  const menuLinks = gsap.utils.toArray(".nav-dropdown a");
+  const bars = gsap.utils.toArray(".menu-toggle__bar");
+  const menuLabel = document.querySelector(".menu-toggle__label");
+  const featureItems = gsap.utils.toArray(".feature-item");
+
+  if (!menuWrap || !menuToggle || !menuBg || !dropdown) return;
+
+  let isOpen = false;
+  let isAnimating = false;
+
+  const openHeight = () => {
+    return window.innerWidth <= 600 ? 308 : 330;
+  };
+
+  gsap.set(menuBg, {
+    height: window.innerWidth <= 600 ? 50 : 54,
+    borderRadius: 14
+  });
+
+  gsap.set(menuLinks, {
+    autoAlpha: 0,
+    y: -10,
+    rotateX: -10,
+    transformOrigin: "50% 0%"
+  });
+
+  gsap.set(dropdown, {
+    visibility: "hidden"
+  });
+
+  const openMenu = () => {
+    if (isOpen || isAnimating) return;
+
+    isOpen = true;
+    isAnimating = true;
+
+    menuToggle.classList.add("open");
+    dropdown.classList.add("open");
+    document.body.classList.add("nav-open");
+
+    gsap.set(dropdown, {
+      visibility: "visible"
+    });
+
+    const tl = gsap.timeline({
+      defaults: {
+        ease: "power3.out"
+      },
+      onComplete: () => {
+        isAnimating = false;
+      }
+    });
+
+    tl.to(menuWrap, {
+      scale: 1.01,
+      duration: .1
+    })
+
+    .to(menuWrap, {
+      scale: 1,
+      duration: .16,
+      ease: "back.out(1.6)"
+    })
+
+    .to(menuBg, {
+      height: openHeight,
+      borderRadius: 28,
+      duration: .34,
+      ease: "expo.inOut"
+    }, 0)
+
+    .to(menuToggle, {
+      borderRadius: 24,
+      boxShadow:
+        "0 5px 18px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.06)",
+      duration: .24
+    }, 0)
+
+    .to(bars[0], {
+      y: 0,
+      rotation: 45,
+      width: 17,
+      duration: .24,
+      ease: "power3.inOut"
+    }, .03)
+
+    .to(bars[1], {
+      y: 0,
+      rotation: -45,
+      width: 17,
+      duration: .24,
+      ease: "power3.inOut"
+    }, .03)
+
+    .to(menuLabel, {
+      y: -5,
+      autoAlpha: 0,
+      duration: .12
+    }, .02)
+
+    .add(() => {
+      menuLabel.textContent = "Close";
+    })
+
+    .fromTo(menuLabel, {
+      y: 5,
+      autoAlpha: 0
+    }, {
+      y: 0,
+      autoAlpha: 1,
+      duration: .18
+    })
+
+    .to(menuLinks, {
+      autoAlpha: 1,
+      y: 0,
+      rotateX: 0,
+      duration: .28,
+      stagger: .035,
+      ease: "back.out(1.15)"
+    }, "-=.08");
+  };
+
+  const closeMenu = () => {
+    if (!isOpen || isAnimating) return;
+
+    isOpen = false;
+    isAnimating = true;
+
+    document.body.classList.remove("nav-open");
+
+    const closedHeight = window.innerWidth <= 600 ? 50 : 54;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        menuToggle.classList.remove("open");
+        dropdown.classList.remove("open");
+
+        gsap.set(dropdown, {
+          visibility: "hidden"
+        });
+
+        isAnimating = false;
+      }
+    });
+
+    tl.set(menuLabel, {
+      autoAlpha: 1,
+      y: 0
+    })
+
+    .to(menuLabel, {
+      y: -7,
+      autoAlpha: 0,
+      duration: .1,
+      ease: "power2.in"
+    })
+
+    .to(menuLinks, {
+      autoAlpha: 0,
+      y: -10,
+      rotateX: -10,
+      duration: .18,
+      stagger: {
+        each: .025,
+        from: "end"
+      },
+      ease: "power3.in"
+    }, "-=.03")
+
+    .to(menuBg, {
+      height: closedHeight,
+      borderRadius: 14,
+      duration: .22,
+      ease: "expo.inOut"
+    }, "-=.04")
+
+    .to(menuToggle, {
+      borderRadius: 14,
+      boxShadow:
+        "0 10px 30px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.07)",
+      duration: .18,
+      ease: "expo.inOut"
+    }, "<")
+
+    .to(bars[0], {
+      rotation: 0,
+      y: -4,
+      width: 22,
+      duration: .18,
+      ease: "power3.inOut"
+    }, "<")
+
+    .to(bars[1], {
+      rotation: 0,
+      y: 4,
+      width: 22,
+      duration: .18,
+      ease: "power3.inOut"
+    }, "<")
+
+    .add(() => {
+      menuLabel.textContent = "Menu";
+    })
+
+    .fromTo(menuLabel, {
+      y: 5,
+      autoAlpha: 0
+    }, {
+      y: 0,
+      autoAlpha: 1,
+      duration: .14,
+      ease: "power2.out"
+    });
+  };
+
+  menuToggle.addEventListener("click", () => {
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  menuLinks.forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("click", event => {
+    if (
+      isOpen &&
+      !menuWrap.contains(event.target) &&
+      !isAnimating
+    ) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && isOpen) {
+      closeMenu();
+    }
+  });
+
+  menuToggle.addEventListener("mouseenter", () => {
+    if (isOpen) return;
+
+    gsap.to(menuToggle, {
+      y: -2,
+      duration: .2,
+      ease: "power2.out"
+    });
+  });
+
+  menuToggle.addEventListener("mouseleave", () => {
+    gsap.to(menuToggle, {
+      y: 0,
+      duration: .22,
+      ease: "power3.out"
+    });
+  });
+
+  menuLinks.forEach(link => {
+    link.addEventListener("mouseenter", () => {
+      gsap.to(link, {
+        x: 5,
+        duration: .2,
+        ease: "power3.out"
+      });
+    });
+
+    link.addEventListener("mouseleave", () => {
+      gsap.to(link, {
+        x: 0,
+        duration: .25,
+        ease: "power3.out"
+      });
+    });
+  });
+
+  if (featureItems.length) {
+    gsap.fromTo(
+      featureItems,
+      {
+        autoAlpha: 0,
+        y: 18,
+        filter: "blur(6px)"
+      },
+      {
+        autoAlpha: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: .7,
+        stagger: .07,
+        delay: .25,
+        ease: "power3.out",
+        clearProps: "filter"
+      }
+    );
+  }
+
+  const viewProject = document.querySelector(".view-project");
+
+  if (viewProject) {
+    const viewText = viewProject.querySelector(".view-project__text");
+
+    viewProject.addEventListener("mouseenter", () => {
+      gsap.to(viewText, {
+        x: 5,
+        duration: .22,
+        ease: "power3.out"
+      });
+    });
+
+    viewProject.addEventListener("mouseleave", () => {
+      gsap.to(viewText, {
+        x: 0,
+        duration: .25,
+        ease: "power3.out"
+      });
+    });
+  }
+
+  window.addEventListener("resize", () => {
+    gsap.set(menuBg, {
+      height: isOpen
+        ? openHeight()
+        : window.innerWidth <= 600
+          ? 50
+          : 54
+    });
+  });
+});
+</script>
 </body>
 </html>
