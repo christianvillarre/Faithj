@@ -2142,10 +2142,12 @@ body.nav-open{
 
 .fj-services-intro__lead{
   margin:0 !important;
-  max-width:42ch !important;
+  max-width:50ch !important;
   color:var(--light-body) !important;
-  font-size:clamp(1.15rem,1.55vw,1.5rem) !important;
-  line-height:1.55 !important;
+  font-size:clamp(1.18rem,1.65vw,1.55rem) !important;
+  font-weight:400 !important;
+  line-height:1.18 !important;
+  letter-spacing:-.035em !important;
 }
 
 @media(max-width:900px){
@@ -2215,7 +2217,80 @@ body.nav-open{
     border-radius:24px 24px 0 0;
   }
 }
-</style>rt
+
+/* Second row within the What We Do overview */
+.fj-overview__content--followup{
+  margin-top:clamp(70px,10vh,120px);
+  padding-top:clamp(70px,10vh,120px);
+  border-top:1px solid var(--light-line);
+}
+.fj-overview__detail h3{
+  margin:0 0 26px;
+  font-size:clamp(2rem,3.2vw,3.6rem);
+  line-height:1;
+  letter-spacing:-.045em;
+}
+.fj-overview__detail h4{
+  margin:42px 0 12px;
+  font-size:clamp(1.35rem,2vw,2rem);
+  line-height:1.1;
+  letter-spacing:-.025em;
+}
+.fj-overview__detail p{
+  margin:0 0 20px;
+  max-width:98ch;
+  color:var(--light-body);
+  font-size:clamp(1.18rem,1.65vw,1.55rem);
+  font-weight:400;
+  line-height:1.18;
+  letter-spacing:-.035em;
+}
+.fj-overview__detail ul{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 0;
+  margin:0 0 30px;
+  padding:0 0 26px;
+  list-style:none;
+  border-bottom:1px solid var(--light-line);
+}
+.fj-overview__detail li{
+  padding:0;
+  color:rgba(0,0,0,.72);
+  line-height:1.45;
+}
+.fj-overview__detail li:not(:last-child)::after{
+  content:"|";
+  margin:0 11px;
+  color:var(--gold);
+}
+.fj-overview__detail .fj-overview__closing{
+  margin-top:30px;
+  color:#111;
+  font-weight:700;
+}
+@media(max-width:600px){
+  .fj-overview__content--followup{margin-top:60px;padding-top:60px}
+}
+
+/* White overview that gradually reveals the project plans image */
+#what-we-do{
+  background-color:#fff !important;
+  background-image:
+    linear-gradient(
+      to bottom,
+      #fff 0%,
+      #fff 42%,
+      rgba(255,255,255,.96) 56%,
+      rgba(255,255,255,.72) 74%,
+      rgba(255,255,255,.20) 100%
+    ),
+    url('/images/project_plans.jpeg') !important;
+  background-repeat:no-repeat !important;
+  background-position:center, center bottom !important;
+  background-size:100% 100%, 100% auto !important;
+}
+</style>
 
 <section class="fj-about fj-overview" id="about">
   <header class="fj-overview__heading">
@@ -2247,6 +2322,53 @@ body.nav-open{
   </div>
 </section>
 
+
+
+
+<section class="fj-services-intro fj-overview fj-overview--dark" id="what-we-do">
+  <div class="fj-overview__heading">
+    <span class="fj-services-intro__eyebrow">What we do</span>
+    <h2>More Than Exterior Painting — A Complete Exterior Painting Solution.</h2>
+  </div>
+
+  <div class="fj-overview__content">
+    <div class="fj-overview__copy">
+      <p class="fj-services-intro__lead">Multifamily exterior painting is one of our core specialties. We provide large-scale exterior painting services for apartment communities, multifamily owners, property management companies, and investment groups.<br><br>
+      What makes our exterior painting service different is simple: <span class="bold">we are much more than a painting company.</span><br><br>
+      Because Faith J. Construction is an experienced General Contractor, we have the ability to handle the exterior repairs necessary to properly prepare a property for painting — without requiring our clients to search for, coordinate, and manage additional contractors.<br><br>
+
+      </p>
+    </div>
+
+    <figure class="fj-overview__image">
+      <img src="/images/image5.jpg" alt="Faith J. Construction multifamily property project">
+    </figure>
+  </div>
+
+  <div class="fj-overview__content fj-overview__content--followup">
+    <figure class="fj-overview__image">
+      <img src="/images/image2.jpg" alt="Exterior preparation and repair work on a multifamily property">
+    </figure>
+
+    <div class="fj-overview__copy fj-overview__detail">
+       <h4>One Contractor, From Exterior Repairs to Final Coat</h4>
+
+      <p>A lasting exterior paint project begins with the condition of the surface underneath. Before painting, our team identifies and repairs damaged or deteriorated exterior components, then completes the required surface preparation, priming, and finish coating.</p>
+
+
+      <p>Because Faith J. Construction is also a general contractor, repairs and painting remain under one coordinated project plan. Clients have one point of contact and one team responsible for the completed exterior.</p>
+
+
+      <p>Our team understands how to repair and prepare different substrates, select appropriate coating systems, coordinate access and equipment, and maintain consistent workmanship across multifamily properties of any size.</p>
+
+      <p class="fj-overview__closing">Repair it correctly. Prepare it properly. Paint it professionally.</p>
+    </div>
+  </div>
+</section>
+
+
+
+
 <section class="fj-services" id="services">
   <article class="fj-service">
     <div class="fj-service__content">
@@ -2270,7 +2392,7 @@ body.nav-open{
       <a class="fj-service__link" href="#contact">Exterior Painting Services</a>
     </div>
     <div class="fj-service__media">
-      <img src="/images/image2.jpg" alt="Multifamily exterior painting project">
+      <img src="/images/image12.jpg" alt="Multifamily exterior painting project">
       <span class="fj-service__photo-label">Exterior Painting</span>
     </div>
   </article>
@@ -2382,23 +2504,7 @@ body.nav-open{
     </div>
   </article>
 </section>
-<!--
-<section class="fj-services-intro fj-overview fj-overview--dark" id="what-we-do">
-  <div class="fj-overview__heading">
-    <span class="fj-services-intro__eyebrow">What we do</span>
-    <h2>Complete Construction Solutions—<br>From Start to Finish.</h2>
-  </div>
 
-  <div class="fj-overview__content">
-    <div class="fj-overview__copy">
-      <p class="fj-services-intro__lead">Faith J. Construction provides comprehensive construction, remodeling, restoration, and property improvement services for multifamily apartment communities, commercial facilities, and residential properties. From new construction and capital improvements to interior renovations, exterior upgrades, and ongoing maintenance projects, we manage every phase with experienced project coordination, quality craftsmanship, and clear communication. Our goal is to deliver durable, cost-effective solutions that protect your investment, minimize disruptions, and create spaces that perform as well as they look.</p>
-    </div>
-
-    <figure class="fj-overview__image">
-      <img src="/images/image1.png" alt="Faith J. Construction multifamily property project">
-    </figure>
-  </div>
-</section>-->
 
 
 <section class="stats">
