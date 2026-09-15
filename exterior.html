@@ -3,8 +3,43 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Exterior Services — Faith J Construction</title>
-<meta name="description" content="Full-scope exterior renovation and curb-appeal services for multifamily, commercial, and residential properties — roofing, siding, painting, concrete, fencing, and more.">
+<title>Multifamily Exterior Renovations | Faith J Construction</title>
+<meta name="description" content="Complete exterior renovations for multifamily and commercial properties, including roofing, siding, gutters, windows, doors, painting, stairs, fencing, and more.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Faith J Construction">
+<meta name="theme-color" content="#0b0b08">
+<link rel="canonical" href="https://www.faithjconstruction.com/exterior.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Faith J Construction">
+<meta property="og:title" content="Multifamily Exterior Renovations | Faith J Construction">
+<meta property="og:description" content="Exterior repairs and complete property transformations coordinated under one general contractor.">
+<meta property="og:url" content="https://www.faithjconstruction.com/exterior.html">
+<meta property="og:image" content="https://www.faithjconstruction.com/images/image5.jpg">
+<meta property="og:image:alt" content="Completed exterior renovation and curb appeal improvements">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Multifamily Exterior Renovations | Faith J Construction">
+<meta name="twitter:description" content="Exterior repairs, renovations, and curb appeal improvements under one accountable team.">
+<meta name="twitter:image" content="https://www.faithjconstruction.com/images/image5.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://www.faithjconstruction.com/exterior.html#service",
+  "name": "Multifamily Exterior Renovations",
+  "url": "https://www.faithjconstruction.com/exterior.html",
+  "serviceType": "Multifamily and commercial exterior renovation",
+  "description": "Exterior renovation services including roofing, siding, gutters, windows, doors, painting, stairs, fencing, decks, patios, lighting, landscaping, and grading.",
+  "areaServed": { "@type": "Country", "name": "United States" },
+  "provider": {
+    "@type": "GeneralContractor",
+    "@id": "https://www.faithjconstruction.com/#business",
+    "name": "Faith J Construction",
+    "url": "https://www.faithjconstruction.com/",
+    "telephone": "+1-281-469-1000"
+  }
+}
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -606,133 +641,73 @@ body.nav-open{overflow:hidden}
   .faq-item__a-inner p{margin-left:0}
 }
 
-/* CONTACT TAB (sits above the footer) */
-.footer-tab{
-  position:absolute;
-  top:0;
-  left:clamp(28px,7vw,104px);
-  transform:translateY(-100%);
-  background:#3a3a38;
-  color:var(--cream);
-  padding:18px 30px 23px;
-  border:0;
-  border-radius:16px 16px 0 0;
-  z-index:1;
-}
-.footer-tab::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-2px;
-  height:3px;
-  background:#3a3a38;
-}
-.contact-kicker{
-  display:block;
-  margin-bottom:10px;
-  color:var(--cream);
-  font-size:.75rem;
-  font-weight:600;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  opacity:.8;
-}
-.footer-tab h2{
-  margin:0;
-  font-size:clamp(1.3rem,2vw,1.7rem);
-  font-weight:620;
-  line-height:1;
-  letter-spacing:-.02em;
-  text-transform:uppercase;
-  white-space:nowrap;
-}
-@media(max-width:600px){
-  .footer-tab{padding:14px 20px 18px}
-  .footer-tab h2{font-size:1.1rem;white-space:normal;max-width:60vw}
-}
+/* CONTACT TAB + FOOTER — matches interior page */
+.footer-tab{position:absolute;top:0;left:clamp(28px,7vw,104px);transform:translateY(-100%);background:#3a3a38;color:var(--cream);padding:18px 30px 23px;border:0;border-radius:16px 16px 0 0;z-index:1}
+.footer-tab::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:3px;background:#3a3a38}
+.contact-kicker{display:block;margin-bottom:10px;color:var(--cream);font-size:.75rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+.footer-tab h2{margin:0;font-size:clamp(1.3rem,2vw,1.7rem);font-weight:620;line-height:1;letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap}
 .contact-form{display:grid;grid-template-columns:1fr 1fr;gap:26px 20px}
 .contact-field{display:flex;flex-direction:column;gap:9px}
 .contact-field--full{grid-column:1/-1}
-.contact-field label{
-  font-size:.72rem;
-  font-weight:600;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.contact-field input,.contact-field textarea,.contact-field select{
+.contact-field label{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.contact-field input,.contact-field textarea{width:100%;border:0;border-bottom:1px solid rgba(239,233,220,.3);border-radius:0;padding:12px 0 14px;background:transparent;color:#fff;font:inherit;outline:none;transition:border-color .25s ease}
+.contact-field select{
   width:100%;
-  border:0;
-  border-bottom:1px solid rgba(239,233,220,.3);
-  border-radius:0;
-  padding:12px 0 14px;
-  background:transparent;
+  -webkit-appearance:none;-moz-appearance:none;appearance:none;
+  cursor:pointer;
+  border:1px solid rgba(239,233,220,.32);
+  border-radius:10px;
+  padding:12px 38px 12px 14px;
+  margin-top:2px;
+  background-color:rgba(239,233,220,.06);
   color:#fff;
   font:inherit;
   outline:none;
-  transition:border-color .25s ease;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23efe9dc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-size:13px;
+  transition:border-color .25s ease,background-color .25s ease,box-shadow .25s ease;
 }
+.contact-field select:hover{border-color:rgba(239,233,220,.55);background-color:rgba(239,233,220,.1)}
+.contact-field select:focus{border-color:#fff;background-color:rgba(239,233,220,.1);box-shadow:0 0 0 3px rgba(239,233,220,.12)}
+.contact-field select:invalid{color:rgba(255,255,255,.55)}
 .contact-field select option{background:#111;color:#fff}
 .contact-field textarea{min-height:120px;resize:vertical}
-.contact-field input:focus,.contact-field textarea:focus,.contact-field select:focus{border-color:#fff}
-.contact-submit{
-  grid-column:1/-1;
-  justify-self:start;
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  border:1px solid #fff;
-  border-radius:999px;
-  padding:14px 22px;
-  background:#fff;
-  color:#111;
-  font-family:var(--headline);
-  font-size:.78rem;
-  font-weight:600;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:transform .3s var(--ease-smooth), background .3s ease, color .3s ease;
-}
+.contact-field input:focus,.contact-field textarea:focus{border-color:#fff}
+.contact-submit{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:12px;border:1px solid #fff;border-radius:999px;padding:14px 22px;background:#fff;color:#111;font-family:var(--headline);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:transform .3s var(--ease-smooth),background .3s ease,color .3s ease}
 .contact-submit:hover{transform:translateY(-2px);background:transparent;color:#fff}
 .contact-submit svg{width:15px;height:15px}
-.contact-form__note{
-  grid-column:1/-1;
-  margin:2px 0 0;
-  font-size:.82rem;
-  color:rgba(239,233,220,.55);
-}
-@media(max-width:800px){
-  .contact-form{grid-template-columns:1fr}
-  .contact-field--full,.contact-submit{grid-column:auto}
-}
+.contact-form__note{grid-column:1/-1;margin:2px 0 0;font-size:.82rem;color:rgba(239,233,220,.55)}
+@media(max-width:600px){.footer-tab{padding:14px 20px 18px}.footer-tab h2{font-size:1.1rem;white-space:normal;max-width:70vw}}
+@media(max-width:800px){.contact-form{grid-template-columns:1fr}.contact-field--full,.contact-submit{grid-column:auto}}
 
-/* FOOTER */
 .site-footer{
   position:relative;
   z-index:5;
   background:#3a3a38;
   color:var(--cream);
   border-top:0;
-  padding:clamp(110px,16vh,180px) clamp(28px,7vw,104px) clamp(60px,8vh,100px);
-  /*border-top:1px solid var(--line-light);*/
+  padding:
+    clamp(110px,12vh,180px)
+    clamp(28px,7vw,104px)
+    clamp(60px,8vh,100px);
 }
 .footer-top{
   display:grid;
-  grid-template-columns:1fr 1.5fr;
-  gap:clamp(40px,6vw,90px);
+  grid-template-columns:minmax(550px,1fr) minmax(480px,1.35fr);
+  gap:clamp(32px,4vw,64px);
   align-items:start;
   padding-bottom:8vh;
 }
-.footer-left{
-  display:flex;
-  flex-direction:column;
-  gap:36px;
-}
+.footer-left{display:flex;flex-direction:column;gap:36px}
 .footer-info{
-  display:flex;
-  flex-direction:row;
-  gap:56px;
+  display:grid;
+  grid-template-columns:max-content auto;
+  column-gap:36px;
+  row-gap:36px;
+  align-items:start;
+  justify-content:start;
 }
 .footer-col span{
   display:block;
@@ -752,9 +727,82 @@ body.nav-open{overflow:hidden}
   transition:opacity .3s var(--ease-smooth);
 }
 .footer-col a:hover{opacity:1}
+.footer-col--contact p{
+  margin:0;
+  color:rgba(239,233,220,.72);
+  font-size:.95rem;
+  line-height:1.55;
+  padding:4px 0;
+}
+.footer-contact-grid{
+  display:grid;
+  grid-template-columns:minmax(170px,.8fr) minmax(250px,1.2fr);
+  gap:10px 28px;
+}
+.footer-contact-group{min-width:0}
+.footer-col--site{
+  margin-left:0;
+  padding-left:0;
+}
+.footer-col--contact strong{
+  color:var(--cream);
+  font-weight:500;
+}
+.footer-col--contact p a{
+  display:inline;
+  padding:0;
+  color:inherit;
+  text-decoration:none;
+  opacity:1;
+  transition:color .25s var(--ease-smooth), filter .25s var(--ease-smooth);
+}
+.footer-col--contact p a:hover,
+.footer-col--contact p a:focus-visible{
+  color:#fff;
+  filter:brightness(1.18);
+}
+.footer-col--contact p a:focus-visible{
+  outline:1px solid rgba(255,255,255,.55);
+  outline-offset:3px;
+}
+.footer-address{padding-top:0!important}
+.footer-form__title{
+  grid-column:1/-1;
+  margin:0 0 18px;
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--cream);
+  opacity:.8;
+}
 .footer-form{margin:0}
-@media(max-width:900px){
+@media(max-width:1250px){
   .footer-top{grid-template-columns:1fr}
+  .footer-form{order:-1;}
+  .footer-left{order:1}
+}
+@media(max-width:800px){
+   .footer-top{
+    grid-template-columns:1fr;
+  }
+  .footer-bottom{
+    justify-content:flex-start;
+  }
+}
+@media(max-width:600px){
+  .footer-info{grid-template-columns:1fr;gap:34px}
+  .footer-contact-grid{grid-template-columns:1fr;gap:0}
+  .footer-col--site{margin-left:0;padding-left:0}
+  .footer-form{
+  padding-top:0;
+}
+.footer-form{
+  padding-top:0;
+}
+  .site-footer{
+  padding-top:clamp(40px,8vh,70px);
+}
 }
 .footer-bottom{
   display:flex;
@@ -778,22 +826,11 @@ body.nav-open{overflow:hidden}
   transition:background .3s var(--ease-smooth);
 }
 .back-to-top:hover{background:rgba(255,255,255,.08)}
-@media(max-width:800px){
-  .footer-bottom{justify-content:flex-start}
+
+@media(max-width:900px){
+  .site-footer{padding-left:22px;padding-right:22px;}
 }
-.page-curtain{
-  position:fixed;
-  inset:0;
-  z-index:10000;
-  background:#000;
-  pointer-events:none;
-  transform:scaleY(0);
-  transform-origin:top center;
-  transition:transform .72s cubic-bezier(.76,0,.24,1);
-  will-change:transform;
-}
-.page-curtain.is-active{transform:scaleY(1)}
-@media(prefers-reduced-motion:reduce){.page-curtain{transition-duration:.2s}}
+
 </style>
 </head>
 
@@ -805,7 +842,7 @@ body.nav-open{overflow:hidden}
 <header class="site-ui">
   <a class="logo nav-split-logo" href="/" aria-label="Home">
 
-    <img src="/images/icon3.png" class="nav-logo-icon" alt="">
+    <img src="/images/icon3.png" class="nav-logo-icon" alt="Faith J Construction logo">
   </a>
 </header>
 
@@ -830,7 +867,7 @@ body.nav-open{overflow:hidden}
 
   <section class="interior-hero" id="top">
     <div class="interior-hero__bg">
-      <img src="/images/image5.jpg" alt="Exterior home renovation and curb appeal upgrade">
+      <img src="/images/image5.jpg" alt="Multifamily exterior renovation and curb appeal upgrade">
     </div>
     <div class="interior-hero__scrim"></div>
     <div class="interior-hero__inner">
@@ -1124,80 +1161,138 @@ body.nav-open{overflow:hidden}
 <footer class="site-footer">
   <div class="footer-tab">
     <span class="contact-kicker">Start a project</span>
-    <h2>Let's upgrade your exteriors.</h2>
+    <h2>Let’s build something lasting.</h2>
   </div>
   <div class="footer-top">
     <div class="footer-left">
-      <div class="footer-brand">
-        <img src="/images/icon4.png" alt="Faith J Construction" class="footer-logo">
-      </div>
+      <div class="footer-brand"><img src="/images/icon4.png" alt="Faith J Construction" class="footer-logo"></div>
       <div class="footer-info">
-        <div class="footer-col">
+        <div class="footer-col footer-col--contact">
           <span>Contact</span>
-          <a href="tel:+18005551234">(800) 555-1234</a>
-          <a href="mailto:hello@faithjconstruction.com">hello@faithjconstruction.com</a>
-          <a href="#">Houston, Texas</a>
+          <div class="footer-contact-grid">
+            <div class="footer-contact-group">
+              <p><strong>Phone:</strong> <a href="tel:+12814691000">281-469-1000</a></p>
+              <p><strong>Fax:</strong> <a href="tel:+12814691040">281-469-1040</a></p>
+              <p><strong>Juan Jr.:</strong> <a href="tel:+18325207371">832-520-7371</a></p>
+            </div>
+            <div class="footer-contact-group">
+              <p><strong>Main Email:</strong> <a href="mailto:Faithjcon@yahoo.com">Faithjcon@yahoo.com</a></p>
+              <p><strong>Other:</strong> <a href="mailto:Juan.jr@faithjconstruction.com">Juan.jr@faithjconstruction.com</a></p>
+              <p><strong>Address:</strong></p>
+              <p class="footer-address"><a href="https://www.google.com/maps/search/?api=1&amp;query=21506+Gentry+Rd%2C+Cypress%2C+TX+77429" target="_blank" rel="noopener noreferrer">21506 Gentry Rd, Cypress, TX 77429</a></p>
+            </div>
+          </div>
         </div>
-        <div class="footer-col">
-          <span>Site</span>
-          <a href="/">Home</a>
-          <a href="/#services">Services</a>
-          <a href="/about.html">About</a>
-          <a href="/#contact">Contact</a>
-        </div>
+        <div class="footer-col footer-col--site"><span>Site</span><a href="/">Home</a><a href="/#about">About</a><a href="/#services">Services</a><a href="/gallery.html">Gallery</a></div>
       </div>
     </div>
 
-    <form class="contact-form footer-form" name="exterior-services-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="exterior-services-inquiry">
+    <form class="contact-form footer-form" name="project-inquiry" method="POST" accept-charset="UTF-8" data-netlify="true" netlify-honeypot="bot-field" aria-label="Project inquiry form">
+      <p class="footer-form__title">Contact Us</p>
+
+      <input
+        type="hidden"
+        name="form-name"
+        value="project-inquiry"
+      >
+
+      <input
+        type="hidden"
+        name="source-page"
+        value="Exterior Renovations"
+      >
+
       <p hidden>
-        <label>Do not fill this out: <input name="bot-field"></label>
+        <label>
+          Do not fill this out:
+          <input type="text" name="bot-field" tabindex="-1" autocomplete="off">
+        </label>
       </p>
 
       <div class="contact-field">
         <label for="contact-name">Name</label>
-        <input id="contact-name" name="name" type="text" autocomplete="name" required>
+
+        <input
+          id="contact-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+        >
       </div>
 
       <div class="contact-field">
         <label for="contact-email">Email</label>
-        <input id="contact-email" name="email" type="email" autocomplete="email" required>
+
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+        >
       </div>
 
       <div class="contact-field">
         <label for="contact-phone">Phone</label>
-        <input id="contact-phone" name="phone" type="tel" autocomplete="tel">
+
+        <input
+          id="contact-phone"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+        >
       </div>
 
       <div class="contact-field">
-        <label for="contact-type">Exterior service</label>
-        <select id="contact-type" name="service-type" required>
-          <option value="" selected disabled>Select one</option>
-          <option>Full Exterior Renovation</option>
-          <option>Roofing</option>
-          <option>Siding</option>
-          <option>Gutters &amp; Downspouts</option>
-          <option>Windows</option>
-          <option>Exterior Doors</option>
-          <option>Exterior Painting</option>
-          <option>Exterior Stairs</option>
-          <option>Fencing</option>
-          <option>Decking &amp; Patios</option>
-          <option>Lighting &amp; Exterior Fixtures</option>
-          <option>Landscaping &amp; Grading</option>
+        <label for="contact-type">Project type</label>
+
+        <select
+          id="contact-type"
+          name="project-type"
+          required
+        >
+          <option value="" selected disabled>
+            Select one
+          </option>
+
+          <option>Commercial Construction</option>
+          <option>Multifamily Renovation</option>
+          <option>Residential Construction</option>
+          <option>Interior Remodeling</option>
+          <option>Exterior Improvements</option>
           <option>Other</option>
         </select>
       </div>
 
       <div class="contact-field contact-field--full">
-        <label for="contact-message">Project details</label>
-        <textarea id="contact-message" name="message" placeholder="Tell us about the property, scope, and timeline." required></textarea>
+        <label for="contact-message">
+          Project details
+        </label>
+
+        <textarea
+          id="contact-message"
+          name="message"
+          placeholder="Tell us about the location, scope, and timeline."
+          required
+        ></textarea>
       </div>
 
       <button class="contact-submit" type="submit">
         Send inquiry
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M6 18L18 6M18 6H10M18 6V14"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </button>
       <p class="contact-form__note">We typically respond within one business day.</p>
