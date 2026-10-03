@@ -41,9 +41,9 @@
 }
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+<script src="/vendor/lenis.min.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,11 +128,14 @@ a{color:inherit}
   top:18px;
   transform:translateX(-50%);
   z-index:210;
-  width:min(290px, calc(100vw - 48px));
-  pointer-events:auto;
+  width:max-content;
+  min-width:min(290px, calc(100vw - 48px));
+  max-width:calc(100vw - 48px);
+  pointer-events:none;
 }
 .menu-toggle{
   position:relative;
+  pointer-events:auto;
   z-index:3;
   width:100%;
   height:54px;
@@ -182,7 +185,7 @@ a{color:inherit}
   pointer-events:none;
   transition:height .4s cubic-bezier(.76,0,.24,1), opacity .18s ease, transform .35s var(--ease-smooth), border-radius .4s var(--ease-smooth);
 }
-.menu-bg.open{height:330px;opacity:1;transform:scale(1);border-radius:22px}
+.menu-bg.open{opacity:1;transform:scale(1);border-radius:22px}
 .nav-dropdown{
   position:relative;
   z-index:2;
@@ -232,14 +235,16 @@ body.nav-open{overflow:hidden}
   .logo{justify-self:start}
 }
 @media(max-width:600px){
-  .menu-wrap{top:16px;width:min(93vw, calc(100vw - 36px));z-index:99}
+  .menu-wrap{top:16px;width:max-content;
+    min-width:min(290px, calc(100vw - 36px));
+    max-width:calc(100vw - 36px);z-index:99}
   .nav-split-logo{height:50px;padding-top:1rem;margin-left:-0.8rem;z-index:999;transition:margin-left .3s ease}
   .nav-split-logo.open{margin-left:0.5rem}
   .menu-toggle{height:70px;padding-left:20px;display:flex;justify-content:flex-end;background:transparent!important;-webkit-tap-highlight-color:transparent}
   .menu-toggle:hover,.menu-toggle:active,.menu-toggle:focus{background:transparent!important;transform:none;outline:none}
   .menu-toggle__label{display:none}
   .menu-bg{height:50px}
-  .menu-bg.open{height:338px!important}
+  .menu-bg.open{}
   .nav-dropdown{padding:62px 12px 12px}
   .nav-dropdown a{min-height:45px;font-size:1.15rem}
 }
@@ -279,8 +284,25 @@ body.nav-open{overflow:hidden}
 .interior-hero__inner{
   position:relative;
   z-index:2;
+  width:100%;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:end;
+  gap:clamp(32px,6vw,96px);
   padding: clamp(120px,18vh,200px) clamp(24px,7vw,104px) clamp(70px,10vh,120px);
-  max-width:980px;
+}
+.interior-hero__intro{
+  max-width:47ch;
+  margin:0;
+  color:#fff;
+  font-size:clamp(1rem,1.35vw,1.2rem);
+  line-height:1.6;
+  text-align:right;
+  justify-self:end;
+}
+.interior-hero__heading{
+  text-align:left;
+  justify-self:start;
 }
 .interior-hero__eyebrow{
   display:block;
@@ -314,7 +336,8 @@ body.nav-open{overflow:hidden}
   align-items:center;
   flex-wrap:wrap;
   gap:clamp(18px,3vw,32px);
-  margin-top:clamp(34px,5vh,48px);
+  margin:0 0 clamp(20px,3vh,34px);
+  justify-content:flex-start;
 }
 .interior-hero__cta{
   display:inline-flex;
@@ -348,12 +371,15 @@ body.nav-open{overflow:hidden}
 }
 .interior-hero__link:hover{color:#fff;border-color:#fff}
 
-@media(max-width:600px){
+@media(max-width:700px){
+  .interior-hero__inner{grid-template-columns:1fr;gap:28px}
+  .interior-hero__intro{max-width:36ch}
   .interior-hero{min-height:70vh}
   .interior-hero__title{font-size:clamp(2.6rem,12vw,4.2rem)}
   .interior-hero__desc{font-size:.96rem}
 }
 
+.interior-hero__title{font-size:clamp(2.7rem,5.1vw,5.8rem)}
 /* SECTION HEAD (shared kicker + heading, used by services / faq) */
 .section-head{
   max-width:156ch;
@@ -385,6 +411,11 @@ body.nav-open{overflow:hidden}
   line-height:1.65;
 }
 
+/* Match the Projects page heading immediately below the hero. */
+.services-section > .section-head{max-width:none;margin-bottom:clamp(38px,6vw,72px)}
+.services-section > .section-head span{display:block;margin:0 0 14px;color:var(--gold);font-size:.9rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.services-section > .section-head h2{width:auto;max-width:none;margin:0;color:#fff;font-family:var(--headline);font-size:clamp(2.8rem,6vw,6rem);font-weight:640;line-height:1;letter-spacing:-.04em;text-transform:none}
+.services-section > .section-head p{max-width:62ch;margin:22px 0 0;color:rgba(255,255,255,.72);font-size:1rem;line-height:1.65}
 /* SERVICES GRID */
 .services-section{
   position:relative;
@@ -831,6 +862,7 @@ body.nav-open{overflow:hidden}
   .site-footer{padding-left:22px;padding-right:22px;}
 }
 
+
 </style>
 <!-- Matomo -->
 <script>
@@ -855,6 +887,9 @@ body.nav-open{overflow:hidden}
     })(window, document, "clarity", "script", "ypkvll95jk");
 </script>
 
+<link rel="stylesheet" href="/page-transitions.css">
+<script src="/page-transition-start.js"></script>
+<link rel="stylesheet" href="/vendor/lenis.css">
 </head>
 
 <body>
@@ -871,6 +906,7 @@ body.nav-open{overflow:hidden}
 
 <div class="menu-wrap" id="menuWrap">
   <div class="menu-bg" id="menuBg"></div>
+
   <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-expanded="false">
     <span class="menu-toggle__label">Menu</span>
     <span class="menu-toggle__box" aria-hidden="true">
@@ -878,11 +914,13 @@ body.nav-open{overflow:hidden}
       <span class="menu-toggle__bar"></span>
     </span>
   </button>
+
   <nav class="nav-dropdown" id="navDropdown" aria-label="Main menu">
-    <a href="/#about"><span>About</span></a>
-    <a href="/#services"><span>Services</span></a>
+    <a href="/about.html"><span>About</span></a>
+    <a href="/projects.html"><span>Projects</span></a>
+    <a href="/services.html"><span>Services</span></a>
     <a href="/gallery.html"><span>Gallery</span></a>
-    <a href="/#contact"><span>Contact</span></a>
+    <a href="/contact.html"><span>Contact</span></a>
   </nav>
 </div>
 
@@ -893,22 +931,18 @@ body.nav-open{overflow:hidden}
       <img src="/images/stock17.jpeg" alt="Commercial property due diligence inspection">
     </div>
     <div class="interior-hero__scrim"></div>
-    <div class="interior-hero__inner">
-      <h1 class="interior-hero__title">Due Diligence<br>Inspections.</h1>
-      <p class="interior-hero__desc">
-        Construction-focused property assessments that uncover conditions, risks, and capital needs before you commit.
-      </p>
+  <div class="interior-hero__inner">
+    <div class="interior-hero__heading">
       <div class="interior-hero__actions">
-        <a class="interior-hero__cta" href="#contact">
-          Start a project
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M6 18L18 6M18 6H10M18 6V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
         <a class="interior-hero__link" href="#services">View all services</a>
       </div>
+      <h1 class="interior-hero__title">Due Diligence<br>Inspections.</h1>
     </div>
-  </section>
+    <p class="interior-hero__intro">
+        Construction-focused property assessments that uncover conditions, risks, and capital needs before you commit.
+      </p>
+  </div>
+</section>
 
   <section class="services-section" id="services">
     <div class="section-head">
@@ -1188,7 +1222,7 @@ body.nav-open{overflow:hidden}
             </div>
           </div>
         </div>
-        <div class="footer-col footer-col--site"><span>Site</span><a href="/">Home</a><a href="/#about">About</a><a href="/#services">Services</a><a href="/gallery.html">Gallery</a></div>
+        <div class="footer-col footer-col--site"><span>Site</span><a href="/">Home</a><a href="/about.html">About</a><a href="/services.html">Services</a><a href="/projects.html">Projects</a><a href="/gallery.html">Gallery</a><a href="/contact.html">Contact</a></div>
       </div>
     </div>
 
@@ -1326,7 +1360,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isOpen = false;
   let isAnimating = false;
   const closedHeight = () => window.innerWidth <= 600 ? 50 : 54;
-  const openHeight = () => window.innerWidth <= 600 ? 308 : 330;
+  const openHeight = () => dropdown.offsetTop + dropdown.scrollHeight;
 
   gsap.set(menuBg, { height: closedHeight(), borderRadius: 14 });
   gsap.set(menuLinks, {
@@ -1599,7 +1633,7 @@ if (typeof gsap === 'undefined') {
   document.body.style.overflow = "";
   const loaderEl = document.querySelector(".loader");
   if (loaderEl) loaderEl.style.display = "none";
-  document.querySelectorAll(".logo, .interior-hero__eyebrow, .interior-hero__title, .interior-hero__desc, .interior-hero__actions")
+  document.querySelectorAll(".logo, .interior-hero__eyebrow, .interior-hero__title, .interior-hero__intro, .interior-hero__actions")
     .forEach((el) => { el.style.opacity = "1"; el.style.transform = "none"; });
   const heroBg = document.querySelector(".interior-hero__bg");
   if (heroBg) heroBg.style.clipPath = "inset(0% round 0px)";
@@ -1616,7 +1650,7 @@ document.documentElement.style.overflow = "hidden";
 document.body.style.overflow = "hidden";
 window.scrollTo(0, 0);
 
-if (!prefersReducedMotion && window.Lenis) {
+if (window.Lenis && !window.matchMedia("(pointer: coarse)").matches) {
   lenis = new Lenis({
     duration: 1.15,
     easing: (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
@@ -1672,7 +1706,7 @@ tl.to(".loader", {
   .to(".logo", { opacity: 1, duration: .7, ease: "power2.out" }, "-=1.3")
   .from(".interior-hero__eyebrow", { y: 24, opacity: 0, duration: .8, ease: "expo.out" }, "-=1.1")
   .from(".interior-hero__title", { y: 55, opacity: 0, duration: 1.1, ease: "expo.out" }, "-=.95")
-  .from(".interior-hero__desc", { y: 30, opacity: 0, duration: .9, ease: "expo.out" }, "-=.85")
+  .from(".interior-hero__intro", { y: 30, opacity: 0, duration: .9, ease: "expo.out" }, "-=.85")
   .from(".interior-hero__actions", { y: 24, opacity: 0, duration: .9, ease: "expo.out" }, "-=.78");
 
 /* Play as soon as the DOM/layout is ready — don't wait on full image/font
@@ -1710,46 +1744,6 @@ if (!canHover) {
 }
 </script>
 
-<script>
-/* Drop a black curtain before navigating to another page on this site. */
-(() => {
-  const curtain = document.querySelector('.page-curtain');
-  if (!curtain) return;
-  let navigating = false;
-
-  window.addEventListener('pageshow', () => {
-    navigating = false;
-    curtain.classList.remove('is-active');
-  });
-
-  document.addEventListener('click', (event) => {
-    const link = event.target.closest('a[href]');
-    if (!link || event.defaultPrevented || navigating) return;
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if ((link.target && link.target !== '_self') || link.hasAttribute('download')) return;
-
-    const rawHref = link.getAttribute('href');
-    if (!rawHref || rawHref.startsWith('#') || /^(mailto:|tel:|javascript:)/i.test(rawHref)) return;
-
-    const destination = new URL(link.href, window.location.href);
-    if (destination.origin !== window.location.origin) return;
-    if (destination.pathname === window.location.pathname && destination.search === window.location.search) return;
-
-    event.preventDefault();
-    navigating = true;
-    curtain.classList.add('is-active');
-
-    let didNavigate = false;
-    const go = () => {
-      if (didNavigate) return;
-      didNavigate = true;
-      window.location.href = destination.href;
-    };
-    curtain.addEventListener('transitionend', go, { once:true });
-    window.setTimeout(go, 850);
-  });
-})();
-</script>
-
+<script src="/page-transitions.js"></script>
 </body>
 </html>

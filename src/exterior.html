@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script data-source-preview>
+  window.location.replace(new URL("../exterior.html" + window.location.search + window.location.hash, window.location.href));
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Multifamily Exterior Renovations | Faith J Construction</title>
@@ -903,25 +906,7 @@ body.nav-open{overflow:hidden}
   </a>
 </header>
 
-<div class="menu-wrap" id="menuWrap">
-  <div class="menu-bg" id="menuBg"></div>
-
-  <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-expanded="false">
-    <span class="menu-toggle__label">Menu</span>
-    <span class="menu-toggle__box" aria-hidden="true">
-      <span class="menu-toggle__bar"></span>
-      <span class="menu-toggle__bar"></span>
-    </span>
-  </button>
-
-  <nav class="nav-dropdown" id="navDropdown" aria-label="Main menu">
-    <a href="/about.html"><span>About</span></a>
-    <a href="/projects.html"><span>Projects</span></a>
-    <a href="/services.html"><span>Services</span></a>
-    <a href="/gallery.html"><span>Gallery</span></a>
-    <a href="/contact.html"><span>Contact</span></a>
-  </nav>
-</div>
+<!--navbar-->
 
 <main>
 
@@ -1214,151 +1199,7 @@ body.nav-open{overflow:hidden}
 
 </main>
 
-<footer class="site-footer">
-  <div class="footer-tab">
-    <span class="contact-kicker">Start a project</span>
-    <h2>Let’s build something lasting.</h2>
-  </div>
-  <div class="footer-top">
-    <div class="footer-left">
-      <div class="footer-brand"><img src="/images/icon4.png" alt="Faith J Construction" class="footer-logo"></div>
-      <div class="footer-info">
-        <div class="footer-col footer-col--contact">
-          <span>Contact</span>
-          <div class="footer-contact-grid">
-            <div class="footer-contact-group">
-              <p><strong>Phone:</strong> <a href="tel:+12814691000">281-469-1000</a></p>
-              <p><strong>Fax:</strong> <a href="tel:+12814691040">281-469-1040</a></p>
-              <p><strong>Juan Jr.:</strong> <a href="tel:+18325207371">832-520-7371</a></p>
-            </div>
-            <div class="footer-contact-group">
-              <p><strong>Main Email:</strong> <a href="mailto:Faithjcon@yahoo.com">Faithjcon@yahoo.com</a></p>
-              <p><strong>Other:</strong> <a href="mailto:Juan.jr@faithjconstruction.com">Juan.jr@faithjconstruction.com</a></p>
-              <p><strong>Address:</strong></p>
-              <p class="footer-address"><a href="https://www.google.com/maps/search/?api=1&amp;query=21506+Gentry+Rd%2C+Cypress%2C+TX+77429" target="_blank" rel="noopener noreferrer">21506 Gentry Rd, Cypress, TX 77429</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="footer-col footer-col--site"><span>Site</span><a href="/">Home</a><a href="/about.html">About</a><a href="/services.html">Services</a><a href="/projects.html">Projects</a><a href="/gallery.html">Gallery</a><a href="/contact.html">Contact</a></div>
-      </div>
-    </div>
-
-    <form class="contact-form footer-form" name="project-inquiry" method="POST" accept-charset="UTF-8" data-netlify="true" netlify-honeypot="bot-field" aria-label="Project inquiry form">
-      <p class="footer-form__title">Contact Us</p>
-
-      <input
-        type="hidden"
-        name="form-name"
-        value="project-inquiry"
-      >
-
-      <input
-        type="hidden"
-        name="source-page"
-        value="Exterior Renovations"
-      >
-
-      <p hidden>
-        <label>
-          Do not fill this out:
-          <input type="text" name="bot-field" tabindex="-1" autocomplete="off">
-        </label>
-      </p>
-
-      <div class="contact-field">
-        <label for="contact-name">Name</label>
-
-        <input
-          id="contact-name"
-          name="name"
-          type="text"
-          autocomplete="name"
-          required
-        >
-      </div>
-
-      <div class="contact-field">
-        <label for="contact-email">Email</label>
-
-        <input
-          id="contact-email"
-          name="email"
-          type="email"
-          autocomplete="email"
-          required
-        >
-      </div>
-
-      <div class="contact-field">
-        <label for="contact-phone">Phone</label>
-
-        <input
-          id="contact-phone"
-          name="phone"
-          type="tel"
-          autocomplete="tel"
-        >
-      </div>
-
-      <div class="contact-field">
-        <label for="contact-type">Project type</label>
-
-        <select
-          id="contact-type"
-          name="project-type"
-          required
-        >
-          <option value="" selected disabled>
-            Select one
-          </option>
-
-          <option>Commercial Construction</option>
-          <option>Multifamily Renovation</option>
-          <option>Residential Construction</option>
-          <option>Interior Remodeling</option>
-          <option>Exterior Improvements</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="contact-field contact-field--full">
-        <label for="contact-message">
-          Project details
-        </label>
-
-        <textarea
-          id="contact-message"
-          name="message"
-          placeholder="Tell us about the location, scope, and timeline."
-          required
-        ></textarea>
-      </div>
-
-      <button class="contact-submit" type="submit">
-        Send inquiry
-
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M6 18L18 6M18 6H10M18 6V14"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-      <p class="contact-form__note">We typically respond within one business day.</p>
-    </form>
-  </div>
-  <div class="footer-bottom">
-    <span>© <span id="year"></span> Faith J Construction. Built with restraint.</span>
-    <a class="back-to-top" href="#top">Back to top ↑</a>
-  </div>
-</footer>
+<!--footer-->
 
 <script>
 /* Animated center menu — matched to the index page. */
