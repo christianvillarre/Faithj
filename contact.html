@@ -355,7 +355,7 @@ body.nav-open{overflow:hidden}
 
 @media(max-width:700px){
   .interior-hero__inner{grid-template-columns:1fr;gap:28px}
-  .interior-hero__intro{max-width:36ch}
+  .interior-hero__intro{max-width:36ch;text-align:left;justify-self:start}
   .interior-hero{min-height:70vh}
   .interior-hero__title{font-size:clamp(2.6rem,12vw,4.2rem)}
   .interior-hero__desc{font-size:.96rem}
@@ -886,13 +886,23 @@ body.nav-open{overflow:hidden}
 .contact-page__form{margin:0}
 .site-footer--compact{padding-top:clamp(56px,8vh,95px)}
 .site-footer--compact .footer-top{grid-template-columns:1fr}
-.site-footer--compact .footer-info{grid-template-columns:1fr}
+.site-footer--compact .footer-left{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,56px);align-items:start}
+.site-footer--compact .footer-info,.site-footer--compact .footer-col--contact,.site-footer--compact .footer-contact-grid{display:contents}
+.site-footer--compact .footer-brand{grid-column:1}
+.site-footer--compact .footer-logo{max-width:100%;height:auto}
+.site-footer--compact .footer-contact-group:first-child{grid-column:2}
+.site-footer--compact .footer-contact-group:last-child{grid-column:3}
+.site-footer--compact .footer-contact-group{overflow-wrap:anywhere}
+.site-footer--compact .footer-col--site{grid-column:4}
+@media(max-width:1100px){.site-footer--compact .footer-left{grid-template-columns:repeat(2,minmax(0,1fr))}.site-footer--compact .footer-brand,.site-footer--compact .footer-contact-group:first-child,.site-footer--compact .footer-contact-group:last-child,.site-footer--compact .footer-col--site{grid-column:auto}}
+@media(max-width:600px){.site-footer--compact .footer-left{grid-template-columns:1fr}}
 @media(max-width:850px){.contact-page__grid{grid-template-columns:1fr}}
 
 </style>
 
 
 
+<link rel="stylesheet" href="/footer-layout.css">
 <link rel="stylesheet" href="/page-transitions.css">
 <script src="/page-transition-start.js"></script>
 <link rel="stylesheet" href="/vendor/lenis.css">
@@ -932,10 +942,10 @@ body.nav-open{overflow:hidden}
 
 <main>
 <section class="interior-hero" id="top">
-  <div class="interior-hero__bg"><img src="/images/cortland_wortham.jpg" alt=""></div>
+  <div class="interior-hero__bg"><img src="/images/project_plans.jpeg" alt=""></div>
   <div class="interior-hero__scrim"></div>
   <div class="interior-hero__inner">
-    <div class="interior-hero__heading"><div class="interior-hero__actions"><a class="interior-hero__link" href="#inquiry">Send an inquiry</a></div><h1 class="interior-hero__title">Contact<br>Us.</h1></div>
+    <div class="interior-hero__heading"><div class="interior-hero__actions"><a class="interior-hero__link" href="#inquiry">Send an inquiry</a></div><h1 class="interior-hero__title">Contact Faith J</h1></div>
     <p class="interior-hero__intro">Tell us about your property, the work you have in mind, and your timeline. Our team will follow up to discuss the next steps.</p>
   </div>
 </section>
@@ -943,7 +953,7 @@ body.nav-open{overflow:hidden}
   <header class="fj-section-head"><span class="fj-section-head__eyebrow">Get In Touch</span><h2>Let’s talk about your project.</h2></header>
   <div class="contact-page__grid">
     <div class="contact-page__details"><h3>Faith J Construction</h3><p>Based in Cypress, Texas, we work with property owners and teams on projects across Texas and select markets nationwide.</p><dl><dt>Phone</dt><dd><a href="tel:+12814691000">281-469-1000</a></dd><dt>Email</dt><dd><a href="mailto:Faithjcon@yahoo.com">Faithjcon@yahoo.com</a></dd><dt>Address</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=21506+Gentry+Rd%2C+Cypress%2C+TX+77429" target="_blank" rel="noopener noreferrer">21506 Gentry Rd, Cypress, TX 77429</a></dd></dl></div>
-    <div class="contact-page__form-wrap"><form class="contact-form contact-page__form" name="project-inquiry" method="POST" accept-charset="UTF-8" data-netlify="true" netlify-honeypot="bot-field" aria-label="Project inquiry form">
+    <div class="contact-page__form-wrap"><form class="contact-form contact-page__form" name="project-inquiry" method="POST" accept-charset="UTF-8" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" aria-label="Project inquiry form">
       <p class="footer-form__title">Project Inquiry</p>
 
       <input
@@ -1034,7 +1044,8 @@ body.nav-open{overflow:hidden}
         ></textarea>
       </div>
 
-      <button class="contact-submit" type="submit">
+      <div class="contact-form__actions">
+        <button class="contact-submit" type="submit">
         Send inquiry
 
         <svg
@@ -1050,7 +1061,9 @@ body.nav-open{overflow:hidden}
             stroke-linejoin="round"
           />
         </svg>
-      </button>
+        </button>
+        <div class="contact-captcha" data-netlify-recaptcha="true"></div>
+      </div>
       <p class="contact-form__note">We typically respond within one business day.</p>
     </form></div>
   </div>
@@ -1063,6 +1076,22 @@ body.nav-open{overflow:hidden}
     <div class="footer-left">
       <div class="footer-brand"><img src="/images/icon4.png" alt="Faith J Construction" class="footer-logo"></div>
       <div class="footer-info">
+        <div class="footer-col footer-col--contact">
+          <div class="footer-contact-grid">
+            <div class="footer-contact-group">
+              <span>Contact</span>
+              <p><strong>Phone:</strong> <a href="tel:+12814691000">281-469-1000</a></p>
+              <p><strong>Fax:</strong> <a href="tel:+12814691040">281-469-1040</a></p>
+              <p><strong>Juan Jr.:</strong> <a href="tel:+18325207371">832-520-7371</a></p>
+            </div>
+            <div class="footer-contact-group">
+              <p><strong>Main Email:</strong> <a href="mailto:Faithjcon@yahoo.com">Faithjcon@yahoo.com</a></p>
+              <p><strong>Other:</strong> <a href="mailto:Juan.jr@faithjconstruction.com">Juan.jr@faithjconstruction.com</a></p>
+              <p><strong>Address:</strong></p>
+              <p class="footer-address"><a href="https://www.google.com/maps/search/?api=1&amp;query=21506+Gentry+Rd%2C+Cypress%2C+TX+77429" target="_blank" rel="noopener noreferrer">21506 Gentry Rd, Cypress, TX 77429</a></p>
+            </div>
+          </div>
+        </div>
         <div class="footer-col footer-col--site"><span>Site</span><a href="/">Home</a><a href="/about.html">About</a><a href="/services.html">Services</a><a href="/projects.html">Projects</a><a href="/gallery.html">Gallery</a><a href="/contact.html">Contact</a></div>
       </div>
     </div>

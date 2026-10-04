@@ -8,9 +8,9 @@
       <div class="footer-brand"><img src="/images/icon4.png" alt="Faith J Construction" class="footer-logo"></div>
       <div class="footer-info">
         <div class="footer-col footer-col--contact">
-          <span>Contact</span>
           <div class="footer-contact-grid">
             <div class="footer-contact-group">
+              <span>Contact</span>
               <p><strong>Phone:</strong> <a href="tel:+12814691000">281-469-1000</a></p>
               <p><strong>Fax:</strong> <a href="tel:+12814691040">281-469-1040</a></p>
               <p><strong>Juan Jr.:</strong> <a href="tel:+18325207371">832-520-7371</a></p>
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <form class="contact-form footer-form" name="project-inquiry" method="POST" accept-charset="UTF-8" data-netlify="true" netlify-honeypot="bot-field" aria-label="Project inquiry form">
+    <form class="contact-form footer-form" name="project-inquiry" method="POST" accept-charset="UTF-8" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" aria-label="Project inquiry form">
       <p class="footer-form__title">Contact Us</p>
 
       <input
@@ -118,7 +118,8 @@
         ></textarea>
       </div>
 
-      <button class="contact-submit" type="submit">
+      <div class="contact-form__actions">
+        <button class="contact-submit" type="submit">
         Send inquiry
 
         <svg
@@ -134,7 +135,9 @@
             stroke-linejoin="round"
           />
         </svg>
-      </button>
+        </button>
+        <div class="contact-captcha" data-netlify-recaptcha="true"></div>
+      </div>
       <p class="contact-form__note">We typically respond within one business day.</p>
     </form>
   </div>

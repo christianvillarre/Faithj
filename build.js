@@ -53,7 +53,6 @@ for (const file of files) {
   if (file === 'contact.html') {
     renderedFooter = renderedFooter
       .replace(/<div class="footer-tab">[\s\S]*?<\/div>/, '')
-      .replace(/<div class="footer-col footer-col--contact">[\s\S]*?(?=<div class="footer-col footer-col--site">)/, '')
       .replace(/<form class="contact-form footer-form"[\s\S]*?<\/form>/, '')
       .replace('class="site-footer"', 'class="site-footer site-footer--compact"');
   }

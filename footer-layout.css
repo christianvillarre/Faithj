@@ -1,0 +1,29 @@
+/* Place the Netlify CAPTCHA beside the form button when space allows. */
+.contact-form__actions{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.contact-form__actions .contact-submit{grid-column:auto}
+.contact-captcha{flex:0 0 auto}
+@media(max-width:400px){
+  .contact-page__form .contact-captcha{transform:scale(.74);transform-origin:left top;margin-bottom:-20px}
+}
+
+/* Keep the site links below the contact details on standard footers. */
+.site-footer:not(.site-footer--compact) .footer-info{
+  grid-template-columns:minmax(0,1fr);
+  gap:clamp(32px,4vw,56px);
+}
+.site-footer:not(.site-footer--compact) .footer-col--site a{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 0;
+  white-space:nowrap;
+}
+.site-footer:not(.site-footer--compact) .footer-col--site a+a::before{
+  content:"|";
+  margin:0 14px;
+  color:rgba(239,233,220,.45);
+}
+
+/* Give the Site column more breathing room on the Contact page. */
+@media(min-width:1101px){
+  .site-footer--compact .footer-col--site{margin-left:clamp(16px,2.5vw,40px)}
+}
