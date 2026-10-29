@@ -474,11 +474,11 @@ body{overflow-x:hidden}
 .hero-arrow{display:none}
 
 @media(max-width:900px){
-  .hero{min-height:680px}
+  .hero{height:100svh;height:100dvh;min-height:0}
   .hero-copy{top:38%;max-width:calc(100vw - 44px)}
   .hero-title{font-size:clamp(3.35rem,14vw,6.5rem);max-width:8ch}
   .hero-description{margin-top:16px;font-size:.9rem;max-width:34ch}
-  .hero-bottom{left:14px;right:14px;bottom:14px;gap:12px}
+  .hero-bottom{left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom, 0px));gap:12px}
   .hero-tabs{
     grid-template-columns:44px minmax(0,1fr) 44px;
     border-radius:12px;overflow:hidden;
@@ -492,11 +492,11 @@ body{overflow-x:hidden}
   .hero-arrow svg{width:21px;height:21px}
 }
 @media(max-width:600px){
-  .hero{height:100svh;min-height:650px}
+  .hero{height:100svh;height:100dvh;min-height:0}
   .hero-copy{left:22px;right:22px;top:34%}
   .hero-title{font-size:clamp(3rem,10vw,5rem);line-height:.86}
   .hero-description{font-size:.84rem;line-height:1.45}
-  .hero-bottom{left:10px;right:10px;bottom:10px;gap:10px}
+  .hero-bottom{left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom, 0px));gap:10px}
   .hero-tabs{grid-template-columns:42px minmax(0,1fr) 42px}
   .hero-arrow{width:42px;min-height:54px}
   .hero-tab{min-height:54px;padding:0 12px}
